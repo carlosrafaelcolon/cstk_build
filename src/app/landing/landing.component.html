@@ -1,0 +1,190 @@
+<app-main-nav></app-main-nav>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active">Home</li>
+</ol>
+<!--<div class="row  no-gutters">
+	<a (click)="gotoArticle()" class=" banner-alert hidden-sm-down">
+			{{headline}}
+	</a>
+</div>-->
+<section class="white-bg" >
+  <div class="container-fluid">
+    <div class="featured-block" style="margin-bottom:60px; margin-top:40px;">
+      <h2 class="featured-block__title">New Release</h2>
+      <div class="row align-items-start featured-listing">
+      <div class="col-md-4 review-item">
+          	<img src="/assets/images/books/droneDebate.jpg" class="main">
+		    <div class="row justify-content-center">
+				<div class="col-6">
+					<a href="http://www.barnesandnoble.com/w/the-drone-debate-avery-plaw/1124292167?ean=9781442230590" target="_blank"><img src="/assets/images/other/bn.png"></a>
+				</div>
+				<div class="col-6">
+					<a href="https://www.amazon.com/Drone-Debate-Unmanned-Conventional-Battlefields/dp/1442230592/ref=mt_paperback?_encoding=UTF8&me=" target="_blank"><img src="/assets/images/other/amazon.png" ></a>
+				</div>
+			</div>
+      </div>
+      <div class="col-md-8 review-item" >
+        <h2>Review</h2>
+        <div [ngSwitch]="homeValue"  myMatchHeight="switch-box">
+			<blockquote  class="blockquote">
+          <div *ngSwitchCase="1" class="switch-box">
+          
+     
+            <p>Plaw, Fricker, and Colon masterfully cover the breadth and depth of drone usage across the globe. By examining drones from the perspectives of military strategy, ethics, and international law, the book avoids falling into any single approach to framing the drone debate—which most similar works unfortunately do. ... Summing Up: Highly recommended. Lower-division undergraduates through faculty.</p>
+            <footer class="blockquote-footer float-right" ><cite title="CHOICE">CHOICE</cite></footer>
+	
+
+        
+          </div>
+          <div *ngSwitchCase="2" class="switch-box">
+      
+            <p>Some of these books, such as The Drone Debate, by the political scientists Avery Plaw, Matthew Fricker, and Carlos Colon ... provide admirable overviews of the debate. Plaw, Fricker, and Colon provide the most thorough analysis of the available numbers, highlighting the discrepancies between official figures and those reported by independent organizations.</p>
+			<footer class="blockquote-footer float-right" ><cite title=" Foreign Affairs"> Foreign Affairs</cite></footer>
+        
+          </div>
+          <div *ngSwitchCase="3" class="switch-box">
+      
+            <p>Offers a wealth of fascinating and important analysis of how drones are used in warfare by several countries, and the ways in which these flying weapons will impact the future of global security.</p>
+			<footer class="blockquote-footer float-right" ><cite title="James Forest">James Forest, professor and director of security studies, University of Massachusetts Lowell</cite></footer>
+      
+          </div>
+		   </blockquote>
+        </div>
+        
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="white-bg">
+  <div class="container-fluid">
+    <div class="row row align-items-start latest-content">
+		<div class="col-md-6">
+			<div class="full-width latest-block">
+				<h2 class="latest-block__title">Recent Operations</h2>
+				<div  *ngIf="!loadingStrikesComplete">loading...</div>
+				<div *ngIf="loadingStrikesComplete">
+					<span  *ngFor="let strike of strikes">
+					<ul class="full-width latest-listing">
+						<li class="date">{{strike?.date | date:'longDate' }}</li>
+						<li>
+							<h3 class="title">
+								<a (click)="gotoStrike(strike)">
+									<span *ngIf="strike?.casualties.totals == 0">
+										<span *ngFor=" let attacker of strike?.countries.attackers; let i = index " >
+
+										<span  *ngIf="i > 0 && !last">,</span>
+										<span  *ngIf="i > 0 && last">& </span>
+										{{attacker.country | capitalize}} counterterrorism operation occured
+
+										</span>
+										<span *ngFor=" let target of strike?.countries.targets" >
+										<span> in {{target.country | capitalize}}</span>
+										</span>
+									</span>
+									<span *ngIf="strike?.casualties.totals == 1">
+										<span *ngFor=" let attacker of strike?.countries.attackers; let i = index " >
+
+										<span  *ngIf="i > 0 && !last">,</span>
+										<span  *ngIf="i > 0 && last">& </span>
+										{{attacker.country | capitalize}} counterterrorism operation
+
+										</span>
+										<span *ngFor=" let target of strike?.countries.targets" >
+										<span> in {{target.country | capitalize}}</span>
+										</span>
+										killed {{strike?.casualties.totals}} person
+									</span>
+									<span *ngIf="strike?.casualties.totals > 1">
+										<span *ngFor=" let attacker of strike?.countries.attackers; let i = index " >
+
+										<span  *ngIf="i > 0 && !last">,</span>
+										<span  *ngIf="i > 0 && last">& </span>
+										{{attacker.country | capitalize}} counterterrorism operation
+
+										</span>
+										<span *ngFor=" let target of strike?.countries.targets" >
+										<span> in {{target.country | capitalize}}</span>
+										</span>
+										killed {{strike?.casualties.totals}} people
+									</span>
+
+								</a>
+							</h3>
+						</li>
+						<li>
+							<div class="content"><span *ngFor=" let detail of strike?.details" [innerHtml]="detail | slice:0:350 | safeHtml"></span></div>
+						</li>
+						<li>
+							<a class="label label-alert content-link border-em" (click)="gotoStrike(strike)">Read More</a>
+						</li>
+						</ul>
+					<hr >
+					</span>
+				</div>
+			
+				<a (click)="gotoDatabase()" class="main-page" style="margin-bottom:50px;">
+					<span class="flex-row group-start">
+						
+						Go to database
+						&nbsp;&nbsp;
+						<img  src="/assets/images/icons/ic_arrow_forward_black_48px.svg"  class="icon-18 ">
+					</span>
+				</a>
+			
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="full-width latest-block">
+				<h2 class="latest-block__title">News & Updates</h2>
+				<div  *ngIf="!loadingPostsComplete">loading...</div>
+				<div  *ngIf="loadingPostsComplete">
+				<div  *ngFor="let post of (posts | slice:0:4)">
+					<ul class="full-width latest-listing">
+						<li class="date">
+							<span class="flex-row group-start">
+								<span *ngIf="post.category.length > 0" class="label content-category">{{post?.category | capitalize}}</span>
+								<span>{{post?.date | date:'longDate' }}</span>
+							</span>
+						</li>
+						<li>
+							<h3 class="title"><a (click)="gotoPost(post)">{{post?.title | capitalize }}</a></h3>
+						</li>
+						<li>
+							<div class="content" ><span [innerHtml]="post.body  | slice:0:350 | safeHtml"></span> </div>
+						</li>
+						<li>
+							<a class="label label-alert content-link" (click)="gotoPost(post)">Read More</a>
+						</li>
+						<li>
+							<p class="author">
+								<!--{{post?.authors }}-->
+								By
+								<span  *ngFor=" let author of post?.authors; let i = index; let last = last ">
+									<span  *ngIf="i > 0 && !last">,</span>
+									<span  *ngIf="i > 0 && last">& </span>
+									<span>{{author.name | capitalize}}</span>
+								</span>
+							</p>
+						</li>
+					</ul>
+					<hr >
+				</div>
+				</div>
+			
+				<a (click)="gotoBlog()" class="main-page" style="margin-bottom:50px;">
+					
+					<span class="flex-row group-start">
+						
+						Go to news and Updates
+						&nbsp;&nbsp;
+						<img  src="/assets/images/icons/ic_arrow_forward_black_48px.svg"  class="icon-18 ">
+					</span>
+				</a>
+			
+			</div>
+		</div>
+	</div>
+  </div>
+</section>
+<app-main-footer></app-main-footer>

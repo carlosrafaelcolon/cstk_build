@@ -1,0 +1,67 @@
+<md-progress-bar mode="indeterminate" class="hidden-sm-down full-width" *ngIf="adminOn" style="margin:0" color="warn"></md-progress-bar>
+<header id="main-nav">
+  <ul class="nav justify-content-end no-gutters navtop">
+   
+    <li class="nav-item " *ngIf="authService.authenticated()">
+      <a class="nav-link" (click)="authService.logout()">Log Out</a>
+    </li>
+    <li class="nav-item " *ngIf="authService.authenticated()">
+      <a class="nav-link alert-hover" routerLink="/admin" routerLinkActive="active-1" (click)="loadAdmin()">Enter Administration</a>
+    </li>
+    <li class="nav-item " *ngIf="!authService.authenticated()">
+      <a class="nav-link"   (click)="authService.login()">Log In</a>
+    </li>
+  </ul>
+  <nav class="navbar navbar-toggleable-md navbar-strike">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><img  src="/assets/images/icons/ic_menu_white_48px.svg" ></span>
+    </button>
+    <a class="navbar-brand"  routerLink="/"><img src="/assets/images/logo/White_Text.svg" class="logo"></a>
+  
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav ">
+        <a class="nav-item nav-link hidden-md-down"  routerLink="/operations" id="section-name">Cross-border Operations Database</a>
+        <a class="nav-item nav-link hidden-lg-up"  routerLink="/operations" >Overview</a>
+        <a class="nav-item nav-link hidden-lg-up"  routerLink="/operations/methodology" >Methodology</a>
+        <a class="nav-item nav-link hidden-lg-up"  routerLink="/operations/names" >Names Identified</a>
+        <a class="nav-item dropdown hidden-lg-up">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Countries</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" routerLink="/operations/pakistan" >Pakistan</a>
+                <a class="dropdown-item" routerLink="/operations/yemen">Yemen</a>
+                <a class="dropdown-item" routerLink="/operations/somalia">Somalia</a>
+                <a class="dropdown-item" routerLink="/operations/israel">Israel</a>
+                <a class="dropdown-item" routerLink="/operations/turkey">Turkey</a>
+            </div>
+        </a>
+        <a class="nav-item nav-link hidden-lg-up"   routerLink="/operations/search">Advance Search</a>
+      </div>
+    </div>
+  </nav>
+    <ul class="nav nav-fill justify-content-center no-gutters navbottom hidden-md-down">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/operations" routerLinkActive="active-sub" [routerLinkActiveOptions]="{exact:true}">Overview</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/operations/methodology" routerLinkActive="active-sub">Methodology</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/operations/names" routerLinkActive="active-sub">Names Identified</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Countries</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/operations/pakistan" routerLinkActive="active-sub" >Pakistan</a>
+            <a class="dropdown-item" routerLink="/operations/yemen" routerLinkActive="active-sub">Yemen</a>
+            <a class="dropdown-item" routerLink="/operations/somalia" routerLinkActive="active-sub">Somalia</a>
+            <a class="dropdown-item" routerLink="/operations/israel" routerLinkActive="active-sub">Israel</a>
+            <a class="dropdown-item" routerLink="/operations/turkey" routerLinkActive="active-sub">Turkey</a>
+        </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  routerLink="/operations/search" routerLinkActive="active-sub">Advance Search</a>
+    </li>
+  </ul>
+</header>
+<router-outlet></router-outlet>
+<app-main-footer></app-main-footer>

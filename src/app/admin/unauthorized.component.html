@@ -1,0 +1,39 @@
+
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Access Denied
+            <small>Information Classified</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item active">Area 51</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+        <section class="authorized-page">
+          <div class="authorized-content">
+            <h2 class="main-text">You are not authorized to access this page</h2>
+            <div class="full-width d-flex justify-content-center" style="margin-bottom: 40px;">
+              <button type="button" class="btn login-back " aria-label="Return" (click)="goBack()">
+                <span class="d-flex justify-content-center">
+                <img  src="/assets/images/icons/ic_keyboard_return_white_36px.svg"  >
+                &nbsp;&nbsp;
+                Return to Administration Dashboard
+                </span>
+              </button>
+            </div>
+
+
+
+
+          </div>
+        </section>
+    </section>
+</div>
+
+
+

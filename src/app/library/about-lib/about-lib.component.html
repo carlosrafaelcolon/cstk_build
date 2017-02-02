@@ -1,0 +1,66 @@
+
+<div class="page-headline">
+    <h1>Targeted Killing Resources</h1>
+    <span class="text_underline"></span>
+</div>
+<span class="d-flex justify-content-center margin-top-bottom-10 "><img  src="/assets/images/icons/ic_local_library_black_48px.svg"  class="icon-100"></span>
+<div class="pub-main-content ">
+    <p>This database is a list of articles, books, and other writings related to targeted killing. Curated by our team, it will be updated and expanded to include new sources and also to include details of the sources already on it. Please <a href="mailto:support@targetedkillingproject.com" class="active-text">send</a> new materials or materials the page does not include.</p>
+</div>
+
+<div  *ngIf="!doneLoading">
+    <div class="d-flex justify-content-center">
+        <md-progress-circle mode="indeterminate" ></md-progress-circle>
+    </div>
+</div>
+<div *ngIf="doneLoading">
+    
+    <md-card class="outline-card margin-vertical-2x" >
+        <md-card-title>
+            <h2>{{publications?.length}} Publications Documented</h2>
+        </md-card-title>
+        <md-card-content>
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <h4 class="list-header">Type</h4>
+                    <ul class="list">
+                        <li><strong>Books:</strong> {{books}}</li>
+                        <li><strong>Articles:</strong> {{articles}}</li>
+                        <li><strong>Reports:</strong> {{reports}}</li>
+                        <li><strong>Documents:</strong> {{documents}}</li>
+                        <li><strong>Anthologies:</strong> {{anthologies}}</li>
+                        <li><strong>News Reports:</strong> {{news}}</li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <h4 class="list-header">Themes</h4>
+                    <ul class="list">
+                        <li><strong>Technology:</strong> {{technologies}}</li>
+                        <li><strong>Ethics:</strong> {{ethics}}</li>
+                        <li><strong>Law:</strong> {{laws}}</li>
+                        <li><strong>Politics:</strong> {{politics}}</li>
+                        <li><strong>Strategy:</strong> {{strategies}}</li>
+                        <li><strong>History:</strong> {{histories}}</li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <h4 class="list-header">Topics</h4>
+                    <ul class="list">
+                        <li><strong>Drones:</strong> {{drones}}</li>
+                        <li><strong>Proliferation:</strong> {{proliferation}}</li>
+                        <li><strong>Data:</strong> {{data}}</li>
+                        <li><strong>Pakistan:</strong> {{pakistan}}</li>
+                        <li><strong>Turkey:</strong> {{turkey}}</li>
+                        <li><strong>Israel:</strong> {{israel}}</li>
+                    </ul>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-actions class="padding-2percent">
+            
+            <button class="btn btn-block success-hover" (click)="gotoLibrary()" >Go To Publications</button>
+        </md-card-actions>
+    </md-card>
+</div>
+

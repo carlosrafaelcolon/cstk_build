@@ -1,0 +1,202 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Cross-border Operations Database
+            <small *ngIf="strikes"><strong>{{strikes.length}}</strong> Operations Documented</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item active" > Cross-border Operations</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+
+        <div class="container-fluid">
+            <div class="page-headline">
+                <h1>Edit Mode</h1>
+                <span class="text_underline"></span>
+            </div>
+            <button class="btn btn-block success-hover" (click)="onSelectCreate()" >Add A New Operation</button>
+
+            <md-card class="filter-form round-top ">
+                <md-toolbar class="primary">Filter Strikes</md-toolbar>
+                <md-card-content >
+             
+                    <md-tab-group class="full-width cb-group">
+                        <md-tab>
+                            <template md-tab-label >
+                            <strong><em>Attacking Countries</em></strong>
+                            </template>
+                            <md-toolbar >
+                            <span>Select Attacking Countries</span>
+                            <span class="fill-remaining-space"></span>
+                            <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.attackers, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
+                            
+                            </md-toolbar>
+                            <ul class="d-flex flex-row flex-wrap adminCheckboxes" >
+                                <li *ngFor="let attacker of strikeOptions.attackers">
+                                    <md-checkbox [(ngModel)]="attacker.selected">
+                                    {{attacker.country}}
+                                    </md-checkbox>
+                                </li> 
+                            </ul>
+                        </md-tab>
+                        <md-tab>
+                            <template md-tab-label>
+                            <strong><em>Countries Targeted</em></strong>
+                            </template>
+                            <md-toolbar >
+                            <span>Select Countries Targeted</span>
+                            <span class="fill-remaining-space"></span>
+                            <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.targets, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button></span>
+                            </md-toolbar>
+                            <ul class="d-flex flex-row flex-wrap adminCheckboxes" >
+                                <li *ngFor="let target of strikeOptions.targets">
+                                    <md-checkbox [(ngModel)]="target.selected">
+                                    {{target.country}}
+                                    </md-checkbox>
+                                </li>
+                            </ul>
+                        </md-tab>
+                        <md-tab>
+                            <template md-tab-label>
+                            <strong><em>Weapon Types</em></strong>
+                            </template>
+                            <md-toolbar >
+                            <span>Select Weapon Types</span>
+                            <span class="fill-remaining-space"></span>
+                            <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.weaponTypes, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button></span>
+                            </md-toolbar>
+                            <ul class="d-flex flex-row flex-wrap adminCheckboxes" >
+                                <li *ngFor="let weapon of strikeOptions.weaponTypes">
+                                    <md-checkbox [(ngModel)]="weapon.selected">
+                                    {{weapon.term}}
+                                    </md-checkbox>
+                                </li>
+                            </ul>
+                        </md-tab>
+                        <md-tab>
+                            <template md-tab-label>
+                            <strong><em>Action Types</em></strong> 
+                            </template>
+                            <md-toolbar >
+                            <span>Select Action Types</span>
+                            <span class="fill-remaining-space"></span>
+                            <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.actionTypes, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
+                           
+                            </md-toolbar>
+                            <ul class="d-flex flex-row flex-wrap adminCheckboxes" >
+                                <li *ngFor="let action of strikeOptions.actionTypes">
+                                    <md-checkbox [(ngModel)]="action.selected" >
+                                    {{action.term}}
+                                    </md-checkbox>
+                                </li>
+                            </ul>
+                        </md-tab>
+                        <hr>
+                    </md-tab-group>
+                    <div class="filter-form-content">
+                        <md-slide-toggle [(ngModel)]="strikeOptions.excludeReviewed" name="excludeReviewed">
+                        Exclude Cases already reviewed?:
+                            <strong *ngIf="!strikeOptions.excludeReviewed">
+                            No
+                            </strong>
+                            <strong *ngIf="strikeOptions.excludeReviewed">
+                            Yes
+                            </strong>
+                        </md-slide-toggle>
+          
+                    </div>
+                </md-card-content>
+                
+                 <md-card-actions class="filter-form-content">
+                    <button class="btn  alert-hover" (click)="resetAll(strikeOptions)">Clear All</button>
+                    <button class="btn  primary-hover" (click)="onSubmit(strikeOptions)">Search Now</button>
+                </md-card-actions>
+        
+            </md-card>
+          
+            <div *ngIf="!loadingComplete">
+                <div class="d-flex justify-content-center load-partial">
+                    <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+                </div>
+            </div>
+            <span *ngIf="loadingComplete">
+            <div *ngIf="strikes">
+                <div class="row editList">
+                    <div class="page-headline">
+                        <h1>List of Operations</h1>
+                        <span class="text_underline"></span>
+                    </div>
+                <div class="table-responsive">
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;">Strikes</th>
+                            <th style="text-align:left;"><em>n</em></th>
+                            <th style="text-align:left;">Militants</th>
+                            <th style="text-align:left;">Civilians</th>
+                            <th style="text-align:left;">Unknowns</th>
+                            <th style="text-align:left;">HVTs</th>
+                            <th colspan="2" style="text-align:left;">Editing</th>																	
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let strike of (strikes | slice:0:listLimit); trackBy strike?.strikeId">
+                            <td style="text-align:left;">
+                                <span *ngFor=" let attacker of strike?.countries.attackers ; let i = index; let last = last ">
+                                <span  *ngIf="i > 0 && !last">,</span>
+                                <span  *ngIf="i > 0 && last">& </span>
+                                {{attacker.country}}
+                                </span>
+                                in
+                                <span *ngFor=" let target of strike?.countries.targets ; let i = index; let last = last ">
+                                <span  *ngIf="i > 0 && !last">,</span>
+                                <span  *ngIf="i > 0 && last">& </span>
+                                {{target.country}}
+                                </span>
+                                on <span class="active-text">{{strike?.date | date}}</span>
+                            </td>
+                            <td>
+                                {{strike?.casualties.totals}}
+                            </td>
+                            <td>
+                                {{strike?.casualties.susMils}}
+                            </td>
+                            <td>
+                                {{strike?.casualties.civilians}}
+                            </td>
+                            <td>
+                                {{strike?.casualties.unknowns}}
+                            </td>
+                            <td>
+                                {{strike?.casualties.hvts}}
+                            </td>
+                            <td><button    (click)="onEdit(strike)"  type="button" class="btn btn-block success-hover">Edit</button></td>
+                            <td><button (click)="onRemove(strike)"  type="button" class="btn btn-block alert-hover">Delete</button></td>														
+                        </tr>	
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8">
+                            <button *ngIf="listLimit < strikes.length"    class="btn  btn-block primary-hover" (click)="listLimit = listLimit + 15">Show More Strikes (displaying {{listLimit}} out of {{strikes?.length }})</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    </table>
+                </div>
+                </div>
+            </div>
+            </span>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+

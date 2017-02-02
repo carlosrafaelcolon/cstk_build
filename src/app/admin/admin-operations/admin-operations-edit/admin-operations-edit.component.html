@@ -1,0 +1,1080 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Cross-border Operations Database
+            <small *ngIf="strike">
+              Currently editing:
+              <span *ngFor=" let attacker of strike.countries.attackers ">
+                  <span>
+                      <span  *ngIf="$index > 0">, </span>
+                      {{attacker.country}}
+                  </span>
+              </span>
+              <span *ngFor=" let target of strike.countries.targets">
+                  
+                  <span> in {{target.country}}</span>
+              </span>
+              <span>on {{strike.date | date}}</span>
+            </small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li  class="breadcrumb-item"><a routerLink="/admin/operations">Cross-border Operations</a></li>
+                <li class="breadcrumb-item active" >Update</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+      <div  *ngIf="!strike">
+        <div class="d-flex justify-content-center load-full">
+          <p>Loading...</p>
+        </div>
+      </div>
+      <div  *ngIf="strike">
+
+        <div class="container-fluid">
+          <button (click)="gotoStrikes()" class="btn btn-block alert-hover"> Go Back</button>
+          <md-card class="basic-form round-top margin-top-bottom-40">
+              <md-toolbar >Editing:
+                  <span *ngFor=" let attacker of strike.countries.attackers ">
+                      <span>
+                          <span  *ngIf="$index > 0">, </span>
+                           &nbsp; {{attacker.country}}
+                      </span>
+                  </span>
+                  <span *ngFor=" let target of strike.countries.targets">
+                       <span> &nbsp; in {{target.country}}</span>
+                  </span>
+                  <span>&nbsp; on {{strike.date | date}}</span>
+              </md-toolbar>
+              <md-card-content class="basic-form-content ">
+                <form [formGroup]="updateForm" (ngSubmit)="onSubmit(updateForm.value)" >
+                  <span class="anchor" id="general"></span>
+                  <h3>Basic Information</h3>
+                  <table class="full-width" cellspacing="0" >
+                      <tr>
+                        <td>
+                          <md-input-container  class="full-width">
+                            <label><h4>Date of Incident (mm-dd-yyyy): {{updateForm.value.date| date:'longDate'}}</h4></label>
+                            <md-hint align="end">Insert Date</md-hint>
+                            <input  md-input	
+                                type="date" 
+                              
+                                formControlName="date">
+                          </md-input-container>
+                          <!--<ng2-datepicker formControlName="date"></ng2-datepicker>-->
+                          
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                         
+                            <md-input-container  class="full-width">
+                          
+								<md-hint align="end">Time of Day</md-hint>
+								<input 	md-input 
+										placeholder="Insert time of day (For example, Morning)" 
+										type="text" 
+										formControlName="time" >
+                            </md-input-container>
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+							<h4>What was the state of war within the victim state when the operation occured:</h4>
+							<select formControlName="stateStatus" class="full-width form-control basic-select border-box">
+								<option *ngFor="let state of stateStatusSelections" [value]="state.value">{{state.display}}</option>
+							</select>
+            
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        
+                            <md-input-container  class="full-width">
+                          
+								<md-hint align="end">Number of strikes</md-hint>
+								<input 	md-input 
+										placeholder="Number of strikes" 
+										type="number" 
+									
+										formControlName="numStrikes" >
+                            </md-input-container>
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                            <md-slide-toggle formControlName="extended">
+                              Did the duration of the operation extend more than 24 hours?:
+                              <strong *ngIf="!updateForm.controls.extended.value">
+                              No
+                              </strong>
+                              <strong *ngIf="updateForm.controls.extended.value">
+                              Yes
+                              </strong>
+                            </md-slide-toggle>
+                        </td>
+                      </tr>
+					  <tr>
+                        <td>
+                            <md-slide-toggle formControlName="onBorder">
+                              Did the operation occur on or near the border?:
+                              <strong *ngIf="!updateForm.controls.onBorder.value">
+                              No
+                              </strong>
+                              <strong *ngIf="updateForm.controls.onBorder.value">
+                              Yes
+                              </strong>
+                            </md-slide-toggle>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                            <md-slide-toggle formControlName="reviewed">
+                              Has this case been reviewed?:
+                              <strong *ngIf="!updateForm.controls.reviewed.value">
+                              No
+                              </strong>
+                              <strong *ngIf="updateForm.controls.reviewed.value">
+                              Yes
+                              </strong>
+                            </md-slide-toggle>
+                        </td>
+                      </tr>
+                  </table>
+                  <hr>
+                  <span class="anchor" id="countries"></span>
+                  <h3>Countries Involved</h3>
+                  <table class="full-width" cellspacing="0" >
+                      <tr>
+                        <td>
+                            <div formGroupName="countries">
+                              <div  formArrayName="attackers">
+                                  <!-- List of attacksers -->
+                                  <h4>Attacking State</h4>
+                                  <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let attacker of updateForm.controls.countries.controls.attackers.controls; let i = index">
+                                    <md-toolbar class="primary">
+                                      <span >Attacking State {{i + 1}}</span>
+                                      <!-- This fills the remaining space of the current row -->
+                                      <span class="fill-remaining-space"></span>
+                                      <span *ngIf="updateForm.controls.countries.controls.attackers.controls.length > 1"><button title="Remove Country" class="btn alert-hover " (click)="removeAttacker(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                                    </md-toolbar>
+
+                                    <md-card-content class="basic-form-content" [formGroupName]="i">
+                                    <table class="full-width" cellspacing="3" >
+                                      <tr >
+                                        <td>
+                                  
+                                            <md-input-container  class="full-width">
+                          
+												<md-hint align="start">Name of Attacking Country</md-hint>
+												<input 	md-input 
+														placeholder="Country" 
+														type="text" 
+											
+														formControlName="country" >
+                                            </md-input-container>
+                                            
+                                        </td>
+                                        <td>
+                         
+                                            <md-input-container   class="full-width">
+												<md-hint align="start">For Example: U.S. denies launching attack</md-hint>
+                                            	<input 	md-input 
+														placeholder="Conflicting details regarding its involvement?"
+                                                      	type="text" 
+                                            
+                                                      	formControlName="probability" >
+                                            </md-input-container>
+                                        </td>
+                                      </tr>
+                                      
+                                    </table>
+                                    
+                                    </md-card-content>
+                                  </md-card>
+                                  <div  class="d-flex flex-column form-group-input">
+                                    <button type="button"   class="btn btn-block success-hover " (click)="addAttacker()">Add Attacking State</button>
+                                  </div>
+                              </div>
+                              <div  formArrayName="targets">
+                                  <!-- List of attacksers -->
+                                  <h4>State Attacked</h4>
+                                  <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let target of updateForm.controls.countries.controls.targets.controls; let i = index">
+                                    <md-toolbar class="primary">
+                                      <span >Attacked State {{i + 1}}</span>
+                                      <!-- This fills the remaining space of the current row -->
+                                      <span class="fill-remaining-space"></span>
+                                      <span *ngIf="updateForm.controls.countries.controls.targets.controls.length > 1"><button title="Remove Country" class="btn alert-hover " (click)="removeTarget(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                                    </md-toolbar>
+
+                                    <md-card-content class="basic-form-content" [formGroupName]="i">
+                                    <table class="full-width" cellspacing="3" >
+                                      <tr >
+                                        <td>
+                                        
+                                            <md-input-container class="full-width">
+                          
+												<md-hint align="start">Name of Country Attacked</md-hint>
+                                            	<input 	md-input 
+														placeholder="Country" 
+														type="text" 
+                                                      
+                                                      	formControlName="country" >
+                                            </md-input-container>
+                                            
+                                        </td>
+                                        <td>
+                                         
+                                            <md-input-container class="full-width">
+                          
+												<md-hint align="start">Region</md-hint>
+												<input 	md-input 
+														placeholder="Region" 
+														type="text" 
+											
+														formControlName="region" >
+                                            </md-input-container>
+                                        </td>
+                                      </tr>
+                                      <tr >
+                                        <td>
+                                       
+                                            <md-input-container class="full-width">
+                          
+												<md-hint align="start">Division</md-hint>
+												<input 	md-input 
+														placeholder="Division" 
+														type="text" 
+														
+														formControlName="division" >
+                                            </md-input-container>
+                                        </td>
+                                        <td>
+                                       
+                                            <md-input-container class="full-width">
+                          
+												<md-hint align="start">Subdivision</md-hint>
+												<input 	md-input 
+														placeholder="Subdivision" 
+														type="text" 
+													
+														formControlName="subdivision" >
+                                            </md-input-container>
+                                        </td>
+                                      </tr>
+                                      <tr >
+                                        <td>
+                                          
+                                            <md-input-container class="full-width">
+                          
+												<md-hint align="start">Locale</md-hint>
+												<input 		md-input 
+															placeholder="Locale" 
+															type="text" 
+														
+															formControlName="locale" >
+                                            </md-input-container>
+                                        </td>
+                    
+                                      </tr>
+                                    </table>
+                                    
+                                    
+                                    </md-card-content>
+                                  </md-card>
+                                  <div  class="d-flex flex-column form-group-input">
+                                    <button type="button"   class="btn btn-block success-hover " (click)="addTarget()">Add Attacking State</button>
+                                  </div>
+                              </div>
+                              
+                            </div>
+                        </td>
+                      </tr>
+                  </table>
+                  <hr>
+                  <span class="anchor" id="types"></span>
+                  <h3>Action/Weapon Types</h3>
+                  <table class="full-width" cellspacing="0" formGroupName="type" >
+                    <tr formArrayName="weaponTypes">
+                      <td>
+                        <h4>Weapons Used</h4>
+                        <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let weapon of updateForm.controls.type.controls.weaponTypes.controls; let i = index">
+                          <md-toolbar class="primary">
+                            <span >Weapon {{i + 1}}</span>
+                            <!-- This fills the remaining space of the current row -->
+                            <span class="fill-remaining-space"></span>
+                            <span *ngIf="updateForm.controls.type.controls.weaponTypes.controls.length > 1"><button title="Remove Weapon" class="btn alert-hover " (click)="removeWeapon(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                          </md-toolbar>
+                          <md-card-content class="basic-form-content" [formGroupName]="i">
+                            <table class="full-width" cellspacing="3" >
+                              <tr >
+                                <td>
+                
+                                    <md-input-container class="full-width">
+                          
+										<md-hint align="end">For Example: Drone</md-hint>
+										<input 	md-input 
+												placeholder="Type of Weapon" 
+												type="text" 
+									
+												formControlName="term" >
+                                    </md-input-container>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                    <md-slide-toggle formControlName="clear">
+                                      It was clear this weapon was used?:
+                                      <strong *ngIf="!updateForm.controls.type.controls.weaponTypes.controls[i].controls.clear.value">
+                                      No
+                                      </strong>
+                                      <strong *ngIf="updateForm.controls.type.controls.weaponTypes.controls[i].controls.clear.value">
+                                      Yes
+                                      </strong>
+                                    </md-slide-toggle>
+                                </td>
+                              </tr>
+                            </table>
+                          </md-card-content>
+                        </md-card>
+                        <div  class="d-flex flex-column form-group-input">
+                          <button type="button"   class="btn btn-block success-hover " (click)="addWeapon()">Add Weapon Type</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr formArrayName="actionTypes">
+                      <td>
+                        <h4>Action Type</h4>
+                        <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let action of updateForm.controls.type.controls.actionTypes.controls; let i = index">
+                          <md-toolbar class="primary">
+                            <span >Action {{i + 1}}</span>
+                            <!-- This fills the remaining space of the current row -->
+                            <span class="fill-remaining-space"></span>
+                            <span *ngIf="updateForm.controls.type.controls.actionTypes.controls.length > 1"><button title="Remove Action" class="btn alert-hover " (click)="removeAction(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                          </md-toolbar>
+                          <md-card-content class="basic-form-content" [formGroupName]="i">
+                            <table class="full-width" cellspacing="3" >
+                              <tr >
+                                <td>
+                                 
+                                    <md-input-container class="full-width">
+                          
+										<md-hint align="end">For Example: Airstrike</md-hint>
+										<input 	md-input 
+												placeholder="Type of Action" 
+												type="text" 
+								
+												formControlName="term" >
+                                    </md-input-container>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                    <md-slide-toggle formControlName="clear">
+                                      It was clear this type of action occured?:
+                                      <strong *ngIf="!updateForm.controls.type.controls.actionTypes.controls[i].controls.clear.value">
+                                      No
+                                      </strong>
+                                      <strong *ngIf="updateForm.controls.type.controls.actionTypes.controls[i].controls.clear.value">
+                                      Yes
+                                      </strong>
+                                    </md-slide-toggle>
+                                </td>
+                              </tr>
+                            </table>
+                          </md-card-content>
+                        </md-card>
+                        <div  class="d-flex flex-column form-group-input">
+                          <button type="button"   class="btn btn-block success-hover " (click)="addAction()">Add Action Type</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                  <hr>
+                  <span class="anchor" id="targets"></span>
+                  <h3>Targets</h3>
+                  <table class="full-width" cellspacing="0" formArrayName="objects" >
+                    <h4>Object Type</h4>
+                    <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let obj of updateForm.controls.objects.controls; let i = index">
+                      <md-toolbar class="primary">
+                        <span >Object {{i + 1}}</span>
+                        <!-- This fills the remaining space of the current row -->
+                        <span class="fill-remaining-space"></span>
+                        <span><button title="Remove Object" class="btn alert-hover " (click)="removeObject(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                      </md-toolbar>
+                      <md-card-content class="basic-form-content" [formGroupName]="i">
+                        <table class="full-width" cellspacing="3" >
+                          <tr >
+                            <td>
+                           
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="end">For example: Vehicle</md-hint>
+									<input 	md-input 	
+											placeholder="Object Type Targeted" 
+											type="text" 
+									
+											formControlName="type" >
+                                </md-input-container>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                                <md-slide-toggle formControlName="clear">
+                                  It was clear this object was targeted?:
+                                  <strong *ngIf="!updateForm.controls.objects.controls[i].controls.clear.value">
+                                  No
+                                  </strong>
+                                  <strong *ngIf="updateForm.controls.objects.controls[i].controls.clear.value">
+                                  Yes
+                                  </strong>
+                                </md-slide-toggle>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                                <md-slide-toggle formControlName="stationary">
+                                  This object was targeted while in motion?:
+                                  <strong *ngIf="!updateForm.controls.objects.controls[i].controls.stationary.value">
+                                  No
+                                  </strong>
+                                  <strong *ngIf="updateForm.controls.objects.controls[i].controls.stationary.value">
+                                  Yes
+                                  </strong>
+                                </md-slide-toggle>
+                            </td>
+                          </tr>
+                        </table>
+                      </md-card-content>
+                    </md-card>
+                    <button type="button"  class="btn btn-block success-hover " (click)="addObject()">Add Object</button>
+                  </table>
+				  <h4>Networks Targeted</h4>
+                  	<table>
+						  <tr>
+                            <td>
+                                <md-slide-toggle formControlName="groupReported">
+                                  Any groups identified?:
+                                  <strong *ngIf="!updateForm.controls.groupReported.value">
+                                  No
+                                  </strong>
+                                  <strong *ngIf="updateForm.controls.groupReported.value">
+                                  Yes
+                                  </strong>
+                                </md-slide-toggle>
+                            </td>
+                          </tr>
+					</table>
+                  <table class="full-width" cellspacing="0" formArrayName="group" *ngIf="updateForm.controls.groupReported.value">
+                    
+				
+                    <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let group of updateForm.controls.group.controls; let i = index">
+                      <md-toolbar class="primary">
+                        <span >Group {{i + 1}}</span>
+                        <!-- This fills the remaining space of the current row -->
+                        <span class="fill-remaining-space"></span>
+                        <span><button title="Remove Group" class="btn alert-hover " (click)="removeGroup(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                      </md-toolbar>
+                      <md-card-content class="basic-form-content" [formGroupName]="i">
+                        <table class="full-width" cellspacing="3" >
+                          
+						 
+                          <tr >
+                            <td >
+                         
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">For example: AQAP</md-hint>
+									<input 	md-input 
+											placeholder="Groups Targeted" 
+											type="text" 
+									
+											formControlName="name" >
+                                </md-input-container>
+                            </td>
+                          </tr>
+                          <tr >
+                            <td>
+                                <md-slide-toggle formControlName="clear">
+                                  It was clear this group was targeted?:
+                                  <strong *ngIf="!updateForm.controls.group.controls[i].controls.clear.value">
+                                  No
+                                  </strong>
+                                  <strong *ngIf="updateForm.controls.group.controls[i].controls.clear.value">
+                                  Yes
+                                  </strong>
+                                </md-slide-toggle>
+                            </td>
+                          </tr>
+						
+                        </table>
+                      </md-card-content>
+                    </md-card>
+					
+                    <button type="button"  class="btn btn-block success-hover " (click)="addGroup()">Add Group</button>
+                  </table>
+				   <h4>Names Identified</h4>
+                  <table>
+						<tr>
+							<td>
+								<md-slide-toggle formControlName="peopleReported">
+								Any names identified?:
+								<strong *ngIf="!updateForm.controls.peopleReported.value">
+								No
+								</strong>
+								<strong *ngIf="updateForm.controls.peopleReported.value">
+								Yes
+								</strong>
+								</md-slide-toggle>
+							</td>
+						</tr>
+					</table>
+                  <table class="full-width" cellspacing="0" formArrayName="people" *ngIf="updateForm.controls.peopleReported.value">
+                   
+					
+                    <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let group of updateForm.controls.people.controls; let i = index">
+                      <md-toolbar class="primary">
+                        <span >Person {{i + 1}}</span>
+                        <!-- This fills the remaining space of the current row -->
+                        <span class="fill-remaining-space"></span>
+                        <span><button title="Remove Person" class="btn alert-hover " (click)="removePerson(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                      </md-toolbar>
+					  
+                      <md-card-content class="basic-form-content" [formGroupName]="i">
+                        <table class="full-width" cellspacing="3" >
+                          
+						 
+                          <tr >
+
+                            <td>
+                       
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">Name of person</md-hint>
+									<input 	md-input 
+											placeholder="Name of person" 
+											type="text" 
+										
+											formControlName="name" >
+                                </md-input-container>
+                            </td>
+                            
+                          </tr>
+						  <tr >
+							  <td>
+                         
+                                <!--<md-input-container class="full-width">
+                          
+									<md-hint align="start">For example: Suspected Militant</md-hint>
+									<input 	md-input 
+											placeholder="Status of person Identified" 
+											type="text" 
+									
+											formControlName="status" >
+                                </md-input-container>-->
+								<select formControlName="status" class="full-width form-control basic-select border-box" style="margin-top:10px">
+									<option *ngFor="let idType of statusSelections" [value]="idType.value">{{idType.display}}</option>
+								</select>
+                            </td>
+						  </tr>
+                          <tr>
+                            <td>
+                                <md-slide-toggle formControlName="clear">
+                                  It was clear this person was targeted?:
+                                  <strong *ngIf="!updateForm.controls.people.controls[i].controls.clear.value">
+                                  No
+                                  </strong>
+                                  <strong *ngIf="updateForm.controls.people.controls[i].controls.clear.value">
+                                  Yes
+                                  </strong>
+                                </md-slide-toggle>
+                            </td>
+                          </tr>
+						
+
+                        </table>
+                      </md-card-content>
+                    </md-card>
+			
+                    <button type="button"  class="btn btn-block success-hover " (click)="addPerson()">Add Person</button>
+                  </table>
+                  <hr>
+                  <span class="anchor" id="casualties"></span>
+                  <h3>Casualties</h3>
+                  <table class="full-width" cellspacing="0" >
+                    
+                    <md-card class="basic-form round-top " formGroupName="casualties">
+                      
+                      <md-card-content class="basic-form-content" >
+                        <table class="full-width" cellspacing="3" >
+                          <tr >
+                            <td>
+                         
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">Total Deaths</md-hint>
+									<input 	md-input 
+											placeholder="Total" 
+											type="number" 
+											formControlName="totals" >
+                                </md-input-container>
+
+                            </td>
+                            <td>
+                           
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">Suspected Militants</md-hint>
+									<input 	md-input 
+											placeholder="Suspected Militants" 
+											type="number" 
+										
+											formControlName="susMils" >
+                                </md-input-container>
+                            </td>
+                          </tr>
+                          <tr >
+                            <td>
+                             
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">Civilians</md-hint>
+									<input md-input placeholder="Civilians" 
+											type="number" 
+										
+											formControlName="civilians" >
+                                </md-input-container>
+                            </td>
+                            <td>
+                         
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">Unknowns</md-hint>
+									<input 	md-input 
+											placeholder="Unknowns" 
+											type="number"  
+											formControlName="unknowns" >
+                                </md-input-container>
+                            </td>
+                          </tr>
+                          <tr >
+                            <td>
+                           
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">High-Value Targets</md-hint>
+									<input 	md-input 
+											placeholder="HVTs" 
+											type="number" 
+										
+											formControlName="hvts" >
+                                </md-input-container>
+                            </td>
+                            <td>
+                             
+                                <md-input-container class="full-width">
+                          
+									<md-hint align="start">Children</md-hint>
+									<input 	md-input 
+											placeholder="Children" 
+											type="number" 
+										
+											formControlName="children" >
+                                </md-input-container>
+                            </td>
+                          </tr>
+                        </table>
+                      </md-card-content>
+                    </md-card>
+                  </table>
+                  <hr>
+                  <span class="anchor" id="incident"></span>
+                  <h3>Summary of Incident</h3>
+                  <table class="full-width" cellspacing="0" formArrayName="details">
+                    <tr *ngFor="let d of updateForm.controls.details.controls; let i = index">
+						
+                      <td class="basic-form-content">
+                        <md-input-container class="full-width">
+											
+							
+							<textarea 	md-input  
+										placeholder="Incident Details"
+								
+										type="text"
+										class="long-min"
+										formControlName="{{i}}" ></textarea>
+                        </md-input-container>
+						<br>
+						<span class="full-width flex-row"  *ngIf="updateForm.controls.details.controls.length > 1">
+							<span >Detail {{i + 1}}</span>
+							<span class="fill-remaining-space"></span>
+							<button type="button"  title="Remove Theme" class="btn alert-hover "  md-mini-fab (click)="removeDetail(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+						</span>
+                      </td>
+                      
+                  
+                    </tr>
+					<tr></tr>
+                
+                      <!--*ngIf="updateForm.controls.details.value < 1 "-->
+                  </table>
+                  <hr>
+                  <span class="anchor" id="sources"></span>
+                  <h3>Source Breakdowns</h3>
+                  <table class="full-width" cellspacing="0" >
+                      <tr>
+                        <td>
+                        <table class="full-width" cellspacing="0" formArrayName="sources">
+                          <md-card class="basic-form round-top margin-top-bottom-10 " *ngFor="let source of updateForm.controls.sources.controls; let i = index">
+                            <md-toolbar class="primary">
+                              <span >Source {{i + 1}}</span>
+                              <!-- This fills the remaining space of the current row -->
+                              <span class="fill-remaining-space"></span>
+                              <span><button title="Remove Source" class="btn alert-hover " (click)="removeSource(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                            </md-toolbar>
+                            <md-card-content class="basic-form-content" [formGroupName]="i">
+                              <table class="full-width" cellspacing="3" >
+                                <tr >
+                                  <td>
+                                  
+                                    <md-input-container class="full-width">
+											
+										<md-hint align="end">Title of Publication</md-hint>
+										<input 	md-input 
+												placeholder="Source Title" 
+												type="text" 
+										
+												formControlName="title" >
+                                    </md-input-container>
+                                  </td>
+                                </tr>
+                                <tr >
+                                  <td>
+                          
+                                    <md-input-container class="full-width">
+											
+										<md-hint align="end">Link</md-hint>
+										<input 	md-input 
+												placeholder="Link to Source" 
+												type="url" 
+											
+												formControlName="link" >
+                                    </md-input-container>
+                                  </td>
+                                </tr>
+                                <tr >
+                                  <td>
+                                 
+                                    <md-input-container class="full-width">
+											
+										<md-hint align="end">Alternative Link</md-hint>
+										<input 	md-input 
+												placeholder="Alt Link to Source" 
+												type="url" 
+												
+												formControlName="altLink" >
+                                    </md-input-container>
+                                  </td>
+                                </tr>
+                                <tr >
+                                  <td>
+									   <md-input-container  class="full-width">
+											<label><h4>Date of Publication (mm-dd-yyyy): {{updateForm.value.pubDate| date:'longDate'}}</h4></label>
+											<md-hint align="end">Insert Date</md-hint>
+											<input  md-input	
+													type="date" 
+											
+													formControlName="pubDate">
+										</md-input-container>
+                                   
+                                    <!--<ng2-datepicker formControlName="pubDate"></ng2-datepicker>-->
+                                   
+                                    
+                                  </td>
+                                </tr>
+                                <tr >
+                                  <td>
+                                    <md-slide-toggle formControlName="countStatistics">
+                                      Count casualty statistic for this source towards overall range?:
+                                      <strong *ngIf="!updateForm.controls.sources.controls[i].controls.countStatistics.value">
+                                      No
+                                      </strong>
+                                      <strong *ngIf="updateForm.controls.sources.controls[i].controls.countStatistics.value">
+                                      Yes
+                                      </strong>
+                                    </md-slide-toggle>
+                                  </td>
+                                </tr>
+                            
+                              </table>
+                              <h3>Type of Press</h3>
+							    <!--<table class="full-width" cellspacing="0"  formArrayName="tags" >
+  
+									<tr  *ngFor="let tag of updateForm.controls.sources.controls[i].controls.tags.controls; let tagFormIndex = index">
+									<td>
+										<md-input-container class="full-width">
+																			
+												<md-hint align="start">Example: Pakistani Press</md-hint>
+													<input    md-input 
+																placeholder="Insert type of press" 
+																type="text" 
+																formControlName="{{tagFormIndex}}" >
+										</md-input-container>
+									</td>
+									
+									<td>
+										<span class="d-flex flex-row flex-wrap">
+										<span class="fill-remaining-space"></span>
+										<button type="button"  title="Remove Press Type" class="btn alert-hover "  md-mini-fab (click)="removeTag(tagFormIndex)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+										</span>
+									</td>
+									</tr>
+								
+									
+							</table>
+							<button type="button"   class="btn success-hover "  (click)="addTag()" >Add Press</button>-->
+                              <app-tags [tags]="updateForm.controls.sources.controls[i]"></app-tags>
+                              <hr>
+                              <table class="full-width" cellspacing="0" > 
+                                <md-card class="basic-form round-top " formGroupName="mainReport">
+                                  <md-card-content class="basic-form-content" >
+                                  <h3>Main Report</h3>
+                                  <h4>Casualties</h4>
+									<table class="full-width" cellspacing="0" >
+										
+										<md-card class="basic-form round-top " formGroupName="casualties">
+										
+										<md-card-content class="basic-form-content" >
+											<table class="full-width" cellspacing="3" >
+											<tr >
+												<td>
+											
+													<md-input-container class="full-width">
+											
+														<md-hint align="start">Total Deaths</md-hint>
+														<input 	md-input 
+																placeholder="Total" 
+																type="number" 
+																formControlName="totals" >
+													</md-input-container>
+
+												</td>
+												<td>
+											
+													<md-input-container class="full-width">
+											
+														<md-hint align="start">Suspected Militants</md-hint>
+														<input 	md-input 
+																placeholder="Suspected Militants" 
+																type="number" 
+															
+																formControlName="susMils" >
+													</md-input-container>
+												</td>
+											</tr>
+											<tr >
+												<td>
+												
+													<md-input-container class="full-width">
+											
+														<md-hint align="start">Civilians</md-hint>
+														<input md-input placeholder="Civilians" 
+																type="number" 
+															
+																formControlName="civilians" >
+													</md-input-container>
+												</td>
+												<td>
+											
+													<md-input-container class="full-width">
+											
+														<md-hint align="start">Unknowns</md-hint>
+														<input 	md-input 
+																placeholder="Unknowns" 
+																type="number"  
+																formControlName="unknowns" >
+													</md-input-container>
+												</td>
+											</tr>
+											<tr >
+												<td>
+											
+													<md-input-container class="full-width">
+											
+														<md-hint align="start">High-Value Targets</md-hint>
+														<input 	md-input 
+																placeholder="HVTs" 
+																type="number" 
+															
+																formControlName="hvts" >
+													</md-input-container>
+												</td>
+												<td>
+												
+													<md-input-container class="full-width">
+											
+														<md-hint align="start">Children</md-hint>
+														<input 	md-input 
+																placeholder="Children" 
+																type="number" 
+															
+																formControlName="children" >
+													</md-input-container>
+												</td>
+											</tr>
+											</table>
+										</md-card-content>
+										</md-card>
+									</table>
+                                  <h4>Source of Information</h4>
+                                  <app-sources [sources]="updateForm.controls.sources.controls[i].controls.mainReport"></app-sources>
+                                  <h4>Target Information</h4>
+                                  <md-card  formGroupName="target">
+                                      
+                                      <md-card-content class="basic-form-content" >
+                                        <table class="full-width" cellspacing="0" >
+                                            <tr>
+                                              <td>
+                                                
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">Location</md-hint>
+													<input 	md-input 
+															placeholder="Location" 
+															type="text" 
+														
+															formControlName="location" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                               
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">Time of Day</md-hint>
+													<input 	md-input 
+															placeholder="Time of Day" 
+															type="text" 
+														
+															formControlName="time" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                             
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">For example: Vehicle</md-hint>
+													<input 	md-input 
+															placeholder="Type of target" 
+															type="text" 
+															
+															formControlName="targetType" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                                
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">Target Type Details</md-hint>
+													<input 	md-input 
+															placeholder="Additional Details relating to type of target" 
+															type="text" 
+														
+															formControlName="targetTypeDetails" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">Additional Details</md-hint>
+													<input 	md-input 
+															placeholder="Additional Details that don't fit above categories'" 
+															type="text" 
+															formControlName="additionalDetails" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                        </table>
+                                      </md-card-content>
+                                  </md-card>
+                                  <h4>Information on Those Killed</h4>
+                                  <md-card  formGroupName="killed">
+                                      
+                                      <md-card-content class="basic-form-content" >
+                                        <table class="full-width" cellspacing="0" >
+                                            <tr>
+                                              <td>
+                                               
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">For Example: Suspected Militants</md-hint>
+													<input md-input placeholder="Status of those killed"
+																type="text" 
+														
+																formControlName="status" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>
+                                            
+                                                  <md-input-container class="full-width">
+											
+													<md-hint align="end">Additional Details</md-hint>
+													<input 	md-input 
+															placeholder="Additional Details relating to those killed"
+															type="text" 
+																
+															formControlName="additionalDetails" >
+                                                  </md-input-container>
+                                              </td>
+                                            </tr>
+                                        </table>
+                                      </md-card-content>
+                                  </md-card>
+                                  
+                                  <app-weapon-types [weapons]="updateForm.controls.sources.controls[i].controls.mainReport"></app-weapon-types>
+                                  </md-card-content>
+                                </md-card>
+                              </table>
+
+                            </md-card-content>
+                          </md-card>
+                          <tr>
+                            <td>
+                              <button type="button" class="btn success-hover" (click)="addSource()">Add Source</button>
+                            </td>
+                          </tr>
+                        </table>
+                        </td>
+                      </tr>
+                  </table>
+                  <hr>
+                  <span class="anchor" id="submit"></span>
+                  <h3>Create Data</h3>
+                  <table class="full-width" cellspacing="0">
+                      <tr>
+                          <td><button class="btn btn-block alert-hover" type="submit" [disabled]="!updateForm.valid">Submit</button></td>
+                      </tr>
+                  </table>
+
+                </form>
+              </md-card-content>
+          </md-card>
+          <pre>{{updateForm.value | json}}</pre>
+        </div>
+
+      </div>
+    </section>
+</div>
+
+

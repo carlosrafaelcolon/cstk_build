@@ -1,0 +1,86 @@
+<ol class="breadcrumb">
+  <li  class="breadcrumb-item "><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item  active">Cross-border Operations Database</li>
+</ol>
+
+<section class="light-bg" style="margin-top:-1rem;">
+  <div class="container">
+    <div class="row ">
+      <div class="col ">
+
+        <button class="display-button margin-top-bottom-40" (click)="gotoSearch()">
+          <span class="d-flex flex-row justify-content-center flex-wrap ">
+            <img class="icon-30" src="/assets/images/icons/ic_search_white_36px.svg" style="margin-bottom: 10px; margin-right: 5px;">
+            <h2>Click to Select Your Search Criteria</h2>
+          </span>
+          <p>The Cross-border Operations Database holds over 1000 records of cross-border incidents, along with summaries and links to sources.</p>
+        </button>
+
+      </div>
+    </div>
+    <div class="row "  myMatchHeight="md-card-content ">
+		<div class="col-md-6  col-lg-4  border-cards">
+			
+			<md-card class="card-outter border-primary">
+				<md-card-title >U.S. in Pakistan</md-card-title>   
+				<md-card-content class="md-card-content">
+					<p>The United States has been launching drone strikes in Pakistan since at least 2004, killing over 3000 people.</p>
+				</md-card-content>
+				<md-card-actions >
+					<button  type="button" class="btn primary-hover-dark " (click)="gotoPakistan()" >View Operations</button>
+				</md-card-actions>
+			</md-card>
+		
+		</div>
+		<div class="col-md-6  col-lg-4 border-cards">
+			
+			<md-card class="card-outter border-primary">
+				<md-card-title >U.S. in Yemen</md-card-title>   
+				<md-card-content class="md-card-content">
+					<p>The first drone strike outside of Afghanistan launched by the United States was in Yemen in 2002. After this initial attack, there were no attacks for seven years. In recent years, however, the United States has launched targeted killings by both drones and manned aircraft.</p>
+				</md-card-content>
+				<md-card-actions >
+					<button  type="button" class="btn primary-hover-dark" (click)="gotoYemen()" >View Operations</button>
+				</md-card-actions>
+			</md-card>
+		</div>
+		<div class="col-md-6  col-lg-4 border-cards">
+			
+			<md-card class="card-outter border-primary">
+				<md-card-title >U.S. in Somalia</md-card-title>   
+				<md-card-content class="md-card-content">
+					<p>The United States has been launched attacks against Somalians linked to al-Shabaab and al-Qaeda and East Africa in Somala for over five years.</p>
+				</md-card-content>
+				<md-card-actions >
+					<button  type="button" class="btn primary-hover-dark" (click)="gotoSomalia()" >View Operations</button>
+				</md-card-actions>
+			</md-card>
+		</div>
+		<div class="col-md-6  col-lg-4 border-cards">
+			
+			<md-card class=" card-outter border-primary">
+				<md-card-title >Israeli Operations</md-card-title>   
+				<md-card-content class="md-card-content">
+					<p>Israel is believed to have launched drone strikes outside of its borders, including in the Gaza Strip, Egypt, and Syria.</p>
+				</md-card-content>
+				<md-card-actions >
+					<button  type="button" class="btn primary-hover-dark" (click)="gotoIsrael()" >View Operations</button>
+				</md-card-actions>
+			</md-card>
+		</div>
+		<div class="col-md-6  col-lg-4 border-cards">
+			
+			<md-card class=" card-outter border-primary">
+				<md-card-title >Turkish Operations</md-card-title>   
+				<md-card-content class="md-card-content">
+					<p>Turkey has been laucnhing attacks across the northern border of Iraq for over a decade.</p>
+				</md-card-content>
+				<md-card-actions >
+					<button  type="button" class="btn primary-hover-dark" (click)="gotoTurkey()" >View Operations</button>
+				</md-card-actions>
+			</md-card>
+		</div>
+    </div>
+
+  </div>
+</section>

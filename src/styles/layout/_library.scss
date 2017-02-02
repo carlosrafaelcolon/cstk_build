@@ -1,0 +1,51 @@
+.publicationList {
+    width: 100%;
+    .lib-box {
+        width: 100%;
+        background-color: $secondary;
+        color:$white;
+        padding: 25px;
+ 
+        margin: 5px auto;
+        -webkit-box-shadow: 4px 4px 52px -21px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 4px 52px -21px rgba(0,0,0,0.75);
+        box-shadow: 4px 4px 52px -21px rgba(0,0,0,0.75);
+        &:hover{
+            background-color: $primary;
+            cursor:pointer;
+        }
+        .pub-type {
+            margin-top: -10px;
+            margin-left:-10px;
+        }
+        .pub-content {
+            margin-top:15px;
+            .pub-title {
+
+                font-family:$stack-roboto;
+            }
+            .pub-author {
+                
+            }
+            .pub-footer {
+       
+            }
+
+        }
+    }
+}
+
+.reviews {
+    font-family:$stack-roboto;
+    margin-left:15px;
+    a{
+        color:$orient;
+        transition: all .5s linear;
+        &:hover{
+            color:$astral;
+        }
+    }
+    .reviewer{
+        margin-top:-8px;
+    }
+}

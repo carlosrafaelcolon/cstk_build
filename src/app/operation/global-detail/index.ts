@@ -1,0 +1,1 @@
+export{GlobalDetailComponent} from './global-detail.component';

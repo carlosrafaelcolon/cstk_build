@@ -1,0 +1,28 @@
+<app-main-nav></app-main-nav>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item "><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item active">About</li>
+</ol>
+<section style="margin-top:-1rem;">
+  <div class="row no-gutters">
+    <div class="col-sm-3 col-md-2  side-nav">
+      <ul class="side-list">
+        <li >
+          <a routerLink="/about" routerLinkActive="active-text"  [routerLinkActiveOptions]="{exact:true}">Organization</a>
+        </li>
+        <li >
+          <a routerLink="/about/people" routerLinkActive="active-text">People</a>
+        </li>
+        <li >
+          <a routerLink="/about/contact" routerLinkActive="active-text" [routerLinkActiveOptions]="{exact:true}" >Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-md-10 side-content">
+      <div class="container-85 min-500px" >
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
+<app-main-footer></app-main-footer>

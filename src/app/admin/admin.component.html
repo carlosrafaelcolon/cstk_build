@@ -1,0 +1,115 @@
+<section class="admin-body page-header-fixed page-sidebar-fixed">
+<div>
+    <div class="page-wrapper"><!--BEGIN HEADER-->
+        <header class="header">
+            <div class="logo"><a routerLink="/admin" ><img  src="/assets/images/logo/White_Text.svg" style="height:80%; width:auto; margin:auto"></a>
+            </div>
+            <nav role="navigation" class="navbar navbar-static-top">
+                <ul class="nav justify-content-end no-gutters user-info">
+                    <li class="nav-item mr-auto" >
+                        <a class="nav-link" routerLink="/"  class="btn alert-hover " >Return Home</a>
+                    </li>
+                    <li class="nav-item " *ngIf="authService.authenticated()">
+                        <img class="avatar" src="{{userIMG}}">
+                    </li>
+                    <li class="nav-item " *ngIf="authService.authenticated()">
+                        <span class="nav-link username" >{{userName}}</span>
+                    </li>
+                    <li class="nav-item ">
+                        <span class="nav-link log" (click)="logOut()">Log Out</span>
+                    </li>
+                </ul>
+          
+            </nav>
+        </header>
+ 
+        <div class="wrapper row-offcanvas row-offcanvas-left"><!--BEGIN SIDEBAR-->
+            <aside class="page-sidebar sidebar-offcanvas">
+                <section class="sidebar">
+                    <ul class="nav flex-column sidebar-menu">
+                        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                            <a class="nav-link " routerLink="/admin" >Administration </a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active"  *ngIf="authService.isAdmin()">
+                            <a class="nav-link" routerLink="/admin/people">People</a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" routerLink="/admin/library">Library</a>
+                            <ul class="nav  flex-column nav-second-level" routerLinkActive="active-link"  [hidden]="!rlaCreateLib.isActive"  routerLinkActive #rlaCreateLib="routerLinkActive">
+                                <li class="nav-item">
+                                    <a routerLink="/admin/library/create"  class="nav-link ">Jump To</a>
+                                    <ul class="nav flex-column nav-third-level">
+ 
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('general')">Basic Info</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"(click)="goTo('categories')">Themes/Tags</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('summary')">Synopsis</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('reviewers')">Reviews</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('submit')" > Submit</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+             
+                        </li>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link"  routerLink="/admin/operations">Strikes</a>
+                            <ul class="nav  flex-column nav-second-level" routerLinkActive="active-link"  [hidden]="!rlaCreateStr.isActive"  routerLinkActive #rlaCreateStr="routerLinkActive" >
+                                <li class="nav-item">
+                                    <a routerLink="/admin/operations/create"  class="nav-link ">Jump To</a>
+                                    <ul class="nav flex-column nav-third-level">
+ 
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('general')">Overview</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('countries')">Countries</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('types')">Weapons/Actions</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"  (click)="goTo('targets')">Targets</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"  (click)="goTo('casualties')" >Casualties</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"  (click)="goTo('incident')">Incident</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"  (click)="goTo('sources')">Sources</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" (click)="goTo('submit')" > Submit</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active" *ngIf="authService.isAdmin()" >
+                            <a class="nav-link" routerLink="/admin/blog">Blog</a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active">
+                            <a class="nav-link" routerLink="/admin/tutorial">Tutorial</a>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+            <!--END SIDERBAR--><!--BEGIN CONTENT-->
+            <router-outlet></router-outlet>
+            
+            <!--END CONTENT--></div>
+        <!--END WRAPPER-->
+        </div>
+</div>
+
+</section>

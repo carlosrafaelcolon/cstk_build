@@ -1,0 +1,322 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+    <li class="breadcrumb-item"><a [routerLink]="['/operations']">Operations</a></li>
+    <li class="breadcrumb-item active" *ngIf="strike">
+     <strong> Incident:</strong>
+    <span *ngFor=" let attacker of strike?.countries.attackers; let i = index ">
+        <span>
+            <span  *ngIf="i > 0 && !last">,</span>
+            <span  *ngIf="i > 0 && last">& </span>
+            {{attacker.country}}
+        </span>
+    </span>
+    <span *ngFor=" let target of strike?.countries.targets; let i = index">   
+    in
+      <span  *ngIf="i > 0 && !last">,</span>
+      <span  *ngIf="i > 0 && last">& </span>
+      {{target.country}}
+    </span>
+    <span>on {{strike?.date | date}}</span>
+    </li>
+</ol>
+<div *ngIf="!strike">
+
+    <div class="d-flex justify-content-center  load-full">
+        
+        <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+    </div>
+</div>
+<div *ngIf="strike">
+  <section class="light-bg" style="margin-top:-1rem;">
+    <div class="container">
+      <div class="viewHeader">
+        <div class="d-flex flex-row flex-wrap">
+            <button type="button" class="btn primary-hover btn-round " aria-label="Return" (click)="goBack()">
+                <span class="d-flex align-items-center">
+                <img  src="/assets/images/icons/ic_keyboard_return_white_36px.svg"  class="icon-30">
+                &nbsp;&nbsp;
+                Go Back
+                </span>
+            </button>
+            <span class="hidden-md-down fill-remaining-space"></span>
+            <span class="hidden-md-down  d-flex flex-row btn-group-round " style="width:25%">
+                <button  class="btn primary-hover-dark flex" disabled>Previous</button>
+                <button  class="btn primary-hover-dark flex" disabled>Next</button>
+            </span>
+        </div>
+        
+        <div class="d-flex flex-column margin-top-bottom-40">
+         
+            <h2>Attack Summary</h2>
+
+            <div>
+                <span><strong>Date:</strong> {{strike?.date | date:'fullDate'}}</span>
+            </div>
+            <div ><strong>Launched By:</strong>
+            <span *ngFor=" let attacker of strike?.countries.attackers; let i = index; let last = last " >
+             
+                    <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                    <span  *ngIf="i > 0 && last">& </span>
+                    {{attacker.country | capitalize}}
+            
+            </span>
+            </div>
+            <div ><strong>Took place in:</strong>
+                <span *ngFor=" let target of strike?.countries.targets" >
+                    <span>{{target.locale}}</span
+                    ><span  *ngIf="target.subdivision"><span  *ngIf="target.subdivision">,</span> {{target.subdivision}}</span
+                    ><span  *ngIf="target.division"><span  *ngIf="target.division">,</span> {{target.division}}</span
+                    ><span  *ngIf="target.region"><span  *ngIf="target.region">,</span> {{target.region}}</span
+                    ><span> in {{target.country | capitalize}}</span>
+                </span>
+            </div>
+            <div ><strong>Weapons used:</strong>
+                <span *ngFor=" let weapon of strike?.type.weaponTypes; let i = index; let last = last ">
+                
+                        <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                        <span  *ngIf="i > 0 && last">& </span>
+                        <span>{{weapon.term | capitalize}}</span> 
+                        <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg" *ngIf="!weapon.clear">
+               
+                </span>
+            </div>
+            <!--<div >Weapons used: 
+                <span *ngFor=" let weapon of strike?.type.weapons.terms; let i = index ">
+                    <span  *ngIf="i > 0">, </span>
+                    <span>{{weapon}}</span> <span *ngIf="strike.type.weapons.ambiguous" ><i class="fa fa-exclamation" aria-hidden="true"></i></span>
+                </span>
+            </div>-->
+            <div ><strong>Actions used:</strong> 
+                <span *ngFor=" let action of strike?.type.actionTypes; let i = index; let last = last ">
+                 
+                        <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                        <span  *ngIf="i > 0 && last">& </span>
+                        <span>{{action.term | capitalize}}</span>
+                        <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!action.clear">
+                       
+               
+                </span>
+            </div>
+            <!--<div >Actions used: 
+                <span *ngFor=" let action of strike?.type.actions.terms; let i = index ">
+                    <span  *ngIf="i > 0">, </span>
+                    <span>{{action}}</span> <span *ngIf="strike.type.weapons.ambiguous" ><i class="fa fa-exclamation" aria-hidden="true"></i></span>
+                </span>
+            </div>-->
+            <div ><strong>Objects targeted:</strong>
+                <span *ngFor=" let object of strike?.objects; let i = index; let last = last " >
+                  
+                        <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                        <span  *ngIf="i > 0 && last">& </span>
+                        <span>{{object.type | capitalize}}</span>
+                        <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!object.clear">
+                     
+                  
+                </span>
+            </div>
+            <!--<div >Objects targeted: 
+                <span *ngFor=" let object of strike?.targets.objects; let i = index ">
+                    <span  *ngIf="i > 0">, </span>
+                    <span>{{object}}</span>
+                </span>
+            </div>-->
+            <div ><strong>Networks targeted:</strong>
+                <span *ngFor=" let group of strike?.group; let i = index; let last = last " >
+                    <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                    <span  *ngIf="i > 0 && last">& </span>
+                    <span>{{group.name}}</span>
+                    <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"   *ngIf="!group.clear">
+                 
+                </span>
+            </div>
+            <!--<div >Networks targeted: 
+                <span *ngFor=" let network of strike?.targets.network; let i = index ">
+                    <span  *ngIf="i > 0">, </span>
+                    <span>{{network}}</span>
+                </span>
+            </div>-->
+            <div ><strong>Names Indentified:</strong>
+                <span *ngFor=" let person of strike?.people; let i = index; let last = last " >
+                 
+                        <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                        <span  *ngIf="i > 0 && last">& </span>
+                        <span>{{person.name | capitalize}}</span>
+                        <span class="label " [ngStyle]="activeStatus(person.status)" >{{person.status | lowercase}}</span>
+                        <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!person.clear">
+                    
+                 
+                </span>
+            </div>
+            <!--<div >People targeted: 
+                <span *ngFor=" let person of strike?.targets.people; let i = index ">
+                    <span  *ngIf="i > 0">, </span>
+                    <span>{{person}}</span>
+                </span>
+            </div>-->
+            
+            <!--<div>Unsorted targets: {{strike?.targets.unsorted}}</div>-->
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="shuttle-bg" >
+    <div class="container">
+      <div class="viewStat">
+        <div class="page-headline">
+            <h1 class="mercury">Primary Source</h1>
+             <span class="text_underline_white"></span>
+        </div>
+        <md-card class="outline-card " id="sm-size">
+            <md-card-content>
+            <ul class="list">
+                <li><strong>People:</strong> {{strike?.casualties.totals}}</li>
+                <li><strong>Suspected Militants:</strong> {{strike?.casualties.susMils}}</li>
+                <li><strong>Civilians:</strong> {{strike?.casualties.civilians}}</li>
+                <li><strong>Unknowns:</strong> {{strike?.casualties.unknowns}}</li>
+            </ul>
+            </md-card-content>
+        </md-card>
+        <!--<div class="table-responsive">
+            <table class="table ">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;"></th>
+                            <th style="text-align:left;">People</th>
+                            <th style="text-align:left;">Suspected Militants</th>
+                            <th style="text-align:left;">Civilians</th>
+                            <th style="text-align:left;">Unknowns</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Low</th>
+                            <td>{{strikeStatistics?.totals.min}}</td>
+                            <td>{{strikeStatistics?.susMils.min}}</td>
+                            <td>{{strikeStatistics?.civilians.min}}</td>
+                            <td>{{strikeStatistics?.unknowns.min}}</td>
+                        </tr>
+                        <tr>
+                            <th>Average</th>
+                            <td>{{strikeStatistics?.totals.avg}}</td>
+                            <td>{{strikeStatistics?.susMils.avg}}</td>
+                            <td>{{strikeStatistics?.civilians.avg}}</td>
+                            <td>{{strikeStatistics?.unknowns.avg}}</td>
+                        </tr>
+                        <tr>
+                            <th>High</th>
+                            <td>{{strikeStatistics?.totals.max}}</td>
+                            <td>{{strikeStatistics?.susMils.max}}</td>
+                            <td>{{strikeStatistics?.civilians.max}}</td>
+                            <td>{{strikeStatistics?.unknowns.max}}</td>
+                        </tr>
+                        <tr>
+                            <th>Primary Source</th>
+                            <td>{{strike?.casualties.totals}}</td>
+                            <td>{{strike?.casualties.susMils}}</td>
+                            <td>{{strike?.casualties.civilians}}</td>
+                            <td>{{strike?.casualties.unknowns}}</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>-->
+      </div>
+    </div>
+  </section>
+  <section class="white-bg">
+    <div class="container">
+      <div class="viewDetails">
+        <div class="page-headline">
+            <h1>Strike Details</h1>
+            <span class="text_underline"></span>
+        </div>
+        <div class="content margin-top-bottom-40">
+            <span  *ngFor=" let detail of strike?.details" [innerHtml]="detail | safeHtml"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="shark-bg">
+    <div class="container">
+        <div class="page-headline">
+            <h1 class="mercury">Source Details</h1>
+            <span class="text_underline_white"></span>
+        </div>
+      <article *ngFor=" let source of strike?.sources" class="sourceRecord">
+          <div class="row">
+              <header class="d-flex flex-row col-md-4">{{source.title }}</header>
+              <span class="col-md-4 "><strong>Published:</strong> {{source.pubDate | date}}</span>
+              <span class="col-md-4 d-flex flex-row justify-content-start flex-wrap ">
+                  <span class="label label-primary border-box" *ngFor=" let tag of source?.tags" style="margin-left:5px; margin-bottom:5px ">{{tag }}</span>
+              </span>
+          </div>
+          
+              <div class="row">
+           <div class="col-md-12 margin-top-bottom-10">
+          <header>Sources of Information:</header>
+          <span *ngFor=" let sourceOfInfo of source?.mainReport.sources; let i = index" class="flex-row">
+              
+            <span  *ngIf="i > 0 && !last"  style="margin-left:-4px">,</span>
+            <span  *ngIf="i > 0 && last">& </span>
+            {{sourceOfInfo}}
+          </span>
+           </div>
+              </div>
+          
+          <div class="row">
+              <div class="d-flex flex-column col-md-6 margin-top-bottom-10">
+                  <header>Number Killed</header>
+                  <span><strong  class="strong">People:</strong> {{source?.mainReport.casualties.totals}}</span>
+                  <span><strong  class="strong">Suspected Militants:</strong> {{source?.mainReport.casualties.susMils}}</span>
+                  <span><strong  class="strong">Civilians:</strong> {{source?.mainReport.casualties.civilians}}</span>
+                  <span><strong  class="strong">Children:</strong> {{source?.mainReport.casualties.children}}</span>
+                  <span><strong  class="strong">Unknowns:</strong> {{source?.mainReport.casualties.unknowns}}</span>
+                  <span><strong  class="strong">High Value Targets:</strong> {{source?.mainReport.casualties.hvts}}</span>
+              </div>
+              <div class="d-flex flex-column col-md-6 margin-top-bottom-10">
+                  <header>Weapons</header>
+                  <span><strong  class="strong">Weapon Type(s):</strong> 
+                      <span *ngFor="let weapon of source?.mainReport.weapons.terms; let i = index">
+                        <span  *ngIf="i > 0 && !last">,</span>
+                        <span  *ngIf="i > 0 && last">& </span>
+                        {{weapon | capitalize}}
+                      </span>
+                      <div>The source was {{source.mainReport.weapons.ambiguous ? "unclear" : "clear"}} about which weapon(s) were used.</div>
+                  </span>	
+              </div>
+          </div>
+       <div class="row">
+           <div class="col-md-12 margin-top-bottom-10">
+          <div  class="d-flex flex-column ">
+              <header>Target Details</header>
+              <span><strong class="strong">Location:</strong> {{source?.mainReport.target.location}}</span>
+              <span><strong  class="strong">Time:</strong> {{source?.mainReport.target.time}}</span>
+              <span><strong  class="strong">Target Type:</strong> {{source?.mainReport.target.targetType}}</span>
+              <span><strong  class="strong">Target Type Details:</strong> {{source?.mainReport.target.targetTypeDetails}}</span>
+              <span><strong  class="strong">Additional Details:</strong> {{source?.mainReport.target.additionalDetails}}</span>
+            
+          </div>
+       </div>
+       </div>
+          <div class="row">
+           <div class="col-md-12 margin-top-bottom-10">
+          <div class="d-flex flex-column ">
+              <header>Details Concerning Those Killed</header>
+              <span><strong  class="strong">Status:</strong> {{source?.mainReport.killed.status | capitalize}}</span>		
+              <span><strong  class="strong">Additional Details:</strong> {{source?.mainReport.killed.additionalDetails}}</span>
+          </div>
+          </div>
+          </div>
+         <div class="row">
+           <div class="col-md-12">
+          <div  class="float-right">
+              <span *ngIf="source.altLink"><a href="{{source?.altLink}}" target="_blank" class="label label-alert-hover border-box">Alternative Link</a></span>
+              <span *ngIf="source.link"><a href="{{source?.link}}" target="_blank" class="label label-goblin-hover border-box">Link to Source</a></span>
+          </div>
+           </div>
+         </div>
+          
+      </article>
+    </div>
+  </section>
+</div>

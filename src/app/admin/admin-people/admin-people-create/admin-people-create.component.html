@@ -1,0 +1,220 @@
+
+
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">People Database
+            <small>Adding new person</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li  class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item" ><a routerLink="/admin/people">People Database</a></li>
+                <li class="breadcrumb-item active"> Create</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+
+      <div class="container-fluid">
+        <button (click)="gotoPeoples()" class="btn btn-block alert-hover"> Go Back</button>
+        <md-card class="basic-form round-top margin-top-bottom-40">
+            <md-toolbar class="primary">New Person </md-toolbar>
+            <md-card-content class="basic-form-content">
+              <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
+                <span class="anchor" id="general"></span>
+                <h3>Basic Information</h3>
+                <table class="full-width" cellspacing="0" >
+                  <tr>
+                      <td>
+                        
+                        <md-input-container  class="full-width">
+                          <md-hint align="end">Name</md-hint>
+							<input 	md-input 
+									placeholder="Insert your name here" 
+									type="text" 
+									formControlName="name" >
+                        </md-input-container>
+                        <div *ngIf="!postForm.get('name').valid" class="full-width" >Enter Name</div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                       
+                        <md-input-container  class="full-width">
+							<md-hint align="end">Title/Position</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert title/position"
+									type="text" 
+									formControlName="title" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                      
+                        <md-input-container  class="full-width">
+							<md-hint align="end">Email</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert email"
+									type="email" 
+									formControlName="email" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                  
+                        <md-input-container  class="full-width">
+							<md-hint align="end">Image Path:</md-hint>
+                        	<input 	md-input 
+									placeholder="Example: /assets/images/staff/superman.jpg"
+									type="text" 
+									formControlName="img" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                </table>
+         
+
+                <hr>
+                <span class="anchor" id="social-media"></span>
+                <h3>Social Media Accounts</h3>
+                <table class="full-width" cellspacing="0" >
+                  <tr>
+                      <td>
+                     
+                        <md-input-container class="full-width">
+							<md-hint align="end">Twitter Account:</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert link to twitter account"
+									type="url" 
+							
+									formControlName="twitter" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                     
+                        <md-input-container class="full-width">
+							<md-hint align="end">Github Account:</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert link to github account"
+									type="url" 
+							
+									formControlName="github" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+				  <tr>
+                      <td>
+                     
+                        <md-input-container class="full-width">
+							<md-hint align="end">Personal Website:</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert link to website"
+									type="url" 
+							
+									formControlName="website" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                </table>
+             
+                <hr>
+                <span class="anchor" id="bio"></span>
+                <h3>Biography</h3>
+                <table class="full-width" cellspacing="0" >
+					<tr>
+                      <td>
+               
+                        <md-input-container class="full-width">
+							<md-hint align="end">Short Bio Description</md-hint>
+							<textarea 	md-input 
+										placeholder="Short Bio to Post with Blogs"
+										type="text"
+									
+										formControlName="shortBio" ></textarea>
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+               
+                        <md-input-container class="full-width">
+							<md-hint align="end">Long Biography</md-hint>
+							<textarea 	md-input 
+										placeholder="tell us about yourself"
+										type="text"
+										class="long-min"
+										formControlName="bio" ></textarea>
+                        </md-input-container>
+                      </td>
+                  </tr>
+                </table>
+         
+
+                <hr>
+
+
+                <span class="anchor" id="publication"></span>
+                <h3>Publications</h3>
+                <table class="full-width" cellspacing="0" formArrayName="publication" >
+                  <md-card class="basic-search-form round-top" *ngFor="let publication of postForm.controls.publication.controls; let i = index">
+                    <md-toolbar class="primary">
+                      <span >Publication {{i + 1}}</span>
+                      <!-- This fills the remaining space of the current row -->
+                      <span class="fill-remaining-space"></span>
+                      <span><button title="Remove Publication" class="btn alert-hover " (click)="removePublication(i)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                    </md-toolbar>
+                    <md-card-content class="basic-form-content" [formGroupName]="i">
+                      <table class="full-width" cellspacing="0" > 
+                        <tr >
+                          <td>
+                         
+                            <md-input-container class="full-width">
+							<md-hint align="end">Citation for Publication</md-hint>
+                            	<input 	md-input 
+										placeholder="Example: 'The Drone Campaign against Al Qaeda and ISIS. Interview with General David Deptula USAF.' Perspectives on Terrorism. Vol. 9, no. 3 (2015)" 
+										type="text" 
+								
+										formControlName="pubName" >
+                            </md-input-container>
+                          </td>
+                        </tr>
+                        <tr >
+                          <td>
+                          
+                            <md-input-container class="full-width">
+								<md-hint align="end">Link to Publication</md-hint>
+                            	<input 	md-input 
+										placeholder="Link to Source" 
+                                      	type="url" 
+                                    
+                                      formControlName="link" >
+                            </md-input-container>
+                          </td>
+                        </tr>
+                      </table>
+                    </md-card-content>
+                  </md-card>
+                  <button type="button"  class="btn btn-block success-hover " (click)="addPublication()">Add A Publication</button>
+                </table>
+                
+                <span class="anchor" id="submit"></span>
+                <h3>Create Data</h3>
+                 <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td><button class="btn btn-block alert-hover" type="submit" [disabled]="!postForm.valid">Submit</button></td>
+                    </tr>
+                </table>
+
+              </form>
+            </md-card-content>
+        </md-card>
+        <pre>{{postForm.value | json}}</pre>
+      </div>
+
+    </section>
+</div>

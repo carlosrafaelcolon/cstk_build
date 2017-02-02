@@ -1,7 +1,7 @@
 {
   "project": {
     "version": "1.0.0-beta.25.5",
-    "name": "ctsk-project"
+    "name": "cstk-project"
   },
   "apps": [
     {
@@ -9,7 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "config.js"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -18,7 +19,7 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.scss"
+        "styles/styles.scss"
       ],
       "scripts": [],
       "environments": {

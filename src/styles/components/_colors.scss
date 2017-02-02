@@ -1,0 +1,182 @@
+//*************************************************
+// Primary Colors (Dark Blue)
+//************************************************
+
+.primary-text-hover {
+    color:$primary !important;
+    &:hover, &:focus,&:active  {
+
+        color:$midnight !important;
+    }
+}
+
+.label-primary {
+    background-color:$primary !important;
+}
+.primary {
+    background-color:$primary !important;
+    color:$white;
+    &:hover, &:focus, &:active  {
+        background-color:$primary !important;
+        color:$white;
+    }
+}
+
+.primary-hover {
+    background-color:$primary !important;
+    color:$white;
+    &:hover, &:focus, &:active {
+        background-color:$astral !important;
+        color:$white;
+    }
+}
+.primary-hover-dark {
+    background-color:$primary !important;
+    color:$white !important;
+    
+    &:hover, &:focus, &:active {
+        background-color:$midnight !important;
+        color:$white;
+    }
+}
+.primary-outline {
+    
+    background-color:transparent !important;
+    border:2px solid $primary;
+    color:$primary !important;
+
+    &:hover, &:focus, &:active {
+        background-color:$primary !important;
+        color:$white !important;
+    }
+}
+
+//*************************************************
+// Shark Colors (Dark Gray)
+//************************************************
+.shark-text {
+
+    color:$shark;
+    &:hover, &:focus, &:active {
+        color:$shark;
+    }
+}
+
+.shark {
+    background-color:$shark !important;
+    color:$white;
+    &:hover, &:focus, &:active {
+        background-color:$shark !important;
+        color:$white;
+    }
+}
+
+.shark-hover {
+    background-color:$shark !important;
+    color:$white;
+    &:hover, &:focus, &:active {
+        background-color:$bright-gray !important;
+        color:$white;
+    }
+}
+
+.shark-outline {
+    background-color:transparent !important;
+    border:2px solid $shark;
+    color:$shark;
+    font-weight:bold;
+    &:hover, &:focus, &:active {
+        background-color:$shark !important;
+        color:$white;
+    }
+}
+
+
+//*************************************************
+// Warning Colors (Red)
+//************************************************
+.active-text {
+ 
+    color:$rose-cherry !important;
+    font-weight:bold;
+    &:hover, &:focus, &:active {
+    
+        color:$rose-cherry !important;
+    }
+}
+
+.label-alert {
+    background-color: $thunderbird;
+    font-family:$stack-roboto;
+}
+.label-alert-hover {
+    background-color: $thunderbird;
+    transition:.4s all linear;
+    &:hover{
+        background-color: $crimson;
+    }
+   
+}
+.alert {
+    background-color: $thunderbird !important;
+    color:$white;
+    font-weight:bold;
+    &:hover, &:focus, &:active {
+        background-color: $thunderbird !important;
+        color:$white;
+    }
+}
+
+.alert-hover {
+    background-color: $thunderbird !important;
+    color:$white;
+    font-weight:bold;
+    &:hover, &:focus, &:active {
+        background-color:$crimson !important;
+        color:$white;
+    }
+}
+.alert-text-hover {
+
+    color:$thunderbird !important;
+    font-weight:bold;
+    &:hover, &:focus, &:active {
+ 
+        color:$crimson !important;
+    }
+}
+//*************************************************
+// Success Colors (Green)
+//************************************************
+.success-hover {
+    background-color:$goblin !important;
+    color:$white;
+    font-weight:bold;
+    &:hover, &:focus, &:active {
+        background-color:$apple !important;
+        color:$white;
+    }
+}
+
+.label-goblin {
+    background-color: $goblin;
+}
+.label-goblin-hover {
+    background-color: $goblin;
+    transition:.4s all linear;
+    &:hover{
+        background-color: $apple;
+    }
+}
+
+
+
+
+
+
+
+
+
+.transparent {
+    background-color:transparent !important;
+}

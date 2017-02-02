@@ -1,0 +1,125 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Library Database
+            <small *ngIf="publications"><strong>{{publications.length}}</strong> Publications Documented</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li  class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item active">Library Database</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+        
+        
+       
+        <div class="container-fluid">
+            <div class="page-headline">
+                <h1>Edit Mode</h1>
+                <span class="text_underline"></span>
+            </div>
+            <button class="btn btn-block success-hover"  (click)="onSelectCreate()" >Add A New Publication</button>
+            <md-card class="basic-form round-top margin-top-bottom-40">
+                <md-toolbar class="primary">Filter Publications</md-toolbar>
+                <md-card-content class="basic-form-content">
+                <form #filterLibrary="ngForm" >
+                <table class="full-width" cellspacing="0" >
+                    <tr>
+                        
+                            <td>
+                            <label>Filter by Theme:</label><br>
+                            <select name="theme" [(ngModel)]="theme" class="form-control basic-select border-box" style="width: 98%;">
+                                <option *ngFor="let theme of themes" [value]="theme.value">  
+                                {{theme.display}}
+                                </option>
+                            </select>
+                            </td>
+                            <td>
+                                <label>Filter by Topic:</label><br>
+                            <select name="topic" [(ngModel)]="topic" class="form-control basic-select border-box" style="width: 98%;">
+                                <option *ngFor="let topic of topics" [value]="topic.value">  
+                                {{topic.display}}
+                                </option>
+                            </select>
+                            </td>
+                            <td>
+                                <label>Filter by Country:</label><br>
+                            <select name="country" [(ngModel)]="country"  class="form-control basic-select border-box"  style="width: 98%;">
+                                <option *ngFor="let country of countries" [value]="country.value" >  
+                                {{country.display}}
+                                </option>
+                            </select>
+                            </td>
+                        
+                    </tr>
+                    
+                </table>
+                <table class="full-width" cellspacing="0">
+                    
+                    <tr>
+                        <td><md-input placeholder="Search by publication title"  style="width: 98%; margin:auto" [(ngModel)]="title" name="title" ></md-input></td>
+                        <td><md-input placeholder="Search by Author"  style="width: 98%; margin:auto"   [(ngModel)]="authors" name="authors" ></md-input></td>
+                    </tr>
+                </table>
+                <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td><button class="btn btn-block alert-hover" (click)="reset(filterLibrary.value)" type="reset">Reset</button></td>
+                    </tr>
+                </table>
+
+                </form>
+                </md-card-content>
+            </md-card>
+            <div *ngIf="!loadingComplete">
+                <div class="d-flex justify-content-center load-partial">
+                    <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+                </div>
+            </div>
+            <div *ngIf="loadingComplete">
+                <div class="row editList">
+                    <div class="page-headline">
+                        <h1>List of Publications</h1>
+                        <span class="text_underline"></span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left;">Publications</th>
+                                <th colspan="2" style="text-align:left;">Editing</th>																	
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr  *ngFor="let publication of (publications | filterLibrary:theme:topic:country:title:authors ); trackBy: trackPublication ">
+                                <td style="text-align:left;">
+                                    <ul>
+                                    <li>{{publication?.title | slice:0:91}}<span *ngIf="publication.title.length > 91">...</span></li>
+                                    <li>
+                                        by 
+                                        <span *ngFor=" let author of publication?.authors; let i = index; let last = last ">
+                                            <span  *ngIf="i > 0 && !last">,</span>
+                                            <span  *ngIf="i > 0 && last">& </span>
+                                            <span>{{author | capitalize | slice:0:81}}<span *ngIf="author.length > 81">...</span></span>
+
+                                        </span>
+                                    </li>
+                                    </ul>
+                                    </td>
+                                <td><button    (click)="onEdit(publication)"  type="button" class="btn btn-block success-hover">Edit</button></td>
+                                <td><button (click)="onRemove(publication)"  type="button" class="btn btn-block alert-hover">Delete</button></td>														
+                            </tr>	
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+       
+    </section>
+ </div>
+
+

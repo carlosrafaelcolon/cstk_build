@@ -1,0 +1,71 @@
+<section  *ngIf="!person">
+    <div class="flex-column group-center load-full">
+
+        <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+    </div>
+</section>
+<section class="peopleList" *ngIf="person">
+    <div class="d-flex flex-row flex-wrap">
+        <button type="button" class="btn primary-hover border-round " aria-label="Return" (click)="gotoPeoples()" id="return-btn">
+            <span class="d-flex align-items-center">
+            <img src="/assets/images/icons/ic_keyboard_return_white_36px.svg" class="icon-30" >
+            &nbsp;&nbsp;
+            View All People
+            </span>
+        </button>
+        <span class="hidden-md-down fill-remaining-space"></span>
+        <span class="hidden-md-down d-flex flex-row btn-group-round " style="width:25%">
+            <button  class="btn primary-hover-dark flex" disabled>Previous</button>
+            <button  class="btn primary-hover-dark flex" disabled>Next</button>
+        </span>
+    </div>
+
+  <div class="row margin-top-bottom-40 " >
+    <div class="col-xs-12 col-md-4 img-section">
+       <img class="img-thumbnail" src="{{person?.img}}"> 
+    </div>
+    <div class="col-xs-12 col-md-8 contact-section">
+        
+        <h1 >{{person?.name}}</h1>
+        <h2 > {{person?.title}}</h2>
+        <hr>
+        <h4 class="list-header">Contact Info:</h4>
+        <div class="d-flex flex-row align-items-center">
+            <a  href="mailto:{{person?.email}}" aria-label="Email" class="social-link primary-text-hover" [hidden]="!person.email" target="_blank">
+                Email
+            </a>
+            <span class="hr-line" [hidden]="!person.website"></span>
+            <a href="{{person?.website}}" aria-label="Personal Website" class="social-link primary-text-hover" [hidden]="!person.website" target="_blank">
+                Personal Website
+            </a>
+            <span class="hr-line"  [hidden]="!person.twitter" ></span>
+            <a href="{{person?.twitter}}" aria-label="Twitter" class="social-link primary-text-hover" [hidden]="!person.twitter" target="_blank">
+                Twitter
+            </a>
+            <span class="hr-line" [hidden]="!person.github" ></span>
+            <a href="{{person?.github}}" aria-label="Github" class="social-link primary-text-hover" [hidden]="!person.github" target="_blank">
+                Github
+            </a>
+        </div>
+      
+    </div>
+  </div>
+  <div class="content"  >
+    
+    <span  [innerHtml]="person?.bio | safeHtml"></span>
+  </div>
+   <div class="publication" *ngIf="person.publication.length > 0">
+        <h2 style="margin-left:-10px">Selected Publications</h2>
+        <ul>
+            <li *ngFor=" let pub of person.publication" style="  margin-bottom:15px;">
+            
+            <span><span   [innerHtml]="pub?.pubName | safeHtml"></span>
+                <small style="font-size:80%; font-weight:bold;">
+                    [<a href="{{pub?.link}}" target="_blank">link</a>]
+                </small>
+            </span>
+        
+            </li>
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,91 @@
+<md-progress-bar mode="indeterminate" class="hidden-sm-down full-width" *ngIf="adminOn" style="margin:0" color="warn"></md-progress-bar>
+<header id="main-nav">
+  <ul class="nav justify-content-end no-gutters navtop">
+   
+    <li class="nav-item " *ngIf="authService.authenticated()">
+      <a class="nav-link" (click)="authService.logout()">Log Out</a>
+    </li>
+    <li class="nav-item " *ngIf="authService.authenticated()">
+      <a class="nav-link alert-hover" routerLink="/admin" routerLinkActive="active-1" (click)="loadAdmin()">Enter Administration</a>
+    </li>
+    <li class="nav-item " *ngIf="!authService.authenticated()">
+      <a class="nav-link"   (click)="authService.login()">Log In</a>
+    </li>
+  </ul>
+  <nav class="navbar navbar-toggleable-md navbar-main">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><img  src="/assets/images/icons/ic_menu_white_48px.svg" ></span>
+    </button>
+    <a class="navbar-brand" routerLink="/" ><img src="/assets/images/logo/White_Text.svg" class="logo"></a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link"  routerLink="/" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a class="nav-item nav-link" routerLink="/operations" routerLinkActive="active-1">Operations</a>
+        <a class="nav-item nav-link" routerLink="/library" routerLinkActive="active-1" >Library</a>
+        <a class="nav-item nav-link" routerLink="/blog" routerLinkActive="active-1">News & Updates</a>
+        <a class="nav-item nav-link " routerLink="/about" routerLinkActive="active-1">About</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item "><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item active">Library</li>
+</ol>
+<section style="margin-top:-1rem;">
+  <div class="row no-gutters">
+  <div class="col-sm-3 col-md-2  side-nav">
+    <ul class="side-list">
+      <li >
+        <a routerLink="/library" routerLinkActive="active-text"  [routerLinkActiveOptions]="{exact:true}">Library</a>
+      </li>
+      <li >
+        <a routerLink="/library/publications" routerLinkActive="active-text">Publications</a>
+      </li>
+      <!--<li >
+        <a routerLink="/library/reviews" routerLinkActive="active-text" [routerLinkActiveOptions]="{exact:true}" >Reviews</a>
+      </li>-->
+    </ul>
+  </div>
+  <div class="col-sm-9 col-md-10   side-content">
+    <div class="container-85">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  </div>
+</section>
+<footer class="main-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6  col-lg-4 footer-info">
+				<h3>Center for the Study of Targeted Killing</h3>
+				<p>University of Massachusetts Dartmouth<br>285 Old Westport Road | Dartmouth, MA</p>
+				<p>© 2012-2017. All rights reserved.</p>
+			</div>
+			<div class="col-lg-4 hidden-md-down d-flex justify-content-center">
+				<a [routerLink]="['/']"><img src="/assets/images/logo/logo.svg" class="footer-logo"></a>
+			</div>
+			<div class="col-md-6 col-lg-4 d-flex justify-content-center list-info">
+				<div class="row" >
+					<div class="col-6 ">
+						<ul class="">
+							<li><a [routerLink]="['/about/contact']">Contact</a></li>
+							<li><a [routerLink]="['/about']">About</a></li>
+							<li><a  [routerLink]="['/about/people']">People</a></li>
+						</ul>
+					</div>
+					<div class=" col-6">
+						<ul class="">
+							<li><a [routerLink]="['/operations']">Operations</a></li>
+							<li><a [routerLink]="['/library/publications']">Library</a></li>
+							<li><a [routerLink]="['/blog']">News</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<section class="d-flex justify-content-center copyright">
+	<a href="http://www.umassd.edu/" target="_blank"><img class="parent-logo" src="/assets/images/logo/umassd_logo.png"></a>
+</section>

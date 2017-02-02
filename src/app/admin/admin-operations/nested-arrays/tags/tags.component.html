@@ -1,0 +1,27 @@
+<div [formGroup]="tagForm" >
+  <table class="full-width" cellspacing="0"  formArrayName="tags" >
+  
+    <tr  *ngFor="let tag of tagForm.controls.tags.controls; let tagFormIndex = index">
+      <td>
+        <md-input-container class="full-width">
+											
+				  <md-hint align="start">Example: Pakistani Press</md-hint>
+					<input    md-input 
+								placeholder="Insert type of press" 
+								type="text" 
+								formControlName="{{tagFormIndex}}" >
+        </md-input-container>
+      </td>
+      
+      <td>
+        <span class="d-flex flex-row flex-wrap">
+          <span class="fill-remaining-space"></span>
+          <button type="button"  title="Remove Press Type" class="btn alert-hover "  md-mini-fab (click)="removeTag(tagFormIndex)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+        </span>
+      </td>
+    </tr>
+  
+    
+  </table>
+  <button type="button"   class="btn success-hover "  (click)="addTag()" >Add Press</button>
+</div>

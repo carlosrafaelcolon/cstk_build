@@ -1,0 +1,112 @@
+.login-page{
+  height:100vh;
+  width:100%;
+  font-family:$stack-roboto;
+  background:$shuttle-gray;
+  display:flex;
+  form{
+    margin:auto;
+    width:80%;
+    .logo{
+      width:220px;
+      height:80px;
+      margin-right:auto;
+      margin-left:auto;
+    }
+    .form-group{
+      label{
+        font-size:19px;
+        color:$white;
+        text-transform:uppercase;
+      }
+      .form-control {font-size:16px; border-radius:0px}
+    }
+    @media #{$tablets } {
+      width:50%;
+    }
+    @media #{$md-device } {
+      width:40%;
+    }
+
+    .login-btn{
+        color: $concrete;
+        background-color: transparent;
+        border:6px solid $concrete;
+        padding: 9px 20px;
+        font-size:20px;
+        &:hover, &:focus{
+          color:$shuttle-gray;
+          background-color: $concrete;
+          transition:.4s linear;
+        }
+    }
+    .login-back{
+        color: $white;
+        font-size:18px;
+        font-weight:normal;
+        background-color: transparent;
+        border:none;
+        padding: 9px 20px;
+    }
+  }
+}
+
+
+.initial-load{
+  height:100vh;
+  width:100%;
+  background:$primary;
+  font-family:$stack-roboto;
+  display:flex;
+  text-align:center;
+  .inital-content{
+    margin:auto;
+    width:80%;
+    @media #{$tablets } {
+      width:50%;
+    }
+    @media #{$md-device } {
+      width:40%;
+    }
+    .logo{
+      width:240px;
+      height:auto;
+      margin-right:auto;
+      margin-left:auto;
+    }
+    .update{
+      font-size: 35px;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 1) !important;
+      text-transform: uppercase;
+      color:white;
+    }
+  }
+}
+
+.authorized-page{
+  height:100vh;
+  width:100%;
+  font-family:$stack-roboto;
+  display:flex;
+  .authorized-content{
+    margin: 120px auto 0 auto;
+    width:80%;
+    h2.main-text{
+      text-align: center;
+      text-transform: uppercase  !important;
+      color:$shuttle-gray;
+      text-shadow: 1px 1px 3px white !important;
+      margin-bottom:40px;
+    }
+ 
+    .login-back{
+        color:$shuttle-gray;
+        font-size:18px;
+        font-weight:normal;
+        background-color: transparent;
+        border:none;
+        padding: 9px 20px;
+    }
+  }
+}

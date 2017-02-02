@@ -1,0 +1,379 @@
+<ol class="breadcrumb">
+  <li   class="breadcrumb-item "><a [routerLink]="['/']">Home</a></li>
+  <li  class="breadcrumb-item "><a [routerLink]="['/operations']">Operations</a></li>
+  <li  class="breadcrumb-item active">Advance Search</li>
+</ol>
+<section  class="light-bg" style="margin-top:-1rem;">
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-sm-6 col-md-3 ">
+        <span  *ngIf="!isAttackerVisible" class="d-flex justify-content-center  tab-section">
+         
+          <strong >Click tab to <span class="blink">open</span></strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+        
+        </span>
+        <span  *ngIf="isAttackerVisible" class="d-flex justify-content-center  tab-section">
+           <strong >Click tab to close</strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <div class="flex-column search-box" [ngStyle]="setBox(isAttackerVisible)">
+          <div class="d-flex justify-content-around search-box-header"  (click)="toggle(1)" [ngStyle]="setHeader(isAttackerVisible) ">
+            <img class="icon-30" src="/assets/images/icons/ic_arrow_drop_down_circle_white_36px.svg" *ngIf="isAttackerVisible">
+            <img class="icon-30" src="/assets/images/icons/ic_play_circle_filled_white_36px.svg" *ngIf="!isAttackerVisible">
+            <span >Attacking State</span>
+          </div>
+          <div class="search-content" [ngStyle]="setContent(isAttackerVisible)" >
+            <span [ngStyle]="setDisplay(isAttackerVisible)">
+            <ul class="checkboxes" >
+              <li *ngFor="let attacker of options.attackers">
+                <md-checkbox [(ngModel)]="attacker.selected">
+                  {{attacker.country}}
+                </md-checkbox>
+              </li> 
+            </ul>
+            <div class="d-flex justify-content-center  search-box-footer" >
+              <div class="d-flex justify-content-around btn-search-group hidden-xl-up">
+                <button title="Check All" class="btn primary-hover " (click)="affectAll(options.attackers, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>
+                <button title="Check All" class="btn alert-hover " (click)="affectAll(options.attackers, false)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button>
+              </div>
+              <div class="btn-group hidden-lg-down" role="group" aria-label="Basic example">
+                <button type="button"class="btn btn-secondary" (click)="affectAll(options.attackers, true)">Select All</button>
+                <button type="button" class="btn btn-secondary" (click)="affectAll(options.attackers, false)">Clear All</button>
+              </div>
+              <!--<span class="flex-row btn-group-round">
+              <button  class="btn shark-outline flex" (click)="affectAll(options.attackers, true)">Select All</button>
+					    <button  class="btn shark-outline flex" (click)="affectAll(options.attackers, false)">Clear Selection</button>
+
+              </span>-->
+            </div>
+            </span>
+          </div>
+          
+        </div>
+    
+      </div>
+      <div class="col-sm-6 col-md-3 ">
+        <span  *ngIf="!isAttackedVisible" class="d-flex justify-content-center  tab-section">
+          <strong >Click tab to <span class="blink">open</span></strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <span  *ngIf="isAttackedVisible" class="d-flex justify-content-center  tab-section">
+           <strong >Click tab to close</strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <div class="flex-column search-box" [ngStyle]="setBox(isAttackedVisible)">
+          <div class="d-flex justify-content-around search-box-header"  (click)="toggle(2)" [ngStyle]="setHeader(isAttackedVisible)">
+            <img class="icon-30" src="/assets/images/icons/ic_arrow_drop_down_circle_white_36px.svg" *ngIf="isAttackedVisible">
+            <img class="icon-30" src="/assets/images/icons/ic_play_circle_filled_white_36px.svg" *ngIf="!isAttackedVisible">
+            <span>State Attacked</span>
+          </div>
+          
+          <div class="search-content"  [ngStyle]="setContent(isAttackedVisible)">
+            <span [ngStyle]="setDisplay(isAttackedVisible)">
+            <ul class="checkboxes" >
+              <li *ngFor="let target of options.targets">
+                <md-checkbox [(ngModel)]="target.selected">
+                  {{target.country}}
+                </md-checkbox>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-center  search-box-footer" >
+              <div class="d-flex justify-content-around btn-search-group hidden-xl-up">
+                <button title="Check All" class="btn primary-hover " (click)="affectAll(options.targets, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>
+                <button title="Check All" class="btn alert-hover " (click)="affectAll(options.targets, false)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button>
+              </div>
+              <div class="btn-group hidden-lg-down" role="group" aria-label="Basic example">
+                <button type="button"class="btn btn-secondary" (click)="affectAll(options.targets, true)">Select All</button>
+                <button type="button" class="btn btn-secondary" (click)="affectAll(options.targets, false)">Clear All</button>
+              </div>
+              <!--<span class="flex-row btn-group-round">
+                <button  class="btn shark-outline flex" (click)="affectAll(options.targets, true)">Select All</button>
+                <button  class="btn shark-outline flex" (click)="affectAll(options.targets, false)">Clear Selection</button>
+              </span>-->
+            </div>
+            </span>
+          </div>
+          
+          
+        </div>
+  
+      </div>
+       <div class="col-sm-6 col-md-3 ">
+         <span  *ngIf="!isWeaponVisible" class="d-flex justify-content-center  tab-section">
+          <strong >Click tab to <span class="blink">open</span></strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <span  *ngIf="isWeaponVisible" class="d-flex justify-content-center  tab-section">
+           <strong >Click tab to close</strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <div class="flex-column search-box" [ngStyle]="setBox(isWeaponVisible)">
+          <div class="d-flex justify-content-around search-box-header"  (click)="toggle(3)" [ngStyle]="setHeader(isWeaponVisible)">
+            <img class="icon-30" src="/assets/images/icons/ic_arrow_drop_down_circle_white_36px.svg" *ngIf="isWeaponVisible">
+            <img class="icon-30" src="/assets/images/icons/ic_play_circle_filled_white_36px.svg" *ngIf="!isWeaponVisible">
+            <span>Weapon Type</span>
+          </div>
+          <div class="search-content" [ngStyle]="setContent(isWeaponVisible)" >
+            <span [ngStyle]="setDisplay(isWeaponVisible)">
+            <ul class="checkboxes" >
+              <li *ngFor="let weapon of options.weaponTypes">
+                <md-checkbox [(ngModel)]="weapon.selected">
+                  {{weapon.term}}
+                </md-checkbox>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-center  search-box-footer" >
+              <div class="d-flex justify-content-around btn-search-group hidden-xl-up">
+                <button title="Check All" class="btn primary-hover " (click)="affectAll(options.weaponTypes, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>
+                <button title="Check All" class="btn alert-hover " (click)="affectAll(options.weaponTypes, false)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button>
+              </div>
+              <div class="btn-group hidden-lg-down" role="group" aria-label="Basic example">
+                <button type="button"class="btn btn-secondary" (click)="affectAll(options.weaponTypes, true)">Select All</button>
+                <button type="button" class="btn btn-secondary" (click)="affectAll(options.weaponTypes, false)">Clear All</button>
+              </div>
+              <!--<span class="flex-row btn-group-round">
+                <button  class="btn shark-outline flex" (click)="affectAll(options.weaponTypes, true)">Select All</button>
+                <button  class="btn shark-outline flex" (click)="affectAll(options.weaponTypes, false)">Clear Selection</button>
+              </span>-->
+            </div>
+            </span>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="col-sm-6 col-md-3 ">
+		  <span  *ngIf="!isActionVisible"class="d-flex justify-content-center  tab-section">
+          <strong >Click tab to <span class="blink">open</span></strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <span  *ngIf="isActionVisible" class="d-flex justify-content-center  tab-section">
+           <strong >Click tab to close</strong>
+          <img class="icon-30 " src="/assets/images/icons/ic_arrow_drop_down_black_48px.svg">
+          
+        </span>
+        <div class="flex-column search-box" [ngStyle]="setBox(isActionVisible)">
+          <div class="d-flex justify-content-around search-box-header" (click)="toggle(4)" [ngStyle]="setHeader(isActionVisible)">
+            <img class="icon-30" src="/assets/images/icons/ic_arrow_drop_down_circle_white_36px.svg" *ngIf="isActionVisible">
+            <img class="icon-30" src="/assets/images/icons/ic_play_circle_filled_white_36px.svg" *ngIf="!isActionVisible">
+            <span>Action Type</span>
+          </div>
+          <div class="search-content" [ngStyle]="setContent(isActionVisible)">
+            <span [ngStyle]="setDisplay(isActionVisible)">
+            <ul class="checkboxes" >
+              <li *ngFor="let action of options.actionTypes">
+                <md-checkbox [(ngModel)]="action.selected" >
+                  {{action.term}}
+                </md-checkbox>
+              </li>
+            </ul>
+            <div class="d-flex justify-content-center  search-box-footer" >
+              <div class="d-flex justify-content-around btn-search-group hidden-xl-up">
+                <button title="Check All" class="btn primary-hover " (click)="affectAll(options.actionTypes, true)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>
+                <button title="Check All" class="btn alert-hover " (click)="affectAll(options.actionTypes, false)" md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button>
+              </div>
+              <div class="btn-group hidden-lg-down" role="group" aria-label="Basic example">
+                <button type="button"class="btn btn-secondary" (click)="affectAll(options.actionTypes, true)">Select All</button>
+                <button type="button" class="btn btn-secondary" (click)="affectAll(options.actionTypes, false)">Clear All</button>
+              </div>
+            
+            </div>
+            </span>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <md-card class="outline-card margin-top-bottom-10">
+            <md-card-title>
+            <h2>Exclude Variables</h2>
+            </md-card-title>
+            <md-card-content>
+              <p>Exclude cases where its unclear which <strong class="active-text">weapons</strong> were used (e.g., possible drone strikes)?:</p>
+              <md-slide-toggle [(ngModel)]="options.excludeWeapons" name="excludeWeapons">
+                
+                  <strong *ngIf="!options.excludeWeapons">
+                  No
+                  </strong>
+                  <strong *ngIf="options.excludeWeapons">
+                  Yes
+                  </strong>
+              </md-slide-toggle>
+            </md-card-content>
+        </md-card>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 margin-top-bottom-40 ">
+   
+        <button (click)="search(options)" class="btn btn-block alert-hover"  *ngIf="!searchClicked" >Search Now</button>
+      
+
+        <button (click)="search(options)" class="btn btn-block primary-hover" *ngIf="searchClicked" >Refine Search</button>
+      </div>
+    </div>
+  </div>
+  
+  
+</section>
+<section   *ngIf="loadingComplete == false">
+  <div class="d-flex flex-column load-partial">
+    <span class="loadingText text-uppercase text-center">Loading...</span>
+    <md-progress-bar mode="indeterminate" color="primary" mode="query" ></md-progress-bar>
+  </div>
+</section>
+<section class="white-bg border-shuttle-top" *ngIf="loadingComplete">
+  <div class="container-fluid">
+    <div class="searchList">
+      <div class="page-headline">
+          <h1>Your search returned {{strikes?.length}} Cases<br>
+            <small>(with a total of <strong>{{basicStats?.numStrikes}}</strong> strikes documented)</small>
+          </h1>
+          <span class="text_underline"></span>
+      </div>
+    
+      <div class="stat-section">
+        <div class="row">
+          <div class="col-md-6">
+            <md-card class="stat-box">
+              <md-card-title>
+                <h2>Total Killed:</h2>
+              </md-card-title>
+              <md-card-content>
+                <ul class="stat-list">
+                  <li><strong>People:</strong> {{basicStats?.totals.sum}}</li>
+                  <li><strong>Suspected Militants:</strong> {{basicStats?.susMils.sum}}</li>
+                  <li><strong>Civilians:</strong> {{basicStats?.civilians.sum}}</li>
+                  <li><strong>Unknowns:</strong> {{basicStats?.unknowns.sum}}</li>
+                </ul>
+              </md-card-content>
+            </md-card>
+          
+          </div>
+          <div class="col-md-6">
+            <md-card class="stat-box">
+              <md-card-title>
+                <h2>Average Killed per Strike:</h2>
+              </md-card-title>
+              <md-card-content>
+                <ul class="stat-list">
+                  <li><strong>People:</strong> {{basicStats?.totals.avg}}</li>
+                  <li><strong>Suspected Militants:</strong> {{basicStats?.susMils.avg}}</li>
+                  <li><strong>Civilians:</strong> {{basicStats?.civilians.avg}}</li>
+                  <li><strong>Unknowns:</strong> {{basicStats?.unknowns.avg}}</li>
+                </ul>
+              </md-card-content>
+            </md-card>
+          
+          </div>
+        </div>
+      </div>
+      
+      <div class="table-section">
+        
+        <h2 >Click a Record Below to See More Details</h2>
+        <span class="d-flex justify-content-center margin-top-bottom-10 "><img  src="/assets/images/icons/ic_filter_list_black_48px.svg"  class="icon-40"></span>
+        <div class="table-responsive ">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:left;">Date</th>
+                <th style="text-align:left;">Attacking Country</th>
+                <th style="text-align:left;">Country Attacked</th>
+                <th style="text-align:left;">Weapons</th>
+                <th style="text-align:left;">Actions</th>
+                <th style="text-align:left;">Mil.</th>
+                <th style="text-align:left;">Civ.</th>
+                <th style="text-align:left;">Unk.</th>	
+                <th style="text-align:left;">HVTs</th>																	
+              </tr>
+            </thead>
+            <tbody>				
+              <tr *ngFor="let strike of (strikes | slice:0:listLimit); trackBy: trackStrike; let odd = odd; let even = even;"  (click)="goToStrike(strike)"  [ngClass]="{ odd: odd, even:even}" >
+
+                <td>{{strike?.date | date}}</td>
+                <td>
+                  <span *ngFor=" let attacker of strike?.countries.attackers; let first = first; let i = index ">
+                    
+                      <span *ngIf="first">{{attacker.country}}</span>
+              
+                    
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor="let target of strike?.countries.targets; let first = first; let i = index">
+                    
+                      <span *ngIf="first">{{target.country}}</span>
+              
+                    
+                  </span>
+                </td>
+                <td>
+                  <span *ngFor=" let weapon of strike?.type.weaponTypes; let first = first; let i = index ">
+                      <span class="flex-row group-center">
+                        <span *ngIf="first">{{weapon.term}}</span> 
+                        <img  class="icon-15" src="/assets/images/icons/ic_priority_high_black_36px.svg" *ngIf="first && !weapon.clear" >
+                        <!--<span *ngIf="first && !weapon.clear" ><img>error</span>-->
+                 
+                      </span>
+                  </span>
+                  <!--<span *ngFor="let term of strike?.type.weapons.terms; let first = first; let i = index">
+                    
+                    <span *ngIf="first">{{term}}</span>
+                    <span *ngIf="i > 0">...</span>
+                  </span>-->
+                </td>
+                <td>
+                  <span *ngFor=" let action of strike?.type.actionTypes; let first = first; let i = index ">
+                        <span class="flex-row group-center">
+                          <span *ngIf="first">{{action.term}}</span>
+                          <img   class="icon-15" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="first && !action.clear" >
+                          <!--<span *ngIf="first && !action.clear" ><img>error</span>-->
+                 
+                        </span>
+                  </span>
+                  <!--<span *ngFor="let term of strike?.type.actions.terms; let first = first; let i = index">
+                    <span *ngIf="first">{{term}}</span>
+                    <span *ngIf="i > 0">...</span>
+                  </span>-->
+                </td>
+                <td>
+                {{strike?.casualties.susMils}}
+                </td>
+                <td>
+                {{strike?.casualties.civilians}}
+                </td>
+                <td>
+                {{strike?.casualties.unknowns}}
+                </td>
+                <td>
+                {{strike?.casualties.hvts}}
+                </td>
+                                        
+              </tr>
+                
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="9">
+                  <button *ngIf="listLimit < strikes.length"    class="btn  btn-block primary-hover" (click)="listLimit = listLimit + 15">Show More Strikes (displaying {{listLimit}} out of {{strikes?.length }})</button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

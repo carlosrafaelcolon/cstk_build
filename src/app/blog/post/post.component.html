@@ -1,0 +1,92 @@
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+	<li class="breadcrumb-item"><a [routerLink]="['/blog']">News & Updates</a></li>
+  	<li class="breadcrumb-item active">{{post?.title | capitalize}}</li>
+</ol>
+<section class="white-bg" >
+  <div class="container-fluid "> 
+
+    <div *ngIf="!post">
+		<div class="d-flex justify-content-center load-full">
+			
+			<md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+		</div>
+    </div>
+	<div  *ngIf="post" class="postView ">
+		
+		
+		<div class="hidden-xs-down category-section ">
+			<h2 class="category-text">{{post?.category | capitalize}}</h2>
+		</div>
+            
+    
+		<div class="flex-column post-listing">
+				
+				<div class="date">{{dateFormatted | date:'longDate' }}</div>
+				<div>
+					<h2 class="title">{{post?.title }}</h2>
+				</div>
+				<div>
+					<h3 class="subtitle">{{post?.subtitle}}</h3>
+				</div>
+				<div>
+					<p class="author">
+						By
+						<span  *ngFor=" let author of post?.authors; let i = index; let last = last ">
+							<span  *ngIf="i > 0 && !last">,</span>
+							<span  *ngIf="i > 0 && last">& </span>
+							<span>{{author.name | capitalize}}
+							</span>
+						</span>
+
+					</p>
+
+				</div>
+				<div class="content ">
+					<span [innerHtml]="post?.body |  safeHtml"></span>
+				
+				</div>
+				
+				
+				<div class="tag-section" *ngIf="post.tags.length > 0">
+					
+					<span class="label tag-header">Tags:</span>
+					<span  *ngFor=" let tag of post?.tags">
+						<span class="label post-tags">{{tag | capitalize}}</span>
+					</span>					
+				</div>
+				<div>
+					<p class="updated">Last Updated: {{post?.updated | date:'longDate' }}</p>
+				</div>
+				<span class="primary-border"></span>
+				<div class="post-bio" *ngIf="userInfo.length > 0">
+					<div *ngFor=" let user of userInfo">
+						<div class="d-flex justify-content-center post-img">
+							<img  src="{{user?.img}}"> 
+						</div>
+						<div class="content">
+							<h3> {{user.name | capitalize}}</h3>
+							<span    [innerHtml]="user?.shortBio  |  safeHtml"></span>
+						</div>
+						<div class="d-flex justify-content-start">
+							<button (click)="gotoAuthor(user)" class="btn shark-hover border-em">Read More </button>
+						</div>
+						<hr>
+					</div>
+				</div>
+		</div>
+		<div class="d-flex justify-content-center" style="margin-top:50px">
+			<a aria-label="Return" (click)="gotoBlog()"class="btn btn-transparent" >View All Articles</a>	
+			<!--<a type="button" class="btn primary-hover border-round" aria-label="Return" (click)="gotoBlog()">
+				<span>
+				<img class="icon-15" src="/assets/images/icons/ic_keyboard_return_white_36px.svg"  >
+				&nbsp;&nbsp;
+				View All Articles
+				</span>
+			</a>-->
+
+		</div>
+
+	</div>
+  </div>
+</section>

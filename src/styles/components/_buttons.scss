@@ -1,0 +1,185 @@
+// ==================================
+// BUTTONS
+// ===================================
+.btn {
+    // font-weight:bold;
+    letter-spacing: 1px;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    transform: translate3d(0, 0, 0);
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-search-group {
+	width:100%;
+	 @media #{$tablets } {
+        width:70%;
+    }
+    @media #{$md-device } {
+        width:60%;
+    }
+}
+.display-button {
+    width:100%;
+    margin-bottom:30px;
+    color:$white;
+    padding:2%;
+    border-radius: 10px;
+    background-color:#002a5c;
+    border: 10px solid #002552;
+    transition: all 1s linear;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  
+    // h3 {
+    //     font-weight:bold;
+    //     font-size: 23px;
+    // }
+    p {
+        font-size: 19px;
+    }
+    &:hover {
+        border-color:$astral;
+		background-color:$orient;
+    }
+}
+.btn-group-round {
+   
+    width:100%;
+    align-items: center;
+    justify-content:center;
+    
+    .btn {
+        border-radius:0;
+        margin:0;
+        &:first-child{
+            border-top-left-radius: 5px !important;
+            border-bottom-left-radius: 5px !important;
+        }
+        &:last-child{
+            border-top-right-radius: 5px !important;
+            border-bottom-right-radius: 5px !important;
+        }
+        
+    }
+}
+.border-round {
+    border-radius: 4px;
+}
+.round-top {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+.border-box {
+    border-radius: 0px;
+}
+
+.border-circle {
+    border-radius: 50%;
+}
+.border-em {
+	border-radius: 999em;
+}
+
+
+
+.btn-main {
+	color: white;
+	background-color:$astral;
+    border:1px solid #109E92;
+	transition: all 0.4s linear;
+	text-transform: uppercase;
+	text-shadow: none;
+	border-radius: 0px;
+	font-weight: 300;
+}
+
+.btn-main:hover,
+.btn-main_selected
+.btn-main:active,
+.btn-main:focus{
+	color:white;
+	background-color:#109E92;
+	border:1px solid #109489;
+	text-shadow: none;
+}
+
+.btn-transparent{
+	border-radius: 0px;
+	color:$astral !important;
+	border:1px solid $astral;
+	transition: all 0.4s linear;
+	text-transform: uppercase;
+	text-shadow: none;
+	font-weight: bold;		
+}
+
+.btn-transparent:hover,
+.btn-transparent:active,
+.btn-transparent:focus{
+	color:white  !important;
+	background-color:$astral;
+	border:1px solid $astral;
+	text-shadow: none;
+}
+
+.btn-transparent-navbar{
+	border-radius: 0px;
+	color:$astral;
+	border:1px solid $astral;
+	transition: all 0.4s linear;
+	text-transform: uppercase;
+	text-shadow: none;	
+}
+
+.btn-purple{
+	color:#9D48A4;
+	background-color:rgba(156,72,163,0);
+	border:1px solid #9D48A4;
+	border-radius: 0px;
+	transition: all 0.4s linear;
+	text-transform: uppercase;
+	text-shadow: none;	
+	font-weight: 400;		
+}
+
+.btn-purple:hover,
+.btn-purple:active,
+.btn-purple:focus,
+.btn-purple:selected,{
+	color:white !important;
+	background-color:rgba(156,72,163,0);
+	border:1px solid #824588;
+	text-shadow: none;
+}
+
+
+.btn-purple-selected{
+	color:white !important;
+	background-color:#9D48A4;
+	border:1px solid #824588;
+	font-weight: 400;	
+}
+
+.btn-transparent-navbar:hover,
+.btn-transparent-navbar:active,
+.btn-transparent-navbar:focus{
+	background-color:$astral !important;
+	border:1px solid $astral;
+	text-shadow: none;
+	color:white !important;
+}
+
+.btn-transparent-selected{
+	color:white;
+	background-color:$astral;
+	border:1px solid $astral;
+	text-shadow: none;
+	font-weight: 300;	
+}
+.btn-default {
+	border-radius: 0px;
+}
+.label {
+
+    padding: .3em .6em;
+	font-weight:normal;
+
+}

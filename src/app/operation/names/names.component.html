@@ -1,0 +1,62 @@
+<ol class="breadcrumb">
+  <li  class="breadcrumb-item "><a [routerLink]="['/']">Home</a></li>
+  <li  class="breadcrumb-item "><a [routerLink]="['/operations']">Operations</a></li>
+  <li  class="breadcrumb-item active">Names Identified</li>
+
+</ol>
+<section class="light-bg" style="margin-top:-1rem;">
+  <div class="container-fluid ">
+     <div class="page-headline">
+          <h1>Names Identified</h1>
+          <span class="text_underline"></span>
+      </div>
+      <div class="term-section">
+        <h1 >Click a Name Below to See More Details</h1>
+        <md-card class="horizontal-legend ">
+          <md-card-content>
+            <ul class="d-flex flex-column flex-lg-row justified-content-between">
+                <li><md-card ><span style="background-color:#CE121B; color:#fff; padding:5px" >Red</span> = High Value Target</md-card></li>
+                <li><md-card ><span style="background-color:#367D36; color:#fff; padding:5px">Green</span> = Suspected Militant</md-card></li>
+                <li><md-card ><span style="background-color:#fabb05; color:#fff; padding:5px">Yellow</span> = Civilian</md-card></li>
+                <li><md-card ><span  style="background-color:#000; color:#fff; padding:5px">Black</span> = Unknown</md-card></li>
+                <li><md-card > <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  data-toggle="tooltip" data-placement="right" title="Tooltip on right"> = Unclear</md-card></li>
+            </ul>
+          </md-card-content>
+        </md-card>
+        <div *ngIf="!loadingComplete">
+          <div class="d-flex justify-content-center ">
+              <md-progress-circle mode="indeterminate" ></md-progress-circle>
+          </div>
+        </div>
+        <div *ngIf="loadingComplete" style="margin-top:50px">
+          <div *ngFor="let strike of strikes" class="listview" >
+            
+            <div class="nameBox-container flex-row group-start">
+              <span class="dates-heading">{{strike?.date | date}}:</span>
+              <div class="flex-row group-start"  *ngFor=" let person of strike?.people; let i = index ">
+                <span  *ngIf="i > 0 && !last">,</span>
+                <span  *ngIf="i > 0 && last">& </span>
+                <span class="term" ><a  (click)="goToStrike(strike)"  [ngStyle]="activeStatus(person.status)">{{person?.name | capitalize}}</a></span>
+                <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!person.clear">
+                <!--<span class="label label-alert border-box" >{{person?.status}}</span>-->
+              </div>
+              
+            </div>
+            <div class="nameCountry-container flex-row group-start">
+            <span *ngFor=" let attacker of strike?.countries.attackers; let last = last; let i = index " class="flex-row group-start">
+              <span  *ngIf="i > 0 && !last">,</span>
+              <span  *ngIf="i > 0 && last">& </span>
+              <span >{{attacker.country}}</span>
+            </span> &nbsp;in&nbsp; 
+            <span *ngFor=" let target of strike?.countries.targets; let last = last; let i = index " class="flex-row group-start">
+              <span  *ngIf="i > 0 && !last">,</span>
+              <span  *ngIf="i > 0 && last">& </span>
+              <span >{{target.country}}</span>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</section>

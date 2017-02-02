@@ -1,0 +1,174 @@
+    .card{
+        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        transform: translate3d(0, 0, 0);
+        transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+        .card-text{
+            font-size:18px; 
+            font-family: $stack-roboto;
+        }
+        .card-block {background:#edeff0;}
+    }
+    .search-box {
+        padding: 0;
+        width: 100%;
+        margin: 5px auto;
+        background-color: $white;
+        border-width:2px;
+        border-style: solid;
+    
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+        transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+        .search-box-header {
+            cursor: pointer;
+            min-height: 35px;
+            font-size:20px;
+            font-weight:bold;
+            color: $white;
+            width: 100%;
+            margin:0;
+            justify-content: space-around;
+            align-items: center;
+            padding:5px;
+
+        }
+        .search-content {
+            margin:0;
+            width: 100%;
+            
+            .checkboxes {
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding:5px;
+                
+                
+            }
+            .search-box-footer {
+                border-top: 2px solid $border-dark;
+                margin:0;
+                width: 100%;
+                background-color: transparent;
+                justify-content: center;
+                align-items: center;
+                padding:5px;
+                
+            
+        }
+        }
+        
+    }
+
+        
+    
+    .basic-form {
+        background-color:$white;
+        padding:0;
+        md-toolbar{
+            background-color:$primary;
+            color:$white;
+        }
+        border: 2px solid $primary;
+        .basic-form-content {
+            h4{
+                font-weight:bold;
+                margin-top:2%;
+                margin-bottom: 2%;
+                color:$rose-cherry;
+
+            }
+            label h4{
+                font-weight:bold;
+            
+                color:$shark;
+
+            }
+            padding:2%;
+            md-input-container, select {
+                margin:2% 0;
+                
+            }
+        table {
+                margin:10px 0;
+                
+            }
+        }
+    }
+    .filter-form {
+        padding:0;
+        margin:2% 0;
+        border: 2px solid $primary;
+        md-ink-bar {
+        background-color:$secondary ;
+        
+        }
+        md-toolbar {
+            background-color:$primary ;
+            color:$white;
+        }
+        md-toolbar.lvl2-transparent {
+            background-color:transparent ;
+            color:$rose-cherry;
+            min-height: 44px;
+        }
+        .cb-group {
+            border-bottom:2px solid $shuttle-gray;
+            min-height: 275px;
+            .tab-label {
+                margin-bottom:0;
+            }
+            .adminCheckboxes {
+                li {
+                    margin:2%;
+                }
+            }
+        }
+        
+        .filter-form-content {
+            margin:2%;
+
+            p, .md-slide-toggle-content {
+                font-size:17px;
+            }
+            
+            .adminCheckboxes {
+                li {
+                    margin:2%;
+                }
+            }
+        }
+
+    }
+    .outline-card {
+        border: 2px solid $primary !important;
+    }
+    .horizontal-legend{
+        border: 2px solid $primary !important;
+        font-weight:bold;
+        md-card{
+            padding:10px;
+            box-shadow:none;
+        
+        }
+    }
+    .border-cards{
+        margin-bottom:40px;
+        .card-outter{
+            border:1px solid gainsboro;
+        }
+        .border-primary{
+            border-left:10px solid $primary;	
+        }
+    }
+    
+
+//***********************************
+// Form Components
+//***********************************
+.basic-select {
+    margin:auto;
+    border:2px solid $primary;
+    color:$shark;
+    font-weight:bold;
+}
+.long-min {
+    min-height:300px;
+}

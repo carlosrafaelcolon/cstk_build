@@ -1,0 +1,309 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Library Database
+            <small>Adding a new publication</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+                <li class="breadcrumb-item" ><a routerLink="/admin/library" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Library Database</a></li>
+                <li class="breadcrumb-item active">Update</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+      <div class="container-fluid">
+        <button (click)="gotoLibrary()" class="btn btn-block alert-hover"> Go Back</button>
+        <md-card class="basic-form round-top margin-top-bottom-40">
+            <md-toolbar >New Publication Information</md-toolbar>
+            <md-card-content class="basic-form-content">
+              <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
+
+                <span class="anchor" id="general"></span>
+                <h3>Basic Information</h3>
+                <table class="full-width" cellspacing="0" >
+                  <tr>
+                      <td>
+                 
+                        <md-input-container  class="full-width">
+							<md-hint align="end">Title of Publication</md-hint>
+							<input 	md-input 
+						  			placeholder="Example: The Drone Debate" 
+									type="text" 
+                             
+									formControlName="title" >
+                        </md-input-container>
+                        <div *ngIf="!postForm.get('title').valid" class="full-width" >Enter Publication Title</div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+						  <md-input-container  class="full-width">
+								<label><h4>Date of Publication (mm-dd-yyyy): {{postForm.value.pubDate| date:'longDate'}}</h4></label>
+								<md-hint align="end">Insert Date of Publication</md-hint>
+								<input  md-input	
+										type="date" 
+									
+										formControlName="pubDate">
+							</md-input-container>
+                     
+                        <!--<ng2-datepicker formControlName="pubDate"></ng2-datepicker>-->
+                     
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                   
+                        <md-input-container class="full-width">
+							<md-hint align="end">Publishing Company</md-hint>
+							<input 	md-input 
+									placeholder="Insert publisher of source here" 
+                                  	type="text" 
+                                  
+                                  	formControlName="publisher" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                     
+                        <md-input-container class="full-width">
+							<md-hint align="end">Page Count</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert number of pages" 
+                                  	type="number" 
+                          
+                                  	formControlName="pageCount" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+          
+                        <md-input-container class="full-width">
+							<md-hint align="end">Link to Source</md-hint>
+                        	<input 	md-input 
+									placeholder="Insert link to source here" 
+                                  	type="url" 
+                                
+                                  	formControlName="link" >
+                        </md-input-container>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+						<select formControlName="pubType" class="full-width form-control basic-select border-box">
+							<option *ngFor="let pub of pubTypeSelections" [value]="pub.value">{{pub.display}}</option>
+						</select>
+                      </td>
+                  </tr>
+                </table>
+                <h4>Authors</h4>
+                <table class="full-width" cellspacing="0"  formArrayName="authors" >
+                  <tr  *ngFor="let author of postForm.controls.authors.controls; let i = index">
+                    <td>
+                      <md-input-container class="full-width">
+							<md-hint align="end">Author</md-hint>
+                      		<input 	md-input 
+							  		placeholder="Insert name of author" 
+                            		type="text" 
+           
+                            		formControlName="{{i}}" >
+                      </md-input-container>
+                    </td>
+                    <td>
+                      <span class="d-flex flex-row flex-wrap">
+                        <span class="fill-remaining-space"></span>
+                        <button type="button"  title="Remove Author" class="btn alert-hover "  md-mini-fab (click)="removeAuthor(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+                <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td><button class="btn btn-block success-hover" type="button" (click)="addAuthor()">Add Author</button></td>
+                    </tr>
+                </table>
+ 
+                <hr>
+                <span class="anchor" id="categories"></span>
+                <h3>Themes & Topics</h3>
+                <h4>Themes</h4>
+                <table class="full-width" cellspacing="0"  formArrayName="themes" >
+                  <tr  *ngFor="let theme of postForm.controls.themes.controls; let i = index">
+                    <td>
+                      <!--<md-input-container class="full-width">
+							<md-hint align="end">Theme</md-hint>
+                      		<input 	md-input 
+							  		placeholder="Insert theme" 
+									type="text" 
+			
+									formControlName="{{i}}" >
+                      </md-input-container>-->
+					  <select formControlName="{{i}}" class="full-width form-control basic-select border-box">
+						<option *ngFor="let theme of themeSelections" [value]="theme.value">{{theme.display}}</option>
+					</select>
+                    </td>
+                    <td>
+                      <span class="d-flex flex-row flex-wrap">
+                        <span class="fill-remaining-space"></span>
+                        <button type="button"  title="Remove Theme" class="btn alert-hover "  md-mini-fab (click)="removeTheme(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+                <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td><button class="btn btn-block success-hover" type="button" (click)="addTheme()">Add a Theme</button></td>
+                    </tr>
+                </table>
+     
+                <h4>Topics</h4>
+                <table class="full-width" cellspacing="0"  formArrayName="topics" >
+                  <tr  *ngFor="let topic of postForm.controls.topics.controls; let i = index">
+                    <td>
+                      <md-input-container class="full-width">
+						<md-hint align="end">Topic</md-hint>
+                      	<input 	md-input 
+						  		placeholder="Insert topic" 
+                            	type="text" 
+                            
+                            	formControlName="{{i}}" >
+                      </md-input-container>
+					
+                    </td>
+                    <td>
+                      <span class="d-flex flex-row flex-wrap">
+                        <span class="fill-remaining-space"></span>
+                        <button type="button"  title="Remove Topic" class="btn alert-hover "  md-mini-fab (click)="removeTopic(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+                <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td><button class="btn btn-block success-hover" type="button" (click)="addTopic()">Add a Topic</button></td>
+                    </tr>
+                </table>
+
+                <span class="anchor" id="summary"></span>
+                <h3>Synopsis</h3>
+                <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                
+                          <md-input-container class="full-width">
+							<md-hint align="end">Summary of Publication</md-hint>
+                          	<textarea 	md-input 
+							  			placeholder="Summary of Source"
+                                       
+                                        type="text"
+                                        class="long-min"
+                                        formControlName="summary" ></textarea>
+                          </md-input-container>
+                        </td>
+                    </tr>
+                </table>
+    
+                <span class="anchor" id="reviewers"></span>
+                <h3>Reviews</h3>
+                <table class="full-width" cellspacing="0" >
+					<tr >
+						<td>
+							<md-slide-toggle formControlName="reviewed">
+							Has this publication been reviewed?:
+							<strong *ngIf="!postForm.controls.reviewed.value">
+							No
+							</strong>
+							<strong *ngIf="postForm.controls.reviewed.value">
+							Yes
+							</strong>
+						</md-slide-toggle>
+						</td>
+					</tr>
+                  <tr *ngIf="postForm.controls.reviewed.value">
+                    <td>
+                      <table class="full-width" cellspacing="0" formArrayName="reviews">
+                        <md-card class="basic-form round-top margin-top-bottom-10" *ngFor="let review of postForm.controls.reviews.controls; let i = index">
+                          <md-toolbar >
+                            <span >Review {{i + 1}}</span>
+                            <!-- This fills the remaining space of the current row -->
+                            <span class="fill-remaining-space"></span>
+                            <span><button title="Remove Review" class="btn alert-hover " (click)="removeReview(i)"  md-mini-fab ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button></span>
+                          </md-toolbar>
+                          <md-card-content class="basic-form-content" [formGroupName]="i">
+                            <table class="full-width" cellspacing="3" >
+                          
+                              <tr >
+                                <td>
+                            
+                                  <md-input-container class="full-width">
+									<md-hint align="end">Reviewer</md-hint>
+                                  	<input 	md-input 
+									  		placeholder="Name of Reviewer" 
+                                            type="text" 
+                       
+                                            formControlName="reviewer" >
+                                  </md-input-container>
+                                </td>
+                              </tr>
+                              <tr >
+                                <td>
+                   
+                                  <md-input-container class="full-width">
+									<md-hint align="end">Title</md-hint>
+                                  	<input 	md-input 
+									  		placeholder="Title of Review" 
+                                            type="text" 
+                                     
+                                            formControlName="reviewTitle" >
+                                  </md-input-container>
+                                </td>
+                              </tr>
+                              <tr >
+                                <td>
+                         
+                                  <md-input-container class="full-width">
+									<md-hint align="end">Link</md-hint>
+                                  	<input 	md-input 
+									  		placeholder="Link to Review" 
+                                            type="url" 
+                                       
+                                            formControlName="reviewLink" >
+                                  </md-input-container>
+                                </td>
+                              </tr>
+                            </table>
+                          </md-card-content>
+                        </md-card>
+                      </table>
+                      <table class="full-width" cellspacing="0">
+                        <tr>
+                            <td><button class="btn btn-block success-hover" type="button" (click)="addReview()">Add a Review</button></td>
+                        </tr>
+                    </table>
+                    </td>
+                  </tr>
+                </table>
+                
+                
+                <span class="anchor" id="submit"></span>
+                <h3>Create Data</h3>
+                <table class="full-width" cellspacing="0">
+                    <tr>
+                        <td><button class="btn btn-block alert-hover" type="submit"  [disabled]="!postForm.valid">Submit</button></td>
+                    </tr>
+                </table>
+                
+
+              </form>
+            </md-card-content>
+        </md-card>
+        <pre>{{postForm.value | json}}</pre>
+      </div>
+    </section>
+ </div>
+
+
+

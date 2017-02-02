@@ -1,0 +1,33 @@
+<section  *ngIf="!people">
+    <div class="d-flex justify-content-center">
+        
+        <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+    </div>
+</section>
+<section class="peopleList" *ngIf="people" >
+  <div class="row "  >
+      <div class="col-xs-12 col-sm-6 col-md-4  col-lg-4" *ngFor="let person of people ">
+        <div class="card  margin-top-bottom-10" >
+            <img class="card-img-top" src="{{person?.img}}" >
+            <div class="card-block">
+                <h4 class="card-title"><a (click)="onSelect(person)" class=" primary-text-hover " >{{person?.name}}</a></h4>
+                <p class="card-text">{{person?.title}}</p>
+                <a  class="btn primary-hover-dark" (click)="onSelect(person)" >Read Bio</a>
+            </div>
+        </div>
+      </div>
+         <!-- TEAM MEMBER -->
+        <!--<div class="team col-xs-12 col-sm-6 col-md-4  col-lg-4" *ngFor="let person of people ">
+            <div>
+                <img alt="team-member" class="img-responsive img-thumbnail" src="{{person?.img}}">
+            </div>
+            <div class="details">
+                <h3><a (click)="onSelect(person)"  >{{person?.name}}</a></h3>
+                <h4>{{person?.title}}</h4>
+                <button  class="btn btn-block primary-hover-dark" (click)="onSelect(person)" >Read Bio</button>
+             
+            </div>
+        </div>-->
+  </div>
+
+</section>

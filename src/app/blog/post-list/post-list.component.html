@@ -1,0 +1,45 @@
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item active">News & Updates</li>
+</ol>
+<section class="white-bg min-500px" >
+  <div class="container-fluid "> 
+     <div  *ngIf="!loadingPostsComplete">
+      <div class="d-flex justify-content-center">
+        <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+      </div>
+    </div>
+    <div  *ngIf="loadingPostsComplete" >
+      <div  *ngFor="let post of posts" class="blogView">
+        <ul class="post-listing">
+          <li class="date">
+              <span *ngIf="post.category.length > 0" class="label label-alert border-box">{{post?.category | capitalize}}</span>
+              <span style="margin-left:10px; font-weight:bold;">{{post?.date | date:'longDate' }}</span>
+          </li>
+        
+          <li>
+            <h2 ><a class="title" (click)="gotoBlog(post)">{{post?.title }}</a></h2>
+          </li>
+          <li>
+            <h3 class="subtitle">{{post?.subtitle }}</h3>
+          </li>
+ 
+          <li>
+            <p class="author">
+              By
+              <span  *ngFor=" let author of post?.authors; let i = index; let last = last ">
+                <span  *ngIf="i > 0 && !last">,</span>
+                <span  *ngIf="i > 0 && last">& </span>
+                <span>{{author.name | capitalize}}</span>
+              </span>
+            </p>
+
+          </li>
+        
+          
+        </ul>
+      
+      </div>
+    </div>
+  </div>
+</section>

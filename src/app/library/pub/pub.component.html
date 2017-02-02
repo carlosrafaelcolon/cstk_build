@@ -1,0 +1,92 @@
+<div *ngIf="!publication">
+      <div class="d-flex justify-content-center  load-full">
+        <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+    </div>
+</div>
+<section class="publicationList" *ngIf="publication">
+    <div class="d-flex flex-row flex-wrap">
+        <button type="button" class="btn primary-hover btn-round " aria-label="Return" (click)="gotoPublications()">
+            <span class="d-flex align-items-center">
+            <img  src="/assets/images/icons/ic_keyboard_return_white_36px.svg"  class="icon-30">
+            &nbsp;&nbsp;
+            View All Publications
+            </span>
+        </button>
+        <span class="hidden-md-down fill-remaining-space"></span>
+        <span class="hidden-md-down d-flex flex-row btn-group-round " style="width:25%">
+            <button  class="btn primary-hover-dark flex" disabled>Previous</button>
+            <button  class="btn primary-hover-dark flex" disabled>Next</button>
+        </span>
+    </div>
+
+  <div class="d-flex flex-column pubHeader margin-top-bottom-40">
+    <h2 class="main-header">{{publication?.title}}</h2>
+    <div>
+        <span><strong>Date:</strong> {{dateFormatted | date:'fullDate'}}</span>
+    </div>
+    <div *ngIf="publication.authors.length > 0"><strong>Authored By:</strong>
+    <span *ngFor="let author of publication?.authors; let i = index; let last = last">
+        <span>
+            <span  *ngIf="i > 0 && !last" style="margin-left:-4px">, </span>
+            <span  *ngIf="i > 0 && last">& </span>
+            {{author | capitalize}}
+            
+        </span>
+    </span>
+    </div>
+    <div>
+        <span><strong>Publisher:</strong> {{publication?.publisher}}</span>
+    </div>
+    <div>
+        <span><strong>Publication Type:</strong> {{publication?.pubType}}</span>
+    </div>
+    <div>
+        <span><strong>Page Count:</strong> {{publication?.pageCount}}</span>
+    </div>
+    <div><strong>Themes:</strong>
+    <span *ngFor="let theme of publication?.themes; let i = index; let last = last">
+        <span>
+            <span  *ngIf="i > 0 && !last" style="margin-left:-4px">, </span>
+            <span  *ngIf="i > 0 && last">& </span>
+            {{theme | capitalize}}
+        </span>
+    </span>
+    </div>
+    <div><strong>Topics:</strong>
+    <span *ngFor="let topic of publication?.topics; let i = index; let last = last">
+        <span>
+            <span  *ngIf="i > 0 " style="margin-left:-4px">, </span>
+            {{topic | lowercase}}
+        </span>
+    </span>
+    </div>
+    
+    <span *ngIf="publication?.reviewed">
+    <div><strong>Reviews:</strong>
+        
+        <div *ngFor="let review of publication?.reviews; let i = index" class="flex-column group-start reviews" >
+            <h3 *ngIf="review.reviewTitle"><a href="{{review?.reviewLink}}" target="_blank">{{review?.reviewTitle}}</a></h3>
+            <p class="reviewer">By <em>{{review?.reviewer}}</em></p>
+        </div>
+    </div>
+    </span>
+    <div>
+        <span><a href="{{publication?.link}}" target="_blank" class="alert-text-hover">Click Here to View Publication</a></span>
+    </div>
+    
+  </div>
+ 
+    <hr>
+    <div class="min-250px">
+    <div class="page-headline">
+        <h1>Publication Summary</h1>
+        <span class="text_underline"></span>
+    </div>
+
+    <h2 *ngIf="!publication?.summary" class="text-center">Summary not yet available</h2>
+    <div class="content"  *ngIf="publication?.summary" >
+    <span    [innerHtml]="publication?.summary | safeHtml"></span>
+    </div>
+    </div>
+         
+</section>

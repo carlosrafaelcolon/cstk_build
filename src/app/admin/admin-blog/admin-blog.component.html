@@ -1,0 +1,69 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Blog
+            <small *ngIf="posts"><strong>{{posts.length}}</strong> posts</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item active">Blog</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content" >
+      <div class="container-fluid">
+            <div class="page-headline">
+                <h1>Edit Mode</h1>
+                <span class="text_underline"></span>
+            </div>
+            <button class="btn btn-block success-hover" (click)="onSelectCreate()" >Create A New Post</button>
+
+          <div *ngIf="!loadingPostsComplete">
+            <div class="d-flex justify-content-center load-full">
+               <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+            </div>
+          </div>
+          <div *ngIf="loadingPostsComplete">
+            <div class="row editList">
+                <div class="page-headline">
+                    <h1>List of Posts</h1>
+                    <span class="text_underline"></span>
+                </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                      <tr>
+                          <th style="text-align:left;">Posts</th>
+                          <th colspan="2" style="text-align:left;">Editing</th>																	
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <tr *ngFor=" let post of posts ">
+                          <td style="text-align:left;">
+                            <ul>
+                              <li> {{post?.title}}</li>
+                                <li>By 
+                                <span *ngFor=" let author of post?.authors; let i = index; let last = last ">
+                                    <span  *ngIf="i > 0 && !last">,</span>
+                                    <span  *ngIf="i > 0 && last">& </span>
+                                    <span>{{author.name | capitalize}}</span>
+
+                                </span>
+                            
+                                </li>
+                            </ul>
+                           
+                          </td>
+                          <td><button    (click)="onEdit(post)"  type="button" class="btn  btn-block success-hover">Edit</button></td>
+                          <td><button (click)="onRemove(post)"   type="button" class="btn  btn-block alert-hover">Delete</button></td>														
+                      </tr>	
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+</div>

@@ -1,0 +1,1 @@
+export {SomaliaComponent} from './somalia.component';

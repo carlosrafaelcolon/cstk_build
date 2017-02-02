@@ -1,0 +1,55 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">People Database
+            <small *ngIf="people"><strong>{{people.length}}</strong> Team members recorded</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item active">People Database</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+      <div class="container-fluid">
+            <div class="page-headline">
+                <h1>Edit Mode</h1>
+                <span class="text_underline"></span>
+            </div>
+            <button class="btn btn-block success-hover" (click)="onSelectCreate()" >Create A New Person</button>
+
+          <div *ngIf="!loadinPeopleComplete">
+            <div class="d-flex justify-content-center load-full">
+               <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+            </div>
+          </div>
+          <div *ngIf="loadinPeopleComplete">
+            <div class="row editList">
+                <div class="page-headline">
+                    <h1>List of People</h1>
+                    <span class="text_underline"></span>
+                </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                      <tr>
+                          <th style="text-align:left;">People</th>
+                          <th colspan="2" style="text-align:left;">Editing</th>																	
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <tr *ngFor=" let person of people ">
+                          <td style="text-align:left;">{{person?.name}}</td>
+                          <td><button    (click)="onEdit(person)"  type="button" class="btn  btn-block success-hover">Edit</button></td>
+                          <td><button (click)="onRemove(person)"   type="button" class="btn  btn-block alert-hover">Delete</button></td>														
+                      </tr>	
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+</div>

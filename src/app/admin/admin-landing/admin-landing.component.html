@@ -1,0 +1,84 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Administration
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+                <li class="breadcrumb-item" ><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item active">Administration</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+    
+        <div class="row">
+    
+            <div class="col-md-4 margin-top-bottom-10">
+                <md-card class="outline-card ">
+                    <img md-card-image src="/assets/images/other/cod-project.png">
+                    <md-card-actions>
+                        <button  class="btn btn-block primary-hover" (click)="gotoStrikes()">Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4 margin-top-bottom-10">
+                <md-card class="outline-card ">
+                    
+                    <img md-card-image src="/assets/images/other/lib-project.png" style="height:237px">
+                    <md-card-actions>
+                        <button  class="btn btn-block primary-hover" (click)="gotoLibrary()">Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4 margin-top-bottom-10" *ngIf="authService.isAdmin()">
+                <md-card class="outline-card ">
+                    
+                    <img md-card-image src="/assets/images/other/blog.png" style="height:237px">
+                    <md-card-actions>
+                        <button  class="btn btn-block primary-hover" (click)="gotoBlog()">Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4 margin-top-bottom-10" *ngIf="authService.isAdmin()">
+                <md-card class="outline-card ">
+                    
+                    <img md-card-image src="/assets/images/other/staff-list.png">
+                    <md-card-actions>
+                        <button class="btn btn-block primary-hover" (click)="gotoPeople()">Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4 margin-top-bottom-10">
+                <md-card class="outline-card ">
+                    
+                    <img md-card-image src="/assets/images/other/is-project.png">
+                    <md-card-actions>
+                        <button  class="btn btn-block primary-hover" disabled>Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4 margin-top-bottom-10">
+                <md-card class="outline-card ">
+                
+                    <img md-card-image src="/assets/images/other/cat-project.png">
+                
+                    <md-card-actions>
+                        <button  class="btn btn-block primary-hover" disabled>Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4 margin-top-bottom-10">
+                <md-card class="outline-card ">
+                    
+                    <img md-card-image src="/assets/images/other/leader-project.png">
+                    
+                    <md-card-actions>
+                        <button   class="btn btn-block primary-hover" disabled>Enter</button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+    </section>
+</div>

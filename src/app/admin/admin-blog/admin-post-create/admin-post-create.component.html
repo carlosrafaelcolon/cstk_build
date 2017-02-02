@@ -1,0 +1,227 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Blog
+            <small>New Article</small>
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li  class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Administration</a></li>
+                <li class="breadcrumb-item"><a routerLink="/admin/blog">Blog</a></li>
+                <li class="breadcrumb-item active" > Create</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+
+
+      
+        <div class="container-fluid">
+       
+
+      		<button (click)="gotoBlog()" class="btn btn-block alert-hover"> Go Back</button>
+			<md-card class="basic-form round-top margin-top-bottom-40">
+				 <md-toolbar >
+					 New Article: {{postForm.value.title}}
+				 </md-toolbar>
+				 <md-card-content class="basic-form-content">
+					 <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
+						<table class="full-width" cellspacing="0"  formArrayName="authors" >
+							<tr  *ngFor="let author of postForm.controls.authors.controls; let i = index">
+								<td >
+								<div class="full-width d-flex flex-row flex-wrap">
+								<h4 class="margin-top:auto; margin-bottom:auto"><strong class="active-text">Author</strong> {{i + 1}}</h4>
+								<!-- This fills the remaining space of the current row -->
+								<span class="fill-remaining-space"></span>
+								<button type="button"  title="Remove Author" class="btn alert-hover "  md-mini-fab (click)="removeAuthor(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+								</div>
+								<table class="full-width" cellspacing="3" [formGroupName]="i">
+									<tr >
+										<td>
+											<md-input-container  class="full-width">
+												<md-hint align="end">Authors</md-hint>
+												<input  md-input	
+														type="text" 
+														placeholder="Insert name of author" 
+														formControlName="name">
+											</md-input-container>
+											<!--<select  formControlName="name" class="full-width form-control basic-select border-box">
+												<option *ngFor="let author of bloggers" [value]="author.value" >{{author.display}}</option>
+											</select>-->
+								
+										</td>
+									</tr>
+									<tr  *ngIf="postForm.controls.authors.controls[i].controls.name.value !== null">
+										<td>
+											<div>
+												<label>Associate Author with a Pre-Existing Account to Display Bio</label>
+												<md-input-container  class="full-width">
+													<md-hint align="end">Bio Identification Number</md-hint>
+													<input  md-input	
+															type="number" 
+															placeholder="Insert Author Id" 
+															formControlName="authorId">
+												</md-input-container>
+												<!--<div *ngFor="let id of ids">
+													<label>
+													<input type="radio" formControlName="authorId" 
+													[value]="id.value">
+													{{id.display}}
+													</label>
+												</div>-->
+											</div>
+										
+										</td>
+									</tr>
+								</table>
+									
+									
+									<!--<md-input-container  class="full-width">
+										<md-hint align="end">Authors</md-hint>
+										<input  md-input	
+												type="text" 
+												placeholder="Insert name of author" 
+												formControlName="{{i}}">
+									</md-input-container>-->
+
+									
+								</td>
+								<!--<td *ngIf="postForm.controls.authors.controls.length > 1">
+								<span class="flex-row">
+									<span class="fill-remaining-space"></span>
+									<button type="button"  title="Remove Author" class="btn alert-hover "  md-mini-fab (click)="removeAuthor(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+								</span>
+								</td>-->
+							</tr>
+							<tr>
+								<td>
+									<div *ngIf="!postForm.get('authors').valid" class="full-width" >Enter Author</div>
+								</td>
+							</tr>
+						</table>
+
+						 <table class="full-width" cellspacing="0"  >
+							<tr>
+								<td><button class="btn btn-block success-hover" type="button" (click)="addAuthor()">Add Author</button></td>
+							</tr>
+						</table>
+						<hr>
+						<table class="full-width" cellspacing="0" >
+							<tr>
+								<td>
+									<md-input-container  class="full-width">
+										<md-hint align="end">Title of Article</md-hint>
+										<input  md-input	
+												type="text" 
+												 placeholder="Insert your title"
+												formControlName="title">
+									</md-input-container>
+							
+									<div *ngIf="!postForm.get('title').valid" class="full-width" >Enter Title</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<md-input-container  class="full-width">
+										<md-hint align="end">Subtitle of Article</md-hint>
+										<input  md-input	
+												type="text" 
+												 placeholder="Insert subtitle"
+												formControlName="subtitle">
+									</md-input-container>
+							
+									
+								</td>
+							</tr>
+						
+							
+							<tr>
+								<td>
+									<md-input-container  class="full-width">
+										<md-hint align="end">Article Content</md-hint>
+										<textarea 	md-input
+													type="text" 
+													class="long-min"
+													placeholder="Body of article"
+													formControlName="body"></textarea>
+										
+									</md-input-container>
+									<div *ngIf="!postForm.get('body').valid" class="full-width" >Enter Content for Article</div>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+								
+
+									<select formControlName="category" class="full-width form-control basic-select border-box">
+										<option *ngFor="let cat of categories" [value]="cat.value">{{cat.display}}</option>
+									</select>
+								
+							
+									<div *ngIf="!postForm.get('category').valid" class="full-width" >Enter Category</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									
+									<md-input-container  class="full-width">
+										<label><h4>Date of Publication (mm-dd-yyyy): {{postForm.value.date| date:'longDate'}}</h4></label>
+										<md-hint align="end">Insert Date</md-hint>
+										<input  md-input	
+												type="date" 
+											
+												formControlName="date">
+									</md-input-container>
+									<!--<ng2-datepicker formControlName="date" ></ng2-datepicker>-->
+									<div *ngIf="!postForm.get('date').valid" class="full-width" >Enter a Publication Date</div>
+								
+								</td>
+							</tr>
+				
+						</table>
+						 <table class="full-width" cellspacing="0"  formArrayName="tags" >
+							<tr  *ngFor="let tag of postForm.controls.tags.controls; let i = index">
+								<td>
+									<!--<select [(ngModel)]="selectedCategory[i]" formControlName="{{i}}" class="full-width form-control basic-select border-box">
+										<option *ngFor="let author of authors" [value]="author.value">{{author.display}}</option>
+									</select>-->
+									<md-input-container  class="full-width">
+										<md-hint align="end">Tags</md-hint>
+										<input  md-input	
+												type="text" 
+												placeholder="Insert tag" 
+												formControlName="{{i}}">
+									</md-input-container>
+								</td>
+								<td>
+								<span class="d-flex flex-row flex-wrap">
+									<span class="fill-remaining-space"></span>
+									<button type="button"  title="Remove Author" class="btn alert-hover "  md-mini-fab (click)="removeTag(i)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+								</span>
+								</td>
+							</tr>
+						</table>
+						 <table class="full-width" cellspacing="0">
+							<tr>
+								<td><button class="btn btn-block success-hover" type="button" (click)="addTag()">Add Tag</button></td>
+							</tr>
+						</table>
+						<h3>Create Data</h3>
+						<table class="full-width" cellspacing="0">
+							<tr>
+								<td><button class="btn btn-block alert-hover" type="submit"  [disabled]="!postForm.valid">Submit</button></td>
+							</tr>
+						</table>
+					 </form>
+				 </md-card-content>
+			</md-card>
+	
+			<pre>{{postForm.value | json}}</pre>
+			<pre>{{name | json}}</pre>
+  
+        </div>
+      
+  
+    </section>
+</div>

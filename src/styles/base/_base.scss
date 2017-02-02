@@ -1,0 +1,142 @@
+/* Base Styles -------------------- */
+/**
+ * Remove default list styles, margins and padding.
+ */
+
+//  ol, 
+//  ul {
+//   margin: 0;
+//   padding: 0;
+//   list-style: none;
+// }
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+
+}
+img {
+  width:100%;
+}
+a{
+  cursor:pointer;
+  color:$primary;
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+    
+  }
+}
+button {
+  cursor:pointer;
+}
+  ol, 
+  ul {
+  margin: 0;
+  list-style: none;
+}
+.label {
+  font-size:75%;
+  color:$white !important;
+      text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+        padding: .4em;
+}
+.hr-line {
+			display: block;
+			background:$shark;
+			width: 10px;
+			height: 1px;
+			margin: 0 7px;
+		}
+.side-active {
+  color:$astral !important;
+}
+.active-sub {
+  color:$white !important;
+  background-color:$astral !important;
+  opacity:1 !important;
+}
+.active-1 {
+     opacity:1 !important;
+}
+
+
+ .md-checkbox-checked.md-accent .md-checkbox-background {
+    background-color: $midnight-blue !important;
+}
+
+
+.fill-remaining-space {
+  // This fills the remaining space, by using flexbox. 
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
+
+}
+
+.half-width { 
+		width:100%;
+		@media #{$tablets } {
+		width:50%;
+
+		}
+}
+.full-width { width:100%;}
+.full-height { height:100%;}
+
+.margin-vertical-2x {
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+.margin-top-bottom-10 {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.margin-top-bottom-40 {
+  margin-top:40px;
+  margin-bottom:40px;
+}
+.padding-2percent {
+  padding:20px;
+}
+
+
+.load-partial {
+  width:100%;
+  min-height: 50vh;
+  md-progress-bar {
+    margin-bottom:auto;
+  }
+  .loadingText {
+    font-size:46px;
+    color:$shark;
+  }
+}
+.load-full {
+  width:100%;
+  min-height: 100vh;
+  md-progress-circle, md-progress-spinner {
+    margin:auto;
+  }
+}
+
+#sm-size{
+    @media #{$tablets } {
+      width:450px;
+  }
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    // @media #{$tablets } {
+    //     width:75%;
+
+    // }
+    li{
+        font-size:20px;
+        margin-bottom:5px;
+        text-align:left;
+    }
+
+}

@@ -1,0 +1,1 @@
+export {YemenComponent} from './yemen.component';

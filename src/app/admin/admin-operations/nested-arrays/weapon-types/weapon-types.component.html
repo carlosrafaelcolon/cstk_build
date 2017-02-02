@@ -1,0 +1,55 @@
+<div [formGroup]="weaponForm" >
+  <div formGroupName="weapons">
+      <table class="full-width" cellspacing="0"  formArrayName="terms">
+        <h4>Weapons Used</h4>
+        <tr  *ngFor="let term of weaponForm.controls.weapons.controls.terms.controls; let weaponFormIndex = index">
+          <td>
+            <md-input-container class="full-width">
+											
+				<md-hint align="start">Example: Drone</md-hint>
+				<input 	md-input 
+						placeholder="Type of Weapon"
+						type="text" 
+						formControlName="{{weaponFormIndex}}" >
+            </md-input-container>
+          </td>
+          
+          <td>
+            <span class="d-flex flex-row flex-wrap">
+              <span class="fill-remaining-space"></span>
+              <button type="button"  title="Remove Press Type" class="btn alert-hover "  md-mini-fab (click)="removeWeaponType(weaponFormIndex)" ><img class="icon-30" src="/assets/images/icons/ic_close_white_36px.svg"></button>
+            </span>
+          </td>
+        </tr>
+      
+        
+      </table>
+      <button type="button"   class="btn success-hover "  (click)="addWeaponType()" >Add Weapon</button>
+      <span *ngIf="weaponForm.controls.weapons.controls.terms.controls.length > 0">
+      <table class="full-width" cellspacing="3" >
+        <tr >
+          <td>
+            <md-slide-toggle formControlName="ambiguous">
+              It was unclear this/these weapon(s) were used:
+              <strong *ngIf="!weaponForm.controls.weapons.controls.ambiguous.value">
+              Yes
+              </strong>
+              <strong *ngIf="weaponForm.controls.weapons.controls.ambiguous.value">
+              No
+              </strong>
+            </md-slide-toggle>
+          </td>
+        </tr>
+
+      </table>
+      </span>
+   
+  </div>
+  
+
+</div>
+
+
+
+
+

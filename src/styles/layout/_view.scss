@@ -1,0 +1,279 @@
+.searchList {
+    background: $white;
+    width:100%;
+
+    margin:20px auto;
+    .stat-section {
+        width:90%;
+        margin:5px auto;
+        .stat-box {
+            
+            border: 3px solid $primary ;
+            margin-top:20px;
+            margin-bottom:20px;
+            
+
+        }
+    }
+    .table-section {
+        width:90%;
+        margin:5px auto;
+        .table {
+            box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+            transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            border: 5px solid $border-dark;
+            td {
+                vertical-align: middle;
+            }
+            thead th,
+            tfoot th {
+                font-weight: bold;
+                text-transform: uppercase;
+                color:$rose-cherry;
+            }
+            thead th,
+            thead td {
+                padding: 18px;
+                
+                &:active {
+                    outline: none;
+                }
+                vertical-align: middle;
+            }
+            tfoot th,
+            tfoot td {
+                padding: 10px;
+            
+                vertical-align: middle;
+            }
+        
+            tbody th,
+            tbody td {
+                padding: 12px;
+                vertical-align: middle;
+                
+                font-weight:bold;
+            }
+            tbody {
+                cursor: pointer;
+                .even {
+                    &:hover {
+                        color:$astral;
+
+                    }
+                }
+                .odd {
+                    background:$third;
+                    color: $white;
+                    &:hover {
+                            background:$astral;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.editList {
+    // margin:2% 0;
+    .table {
+         box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+        transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+        border:3px solid $border-dark;
+        background-color: $white;
+        width: 100%;
+        margin: 0 auto;
+        clear: both;
+        border-collapse: separate;
+        border-spacing: 0;
+        /*
+        * Header and footer styles
+        */
+        /*
+        * Body styles
+        */
+        td {
+            vertical-align: middle;
+        }
+        thead th,
+        tfoot th {
+            font-weight: bold;
+            
+            color:$rose-cherry;
+        }
+        thead th,
+        thead td {
+            padding: 18px;
+            border-bottom: 1px solid $shark;
+            &:active {
+                 outline: none;
+            }
+            vertical-align: middle;
+        }
+        tfoot th,
+        tfoot td {
+            padding: 10px;
+            border-top: 1px solid $shark;
+            vertical-align: middle;
+        }
+        tbody tr {
+            background-color: $white;
+        }
+        tbody th,
+        tbody td {
+            padding: 12px;
+            vertical-align: middle;
+            background-color: $white;
+            font-weight:bold;
+        }
+    }
+  
+}
+
+
+.term-section{
+    width:100%;
+    margin:0 auto;
+    @media #{$tablets } {
+        width:90%;
+    }
+    @media #{$md-device } {
+        width:80%;
+    }
+    h1{
+        font-size: 29px;
+        font-weight: 300;
+        line-height: 1.313em;
+        color: $shark;
+        text-align:center;
+        @media #{$tablets } {
+            font-size: 34px;
+        }
+    }
+
+}
+
+.listview{
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 1.313em;
+    margin-bottom:60px;
+    font-family:$stack-roboto;
+ 
+    .nameBox-container {
+        margin-bottom:0;
+        padding-bottom:0;
+        .dates-heading {
+            color: #bfbfbf;
+            transition: color .2s ease;
+            margin-right: .2em;
+        }
+        .term {
+            margin-right: .2em;
+            position: relative;
+            
+            transition: color .1s ease;
+            a {
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .nameCountry-container{
+        color:$shuttle-gray;
+        font-size: 20px;
+        font-style: italic;
+        margin-top: -10px;
+        padding-top: 0;
+    }
+}
+
+
+
+
+
+
+
+.sourceRecord{
+        background: $white;
+        min-height: 100vh;
+        padding: 15px;
+        margin: 7vh 2vw;
+        font-size: 19.2px;
+    
+    
+    }
+
+
+
+
+.viewStat {
+    text-align: center;
+	padding-bottom: 50px;
+	margin-left: auto;
+	margin-right: auto;
+    table>tbody>tr>td,
+    table>thead>tr>th {
+        text-align: center;
+    }
+    table>tbody>tr>td:nth-child(2n) a{
+        margin:0px;
+    }
+    table tr td:nth-child(1){
+        text-align: left;
+        font-weight: 300;
+    }
+    table thead tr th:nth-child(2),
+    table thead tr th:nth-child(6){
+        border-radius: 7px 7px 0px 0px;
+        background-color:white;	
+    }
+    table thead tr th:nth-child(4){
+        border-radius: 7px 7px 0px 0px;
+        background-color:#f2f2f2;	
+    }
+    table thead tr th{
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 2px solid $astral !important;
+    }
+    table tfoot tr td{
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 2px solid $astral !important;
+    }
+    table thead tr th:nth-child(1){
+        text-align: left;
+    }
+    table tr td:nth-child(4){
+        background-color:#f2f2f2;
+    }
+    .table>tbody>tr>td i{
+        color:$astral !important;
+    }
+    .table>thead>tr>th, 
+    .table>tbody>tr>th, 
+    .table>tfoot>tr>th, 
+    .table>thead>tr>td, 
+    .table>tbody>tr>td, 
+    .table>tfoot>tr>td{
+        padding: 20px;
+        font-size: 18px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-bottom: 1px solid $astral;
+    }
+    .table>thead>tr>th:first-child{
+        font-size:20px;
+    }
+    .table>thead>tr>th:nth-child(2n){
+        width:20%;
+    }
+   
+}

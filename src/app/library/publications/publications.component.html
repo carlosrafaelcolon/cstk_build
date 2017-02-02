@@ -1,0 +1,86 @@
+<section  *ngIf="!publications">
+    <div class="d-flex justify-content-center">
+        <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+    </div>
+</section>
+<section class="publicationList" *ngIf="publications">
+    <div class="row">
+        <div class="col-md-12">
+            <md-card class="basic-form">
+                <md-toolbar >Filter Publications</md-toolbar>
+                <md-card-content class="basic-form-content">
+                <form #filterLibrary="ngForm" >
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Filter by Theme:</label><br>
+                            <select name="theme" [(ngModel)]="theme" class="col basic-select" >
+                                <option *ngFor="let theme of themes" [value]="theme.value">  
+                                {{theme.display}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Filter by Topic:</label><br>
+                            <select name="topic" [(ngModel)]="topic"  class="col basic-select">
+                                <option *ngFor="let topic of topics" [value]="topic.value">  
+                                {{topic.display}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Filter by Country:</label><br>
+                            <select name="country" [(ngModel)]="country"  class="col basic-select">
+                                <option *ngFor="let country of countries" [value]="country.value" >  
+                                {{country.display}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <md-input-container  style="width:98%; margin:auto;">
+                                <input md-input placeholder="Search by publication title"  [(ngModel)]="title" name="title" >
+                            </md-input-container>
+                           
+                        </div>
+                        <div class="col-md-6">
+                            <md-input-container   style="width:98%; margin:auto;">
+                                <input md-input  placeholder="Search by Author"  [(ngModel)]="authors" name="authors">
+                            </md-input-container>
+                        </div>
+                    </div>
+                <div class="d-flex justify-content-start">
+                <button class="btn btn-danger" (click)="reset(filterLibrary.value)" type="reset">Reset</button>
+                </div>
+
+                </form>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <div class="row " myMatchHeight="lib-box" style="margin-top:60px; margin-bottom:30px;">
+ 
+        <div class="col-md-6 col-lg-4" *ngFor="let publication of (publications | filterLibrary:theme:topic:country:title:authors ); trackBy: trackPublication ">
+            <div class="lib-box  " (click)="onSelect(publication)">
+                <small class="pub-type">
+                    {{publication?.pubType | uppercase}}
+                </small>
+                <div class="d-flex flex-column pub-content">
+                    <h4 class="pub-title ">{{publication?.title | slice:0:81}}<span *ngIf="publication.title.length > 81">...</span></h4>
+                    <p class="pub-author" *ngIf="publication.authors.length > 0">By 
+                        <span  *ngFor=" let author of publication?.authors; let i = index; let last = last ">
+                            <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
+                            <span  *ngIf="i > 0 && last">& </span>
+                            <span>{{author | capitalize | slice:0:81}}<span *ngIf="author.length > 81">...</span></span>
+                        </span>
+                    </p>
+                    <div class="pub-footer d-flex justify-content-end flex-wrap" style="margin-top:auto">
+                        <span class="badge label-alert border-box" style="margin-left:5px; margin-bottom:5px"  *ngFor=" let topic of publication?.topics">{{topic | uppercase}}</span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+  
+    </div>
+</section>

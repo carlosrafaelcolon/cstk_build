@@ -1,0 +1,51 @@
+
+// Descriptive color variables
+
+$black          :#222;
+$white          :#fff;
+$concrete       :#F2F2F2;
+$mercury        :#E5E5E5;
+$apple          :#449D44;
+$goblin         :#367D36;
+$umass          :#fabf5f;
+$shuttle-gray   :#5E6676;
+$shark          :#24272D;
+$bright-gray    :#3C414B;
+$prussian-blue  :#002147;
+$midnight       :#001228;
+$midnight-blue  :#002A5C;
+$orient         :#005288;
+$astral         :#337AB7;
+$kashmir-blue   :#4B6590;
+$thunderbird    :#CE121B;
+$crimson        :#E5141E;
+$rose-cherry    :#790E39;
+// Functional color variables
+
+$primary            : $prussian-blue;
+$secondary          : $midnight-blue;
+$third              : $kashmir-blue;
+
+$warning            : $thunderbird;
+$success            : $shark;
+
+$border-dark         : $shark;
+$border-light        : #dcdcdc;
+$border-nav          : rgba(255,255,255, .4);
+$hover              : $astral;          
+// Font Stacks
+
+$stack-sans-serif           :  sans-serif;
+$stack-serif                :  serif     ;
+$stack-roboto   	        : 'Roboto', sans-serif;
+$stack-frank                : 'Frank Ruhl Libre', sans-serif;
+
+
+// Media Query Breakpoints
+
+
+$tablets       :  '(min-width: 769px)' ; 
+$md-device     :  '(min-width: 993px)' ; 
+$lg-device     :  '(min-width: 1201px)' ; 
+
+
