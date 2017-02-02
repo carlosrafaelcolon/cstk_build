@@ -4,7 +4,7 @@
 /dist
 /tmp
 /src/config.js
-
+strike-seed.js
 # dependencies
 /node_modules
 
