@@ -7,8 +7,10 @@ import {
   CapitalizePipe,
   FilterLibraryPipe,
   PubCountryPipe,
+  DatexPipe,
   SafeHtmlPipe
   } from './index';
+
 
 
 
@@ -24,7 +26,8 @@ import {
     FilterLibraryPipe, 
     PubCountryPipe, 
     SafeHtmlPipe, 
-    MatchHeightDirective
+    MatchHeightDirective, 
+    DatexPipe
     ],
   exports: [ 
     CommonModule,
@@ -34,6 +37,7 @@ import {
     CapitalizePipe,
     PubCountryPipe,
     SafeHtmlPipe,
+    DatexPipe,
     MaterialModule
   ],
 })

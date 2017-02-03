@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
-import {LibraryService, Publication} from '../../shared';
+import {LibraryService, Publication, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 import * as moment from 'moment';
 @Component({
@@ -8,12 +8,12 @@ import * as moment from 'moment';
   templateUrl: './pub.component.html'
 })
 export class PubComponent implements OnInit, OnDestroy {
-    private publication: Publication;
+    publication: Publication;
     subscription:Subscription;
     dateFormatted;
-    options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
     constructor(
           private route: ActivatedRoute,
+          private help:HelperService,
           private router: Router,
           private libraryService:LibraryService
           ) { }
@@ -27,7 +27,7 @@ export class PubComponent implements OnInit, OnDestroy {
                     .subscribe(
                         data => {
                             this.publication = data,
-                            this.dateFormatted =new Date(this.publication.pubDate).toLocaleDateString('en-US', this.options);
+                            this.dateFormatted =new Date(this.publication.pubDate).toLocaleDateString('en-US', this.help.noWeekday);
                         },
                         error => console.log('error loading')
                       );

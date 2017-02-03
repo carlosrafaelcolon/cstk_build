@@ -30,6 +30,7 @@ import { AdminPostEditComponent} from './admin-blog';
 import { AdminPostCreateComponent } from './admin-blog/admin-post-create/admin-post-create.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { UnauthorizedComponent } from './unauthorized.component';
+import { IdComponent } from './id/id.component';
 
 
 
@@ -61,7 +62,7 @@ import { UnauthorizedComponent } from './unauthorized.component';
     AdminPostEditComponent, 
     AdminPostCreateComponent, 
     TutorialComponent, 
-    UnauthorizedComponent
+    UnauthorizedComponent, IdComponent
     ],
   providers: [
    UserEditGuard,

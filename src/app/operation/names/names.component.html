@@ -32,7 +32,7 @@
           <div *ngFor="let strike of strikes" class="listview" >
             
             <div class="nameBox-container flex-row group-start">
-              <span class="dates-heading">{{strike?.date | date}}:</span>
+              <span class="dates-heading">{{strike?.date }}:</span>
               <div class="flex-row group-start"  *ngFor=" let person of strike?.people; let i = index ">
                 <span  *ngIf="i > 0 && !last">,</span>
                 <span  *ngIf="i > 0 && last">& </span>

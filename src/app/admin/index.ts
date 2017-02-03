@@ -24,3 +24,6 @@ export {
     SourcesComponent,
     WeaponTypesComponent
 } from './admin-operations';
+export {
+    IdComponent
+} from './id';

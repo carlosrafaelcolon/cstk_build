@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute, Params}              from '@angular/router';
-import {BlogService, Post, CapitalizePipe, PeopleService, People} from '../../shared';
+import {BlogService, Post, HelperService, PeopleService, People} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './post.component.html'
 })
 export class PostComponent implements OnInit, OnDestroy {
-	options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
 	dateFormatted;
 	post:Post;
 	subscription: Subscription;
@@ -17,6 +16,7 @@ export class PostComponent implements OnInit, OnDestroy {
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
+		private help:HelperService,
 		private blogService:BlogService,
 		private peopleService: PeopleService
 	) { }
@@ -31,7 +31,7 @@ export class PostComponent implements OnInit, OnDestroy {
                 .subscribe(
                     post => {
 						this.post = post;
-						this.dateFormatted = new Date(this.post.date).toLocaleDateString('en-US', this.options);
+						this.dateFormatted = new Date(this.post.date).toLocaleDateString('en-US', this.help.noWeekday);
 					},
                     error => console.log('error getting post'),
 					() => this.getBio()

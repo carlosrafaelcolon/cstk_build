@@ -1,6 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router }              from '@angular/router';
-import {NameService, Strike } from '../../shared';
+import {NameService, Strike, HelperService } from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-names',
@@ -8,12 +8,12 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class NamesComponent implements OnInit {
   strikes: Strike[] = [];
-  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
   loadingComplete = false;
   value:number = 1;
   sub:Subscription;
   constructor(
     private router:Router,
+    private help:HelperService,
     private nameService:NameService
   ) { 
 
@@ -31,7 +31,7 @@ export class NamesComponent implements OnInit {
           data => {
               this.strikes = data.map(strike => 
                   Object.assign({}, strike, {
-                      date: new Date(strike.date).toLocaleDateString('en-US', this.options),
+                      date: new Date(strike.date).toLocaleDateString('en-US', this.help.noWeekday),
                       year: new Date(strike.date).getFullYear()
                   })
               );

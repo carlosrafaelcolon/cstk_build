@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }              from '@angular/router';
-import { CapitalizePipe,  BlogService, Post} from '../../shared';
+import { CapitalizePipe,  BlogService, Post, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-post-list',
@@ -10,10 +10,10 @@ export class PostListComponent implements OnInit {
 
   posts:Post[];
   loadingPostsComplete:boolean = false
-  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
   formatted = null;
   constructor(
     private router: Router,
+    private help:HelperService,
     private blogService:BlogService) { }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class PostListComponent implements OnInit {
           posts => {
             this.posts = posts.map(post => 
                               Object.assign({}, post, {
-                                  date: new Date(post.date).toLocaleDateString('en-US', this.options)
+                                  date: new Date(post.date).toLocaleDateString('en-US', this.help.noWeekday)
                               })
                           )
           },

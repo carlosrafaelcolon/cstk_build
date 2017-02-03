@@ -18,5 +18,9 @@
    "/names": {
     "target": "http://localhost:3000",
     "secure": false
+  },
+  "/id": {
+    "target": "http://localhost:3000",
+    "secure": false
   }
 }

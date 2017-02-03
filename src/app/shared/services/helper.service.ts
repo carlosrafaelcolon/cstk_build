@@ -5,7 +5,9 @@ import { Observable } from 'rxjs/Observable';
 export class HelperService {
 
   constructor() { }
-  //Helpers
+  	options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
+	noWeekday = {  year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
+  	//Helpers
 	public extractData(res: Response) {
 		let body = res.json();
 		return body || { };

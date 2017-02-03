@@ -17,6 +17,7 @@ import {
     AdminBlogComponent,
     AdminPostCreateComponent,
     AdminPostEditComponent,
+    IdComponent,
     UnauthorizedComponent
   
 } from './index';
@@ -106,6 +107,10 @@ const adminRoutes: Routes = [
                 {
                     path: 'tutorial',  
                     component:  TutorialComponent
+                },
+                {
+                    path: 'indentification',  
+                    component:  IdComponent
                 },
                 {
                     path: 'unauthorized',  

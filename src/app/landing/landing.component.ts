@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ElementRef} from '@angular/core';
 import { Router} from '@angular/router';
-import {StrikeService, Strike,  BlogService, Post} from '../shared';
+import {StrikeService, Strike,  BlogService, Post, HelperService} from '../shared';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -14,16 +14,16 @@ export class LandingComponent implements OnInit, OnDestroy   {
 	id;
 	scrollUp;
 	strikes:Strike[];
-	options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
 	posts:Post[];
 	loadingStrikesComplete:boolean = false;
 	loadingPostsComplete:boolean = false;
 	subPost:Subscription;
-  subStrike:Subscription;
+  	subStrike:Subscription;
 	constructor(
 		private router: Router,
 		private element: ElementRef,
 		private blogService:BlogService,
+		private help:HelperService,
 		private strikeService:StrikeService) { 
 			 this.scrollUp = this.router.events.subscribe((path) => {
 				element.nativeElement.scrollIntoView();
@@ -40,7 +40,9 @@ export class LandingComponent implements OnInit, OnDestroy   {
 	getLatest(){
     this.subStrike =	this.strikeService.getOperations()
       .subscribe(
-          strikes => this.strikes = strikes,
+          strikes => {
+			  this.strikes = strikes
+			},
           error => console.log('error loading strikes'),
           () => this.loadingStrikesComplete = true
         ); 
@@ -50,7 +52,7 @@ export class LandingComponent implements OnInit, OnDestroy   {
           posts => {
           this.posts = posts.map(post => 
                     Object.assign({}, post, {
-                      date: new Date(post.date).toLocaleDateString('en-US', this.options)
+                      date: new Date(post.date).toLocaleDateString('en-US', this.help.noWeekday)
                     })
                   )
           },

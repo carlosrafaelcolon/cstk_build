@@ -19,8 +19,9 @@ var library = require('./routes/api/library');
 var strike = require('./routes/api/strike');
 var results = require('./routes/strike-result');
 var names = require('./routes/name-result');
+var searchById = require('./routes/search-id-result');
 var app = express();
-var oneDay = 86400000;
+
 
 
 require('./database');
@@ -53,6 +54,7 @@ app.use('/landing', recent);
 app.use('/strikes', strike);
 app.use('/search', results);
 app.use('/names', names);
+app.use('/id', searchById);
 // =======================================================
 // app.use(function(req, res, next) {
 //   res.sendFile('index.html', { root: __dirname });

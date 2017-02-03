@@ -1,0 +1,40 @@
+<div class="content">
+       
+    <section class="content-header">
+        <h1 class="float-left">Administration
+        </h1>
+        <div class="float-right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/admin" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+                <li class="breadcrumb-item" ><a routerLink="/admin/indentification" routerLinkActive="active-1" [routerLinkActiveOptions]="{exact:true}">Find Strike</a></li>
+                <li class="breadcrumb-item active">Administration</li>
+            </ol>
+        </div>
+    </section>
+    <section class="main-content">
+        <div class="row">
+        <div class="col-md-12">
+            <md-card class="basic-form">
+                <md-card-content class="basic-form-content">
+                <form #filterLibrary="ngForm" >
+                  <md-input-container  style="width:98%; margin:auto;">
+                      <input md-input placeholder="insert strike id"  type="number"   [(ngModel)]="strikeId" name="strikeId" >
+                  </md-input-container>
+                  <button (click)="search(filterLibrary.value)" class="btn btn-block alert-hover"  >Find Strike</button>
+
+                </form>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <section class="white-bg border-shuttle-top" *ngIf="loadingComplete">
+      <div class="container-fluid">
+        <pre>
+          {{strikes | json}}
+        </pre>
+      </div>
+    </section>
+    </section>
+</div>
+
+

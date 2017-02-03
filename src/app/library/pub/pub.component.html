@@ -22,7 +22,7 @@
   <div class="d-flex flex-column pubHeader margin-top-bottom-40">
     <h2 class="main-header">{{publication?.title}}</h2>
     <div>
-        <span><strong>Date:</strong> {{dateFormatted | date:'fullDate'}}</span>
+        <span><strong>Date:</strong> {{dateFormatted }}</span>
     </div>
     <div *ngIf="publication.authors.length > 0"><strong>Authored By:</strong>
     <span *ngFor="let author of publication?.authors; let i = index; let last = last">
