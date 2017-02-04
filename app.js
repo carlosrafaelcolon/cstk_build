@@ -5,7 +5,7 @@ var express = require('express'),
    favicon = require('serve-favicon'),
    parser = require('body-parser');
 var logger = require("morgan");
-var cookieParser = require('cookie-parser');
+// var cookieParser = require('cookie-parser');
 var compression = require('compression');
 // Import the required dependencies
 
@@ -34,7 +34,7 @@ app.use(compression());
 app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false}));
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(favicon(__dirname + '/dist/favicon.ico'));
 // app.use(express.static(path.join(__dirname, 'dist')));
 
