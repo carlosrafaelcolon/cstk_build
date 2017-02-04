@@ -19,6 +19,7 @@ export class IdComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
    search(searchOptions) {
+     this.loadingComplete = false;
      console.log(searchOptions)
      this.searchClicked = true;
      let searchQuery = searchOptions;

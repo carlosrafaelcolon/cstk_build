@@ -49,7 +49,7 @@
                               
                                 formControlName="date">
                           </md-input-container>
-                          <!--<ng2-datepicker formControlName="date"></ng2-datepicker>-->
+            
                           
                         </td>
                       </tr>
@@ -59,14 +59,7 @@
 							<select formControlName="time" class="full-width form-control basic-select border-box">
 								<option *ngFor="let time of timeSelections" [value]="time.value">{{time.display}}</option>
 							</select>
-                            <!--<md-input-container  class="full-width">
-                          
-								<md-hint align="end">Time of Day</md-hint>
-								<input 	md-input 
-										placeholder="Insert time of day (For example, Morning)" 
-										type="text" 
-										formControlName="time" >
-                            </md-input-container>-->
+         
                         </td>
                       </tr>
 					  <tr>
@@ -168,7 +161,8 @@
 											<select formControlName="country" class="full-width form-control basic-select border-box">
 												<option *ngFor="let attacker of attackingCountrySelections" [value]="attacker.value">{{attacker.display}}</option>
 											</select>
-                                            
+											<div *ngIf="!postForm.get('countries.attackers').valid" class="full-width active-text" >Enter An Attacking Country</div>
+                                  
                                         </td>
                                         
                                       </tr>
@@ -222,7 +216,7 @@
 											<select formControlName="country" class="full-width form-control basic-select border-box">
 												<option *ngFor="let targeted of targetedCountrySelections" [value]="targeted.value">{{targeted.display}}</option>
 											</select>
-                                            
+                                            <div *ngIf="!postForm.get('countries.targets').valid" class="full-width active-text" >Enter Victim Country</div>
                                         </td>
                                         
                                       </tr>
@@ -325,6 +319,7 @@
 									<select formControlName="term" class="full-width form-control basic-select border-box">
 										<option *ngFor="let weapon of weaponSelections" [value]="weapon.value">{{weapon.display}}</option>
 									</select>
+									
                                 </td>
                               </tr>
                               <tr>
@@ -375,6 +370,7 @@
 									<select formControlName="term" class="full-width form-control basic-select border-box">
 										<option *ngFor="let action of actionSelections" [value]="action.value">{{action.display}}</option>
 									</select>
+									
                                 </td>
                               </tr>
                               <tr>
@@ -428,6 +424,7 @@
 								<select formControlName="type" class="full-width form-control basic-select border-box">
 									<option *ngFor="let object of objectSelections" [value]="object.value">{{object.display}}</option>
 								</select>
+								
                             </td>
                           </tr>
                           <tr>
@@ -630,7 +627,7 @@
 											type="number" 
 											formControlName="totals" >
                                 </md-input-container>
-
+								<div *ngIf="!postForm.get('casualties.totals').valid" class="full-width active-text" >Enter Total Count</div>
                             </td>
                             <td>
                            
@@ -643,6 +640,7 @@
 										
 											formControlName="susMils" >
                                 </md-input-container>
+								<div *ngIf="!postForm.get('casualties.susMils').valid" class="full-width active-text" >Enter Suspected Militant Count</div>
                             </td>
                           </tr>
                           <tr >
@@ -656,6 +654,7 @@
 										
 											formControlName="civilians" >
                                 </md-input-container>
+								<div *ngIf="!postForm.get('casualties.civilians').valid" class="full-width active-text" >Enter Civilian Count</div>
                             </td>
                             <td>
                          
@@ -667,6 +666,7 @@
 											type="number"  
 											formControlName="unknowns" >
                                 </md-input-container>
+								<div *ngIf="!postForm.get('casualties.unknowns').valid" class="full-width active-text" >Enter Unknown Count</div>
                             </td>
                           </tr>
                           <tr >
@@ -681,6 +681,7 @@
 										
 											formControlName="hvts" >
                                 </md-input-container>
+								<div *ngIf="!postForm.get('casualties.hvts').valid" class="full-width active-text" >Enter HVT Count</div>
                             </td>
                             <td>
                              
@@ -693,6 +694,7 @@
 										
 											formControlName="children" >
                                 </md-input-container>
+								<div *ngIf="!postForm.get('casualties.children').valid" class="full-width active-text" >Enter Children Count</div>
                             </td>
                           </tr>
                         </table>
@@ -715,6 +717,7 @@
 										class="long-min"
 										formControlName="{{i}}" ></textarea>
                         </md-input-container>
+						<div *ngIf="!postForm.get('details').valid" class="full-width active-text" >Enter Summary</div>
                       </td>
                       
                   

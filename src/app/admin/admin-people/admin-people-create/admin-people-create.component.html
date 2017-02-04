@@ -161,7 +161,7 @@
                 <span class="anchor" id="publication"></span>
                 <h3>Publications</h3>
                 <table class="full-width" cellspacing="0" formArrayName="publication" >
-                  <md-card class="basic-search-form round-top" *ngFor="let publication of postForm.controls.publication.controls; let i = index">
+                  <md-card class="basic-search-form round-top margin-top-bottom-10" *ngFor="let publication of postForm.controls.publication.controls; let i = index">
                     <md-toolbar class="primary">
                       <span >Publication {{i + 1}}</span>
                       <!-- This fills the remaining space of the current row -->
@@ -199,7 +199,7 @@
                       </table>
                     </md-card-content>
                   </md-card>
-                  <button type="button"  class="btn btn-block success-hover " (click)="addPublication()">Add A Publication</button>
+                  <button type="button"  class="btn btn-block success-hover margin-top-bottom-10" (click)="addPublication()">Add A Publication</button>
                 </table>
                 
                 <span class="anchor" id="submit"></span>

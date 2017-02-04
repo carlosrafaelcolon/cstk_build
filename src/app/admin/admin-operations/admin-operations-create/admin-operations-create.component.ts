@@ -147,15 +147,15 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
 				// })
 			]),
             'casualties': this.fb.group({
-                'totals': [null],
-                'susMils': [null],
-                'civilians': [null],
-                'unknowns': [null],
-                'hvts': [null],
-                'children': [null]
+                'totals': [null, Validators.required],
+                'susMils': [null, Validators.required],
+                'civilians': [null, Validators.required],
+                'unknowns': [null, Validators.required],
+                'hvts': [null, Validators.required],
+                'children': [null, Validators.required]
             }),
             'details': this.fb.array([
-					[null]
+					[null, Validators.required]
 				]),
             'sources':this.fb.array([
 				this.fb.group({

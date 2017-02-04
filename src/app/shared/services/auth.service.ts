@@ -1,6 +1,6 @@
-import { Injectable  } from '@angular/core';
+import { Injectable, NgZone  } from '@angular/core';
 import { tokenNotExpired} from 'angular2-jwt';
-
+import { Router }              from '@angular/router';
 // Avoid name not found warnings
 declare var Auth0Lock: any;
 
@@ -29,6 +29,7 @@ export class AuthService {
 				redirect: false,
 				responseType: this.responseType
 			},
+    		autoclose: true,
 			initialScreen: 'login',
 			rememberLastLogin: false,
 			allowSignUp: false,
@@ -36,7 +37,10 @@ export class AuthService {
 		});
 
 		userProfile: any;
-		constructor() {
+		constructor(
+			private router: Router,
+			private ngZone: NgZone
+			) {
 			let self = this;
 			// Set userProfile attribute of already saved profile
 			// self.userProfile = JSON.parse(localStorage.getItem('profile'));
@@ -57,7 +61,7 @@ export class AuthService {
 					localStorage.setItem("accessToken", authResult.accessToken);
 					localStorage.setItem("profile", JSON.stringify(profile));
 					self.userProfile = profile;
-		
+					self.ngZone.run(() => self.authenticated());
 					// Update DOM
 				});
 			});
@@ -80,7 +84,8 @@ export class AuthService {
 			localStorage.removeItem('access_token');
 			localStorage.removeItem('profile');
 			this.userProfile = undefined;
-		
+			this.authenticated();
+			this.router.navigate(['/']);
 		}
 
 
