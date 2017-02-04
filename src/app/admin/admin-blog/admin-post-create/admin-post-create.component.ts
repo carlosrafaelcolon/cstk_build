@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef  } from '@angular/core';
 import { Router }              from '@angular/router';
 import {FormGroup, FormControl, FormArray, Validators, FormBuilder} from '@angular/forms';
-import {BlogService, } from '../../../shared';
+import {BlogService, HelperService} from '../../../shared';
 import {ComponentCanDeactivate} from '../../user-edit.guard';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -27,6 +27,7 @@ export class AdminPostCreateComponent implements OnInit, ComponentCanDeactivate 
 
         private router: Router,
         private blogService: BlogService,
+		private help: HelperService,
         private fb:FormBuilder){
 	
 		}
@@ -93,7 +94,7 @@ export class AdminPostCreateComponent implements OnInit, ComponentCanDeactivate 
 	}
 	canDeactivate():  Observable<boolean> | boolean {
     if(!this.done){
-        return confirm('Do you want to leave?');
+        return confirm(this.help.leave);
     }
     return true
   }

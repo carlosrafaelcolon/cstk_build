@@ -25,16 +25,9 @@ export class AuthGuard implements CanActivate, CanActivateChild{
     this.authService.redirectUrl = url;
 
     // Navigate to the login page with extras
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
     return false;
   }
-
-  // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-  //   if(tokenNotExpired()) {return true};
-  //   this.router.navigate(['admin']);
-    
-  //   return false;
-  // }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.canActivate(route, state);
@@ -46,25 +39,4 @@ export class AuthGuard implements CanActivate, CanActivateChild{
     return this.checkLogin(url);
   }
 
-  // checkLogin(url: string): boolean {
-  //   if (this.authService.loggedIn()) { 
-  //       let redirect = ['/admin'];
-  //       this.router.navigate(redirect)
-  //       return true; 
-  //   }
-    
-    
-
-
-  //   // Navigate to the login page with extras
-  //   this.authService.login();
-  //   return false;
-  // }
 }
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

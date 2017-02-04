@@ -29,23 +29,29 @@
         <h1 >{{person?.name}}</h1>
         <h2 > {{person?.title}}</h2>
         <hr>
-        <h4 class="list-header">Contact Info:</h4>
-        <div class="d-flex flex-row align-items-center">
-            <a  href="mailto:{{person?.email}}" aria-label="Email" class="social-link primary-text-hover" [hidden]="!person.email" target="_blank">
-                Email
-            </a>
-            <span class="hr-line" [hidden]="!person.website"></span>
-            <a href="{{person?.website}}" aria-label="Personal Website" class="social-link primary-text-hover" [hidden]="!person.website" target="_blank">
-                Personal Website
-            </a>
-            <span class="hr-line"  [hidden]="!person.twitter" ></span>
-            <a href="{{person?.twitter}}" aria-label="Twitter" class="social-link primary-text-hover" [hidden]="!person.twitter" target="_blank">
-                Twitter
-            </a>
-            <span class="hr-line" [hidden]="!person.github" ></span>
-            <a href="{{person?.github}}" aria-label="Github" class="social-link primary-text-hover" [hidden]="!person.github" target="_blank">
-                Github
-            </a>
+        <h4 class="list-header active-text">Contact Info:</h4>
+        <div class="d-flex flex-column align-items-start flex-wrap">
+            <div [hidden]="!person.email" style="margin-bottom: 10px;">
+                <strong>Email:</strong>&nbsp;
+                <a    aria-label="Email" class="social-link primary-text-hover"  >
+                    {{person?.email}}
+                </a>
+            </div>
+            <div [hidden]="!person.website" style="margin-bottom: 10px;">
+                <strong>Personal Website:</strong>&nbsp;
+                <a href="{{person?.website}}" aria-label="Personal Website" class="social-link primary-text-hover" [hidden]="!person.website" target="_blank">
+                    {{person?.website}}
+                </a>
+            </div>
+            <div>
+                <a href="{{person?.twitter}}" aria-label="Twitter" class="social-link primary-text-hover" [hidden]="!person.twitter" target="_blank" style="font-size: 22px;">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="{{person?.github}}" aria-label="Github" class="social-link primary-text-hover" [hidden]="!person.github" target="_blank" style="font-size: 22px;">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                </a>
+            </div>
+     
         </div>
       
     </div>

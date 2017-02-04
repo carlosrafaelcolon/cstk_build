@@ -5,13 +5,14 @@ var express = require('express'),
    favicon = require('serve-favicon'),
    parser = require('body-parser');
 var logger = require("morgan");
-var compression = require('compression')
+var cookieParser = require('cookie-parser');
+var compression = require('compression');
 // Import the required dependencies
 
 var cors = require('cors');
 
 
-// var leadership = require('./routes/api/leadership');
+
 var people = require('./routes/api/people');
 var blog = require('./routes/api/blog');
 var recent = require('./routes/api/home');
@@ -25,15 +26,18 @@ var app = express();
 
 
 require('./database');
-// require('./strike-seed');
-// New call to compress content
-// compress all requests 
-app.use(compression())
-app.use(cors());
-app.use(logger("dev"));
-// app.use(express.static(path.join(__dirname, 'dist', { maxAge: oneDay })));
 
+// compress all requests 
+app.disable('x-powered-by');
+app.use(logger('dev'));
+app.use(compression());
+app.use(cors());
 app.use(parser.json());
+app.use(parser.urlencoded({ extended: false}));
+app.use(cookieParser());
+app.use(favicon(__dirname + '/dist/favicon.ico'));
+// app.use(express.static(path.join(__dirname, 'dist')));
+
 
 
 // ==============================================================
@@ -41,9 +45,7 @@ app.use(parser.json());
 // ==============================================================
 /* GET home page. */
 
-// app.get('/', function(req, res) {
-//   res.sendFile('index.html', { root: __dirname });
-// });
+
 // app.get('/', function(req, res) {
 //   res.sendFile(path.join(__dirname, 'dist/', 'index.html'));
 // });
@@ -56,9 +58,7 @@ app.use('/search', results);
 app.use('/names', names);
 app.use('/id', searchById);
 // =======================================================
-// app.use(function(req, res, next) {
-//   res.sendFile('index.html', { root: __dirname });
-// })
+
 // app.use(function(req, res, next) {
 //   res.sendFile(path.join(__dirname, 'dist/', 'index.html'));
 // })
@@ -81,10 +81,8 @@ app.use(function(err, req, res, next){
 	});
 });
 
-var port = process.env.PORT || 3000;
+var port = 3000;
 
 app.listen(port, function() {
 	console.log("Express server is listening on port", port);
 });
-
-

@@ -30,8 +30,6 @@ export class PersonComponent implements OnInit, OnDestroy {
     }
     // navigate to people-list page
     gotoPeoples() { this.router.navigate(['/about/people']); }
-
-
     // unsubscribe to prevent memory leaks
     ngOnDestroy() {
         this.subscription.unsubscribe();

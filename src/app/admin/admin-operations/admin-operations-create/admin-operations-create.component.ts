@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router }              from '@angular/router';
 import {FormGroup, FormControl, FormArray, Validators, FormBuilder} from '@angular/forms';
-import {StrikeService, Strike } from '../../../shared';
+import {StrikeService, Strike, HelperService } from '../../../shared';
 import {ComponentCanDeactivate} from '../../user-edit.guard';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -35,6 +35,7 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
     selectedTime;
     constructor(
         private router: Router,
+        private help:HelperService,
         private strikeService: StrikeService,
         private fb:FormBuilder){}
 
@@ -76,7 +77,7 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
     }
     canDeactivate():  Observable<boolean> | boolean {
     if(!this.done){
-        return confirm('Do you want to leave?');
+        return confirm(this.help.leave);
     }
     return true
   }

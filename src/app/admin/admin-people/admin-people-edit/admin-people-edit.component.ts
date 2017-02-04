@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { Router, ActivatedRoute }              from '@angular/router';
 import {FormGroup, FormControl, FormArray, Validators, FormBuilder} from '@angular/forms';
-import {PeopleService, People} from '../../../shared';
+import {PeopleService, People, HelperService} from '../../../shared';
 import {ComponentCanDeactivate} from '../../user-edit.guard';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -20,6 +20,7 @@ export class AdminPeopleEditComponent implements OnInit, OnDestroy, ComponentCan
         private route: ActivatedRoute,
         private router: Router,
         private peopleService: PeopleService,
+        private help:HelperService,
         private fb:FormBuilder){}
 
   ngOnInit(){
@@ -102,7 +103,7 @@ export class AdminPeopleEditComponent implements OnInit, OnDestroy, ComponentCan
     }
     canDeactivate():  Observable<boolean> | boolean {
       if(!this.done){
-          return confirm('Do you want to leave?');
+          return confirm(this.help.leave);
       }
       return true
     }

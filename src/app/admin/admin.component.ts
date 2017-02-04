@@ -1,24 +1,22 @@
-import { Component, OnInit  } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component  } from '@angular/core';
 import { AuthService } from '../shared';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html'
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent  {
 
 	userName:string;
 	userIMG;
 
 
-	constructor(private authService: AuthService) {}
-
-
-	ngOnInit() {
-		
+	constructor(private authService: AuthService) {
 		this.userName = this.authService.userProfile.user_metadata.name;
 		this.userIMG = this.authService.userProfile.user_metadata.img;
 	}
+
+
+	
 	goTo(location: string): void {
 		window.location.hash = location;
 	}

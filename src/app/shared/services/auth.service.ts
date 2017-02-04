@@ -40,31 +40,46 @@ export class AuthService {
 		constructor(
 			private router: Router,
 			private ngZone: NgZone
-			) {
-			let self = this;
-			// Set userProfile attribute of already saved profile
-			// self.userProfile = JSON.parse(localStorage.getItem('profile'));
-			// Add callback for the Lock `authenticated` event
+		) {
+			this.userProfile = JSON.parse(localStorage.getItem('profile'));
+			// Add callback for lock `authenticated` event
 			this.lock.on("authenticated", (authResult) => {
-				 localStorage.setItem('id_token', authResult.idToken);
+				localStorage.setItem('id_token', authResult.idToken);
 
 				// Fetch profile information
-				  this.lock.getUserInfo(authResult.accessToken, function(error, profile) {
+				this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
 					if (error) {
 						// Handle error
+						alert(error);
 						return;
 					}
-			
-				
-					// Save token and profile locally
-
+					
+					profile.user_metadata = profile.user_metadata || {};
 					localStorage.setItem("accessToken", authResult.accessToken);
-					localStorage.setItem("profile", JSON.stringify(profile));
-					self.userProfile = profile;
-					self.ngZone.run(() => self.authenticated());
-					// Update DOM
+					localStorage.setItem('profile', JSON.stringify(profile));
+					this.userProfile = profile;
 				});
 			});
+			// this.lock.on("authenticated", (authResult) => {
+			// 	 localStorage.setItem('id_token', authResult.idToken);
+
+			// 	// Fetch profile information
+			// 	  this.lock.getUserInfo(authResult.accessToken, function(error, profile) {
+			// 		if (error) {
+			// 			// Handle error
+			// 			return;
+			// 		}
+			
+				
+			// 		// Save token and profile locally
+
+			// 		localStorage.setItem("accessToken", authResult.accessToken);
+			// 		localStorage.setItem("profile", JSON.stringify(profile));
+			// 		self.userProfile = profile;
+			// 		self.ngZone.run(() => self.authenticated());
+			// 		// Update DOM
+			// 	});
+			// });
 
 		}
 		public login() {
