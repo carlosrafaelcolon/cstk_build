@@ -269,7 +269,7 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
                         new FormGroup({
                             'type': new FormControl(this.selectedObject, Validators.required),
                             'clear': new FormControl(false, Validators.required),
-                            'stationary': new FormControl(null, Validators.required)
+                            'stationary': new FormControl(false, Validators.required)
                         })
                     ); }
   removeObject(i: number) { this.objects.removeAt(i); }
@@ -307,7 +307,7 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
                                 'link': new FormControl(null,  Validators.required),
                                 'altLink': new FormControl(null),
                                 'pubDate': new FormControl(this.formattedDate, Validators.required),
-                                'countStatistics': new FormControl(null,  Validators.required),
+                                'countStatistics': new FormControl(false,  Validators.required),
                                 'tags': new FormArray([
                                     new FormControl(null, Validators.required)
                                 ]),
@@ -338,7 +338,7 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
                                         'terms': new FormArray([
                                             new FormControl(null, Validators.required)
                                         ]),
-                                        'ambiguous': new FormControl(null, Validators.required)
+                                        'ambiguous': new FormControl(false, Validators.required)
                                     })
                                     
                                 })

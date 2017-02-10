@@ -37,19 +37,19 @@
                 <span  *ngIf="i > 0 && !last">,</span>
                 <span  *ngIf="i > 0 && last">& </span>
                 <span class="term" ><a  (click)="goToStrike(strike)"  [ngStyle]="activeStatus(person.status)">{{person?.name | capitalize}}</a></span>
-                <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!person.clear">
+                <img  class="icon-30" src="/assets/images/icons/ic_priority_high_black_36px.svg"  style="margin-left: -15px;" *ngIf="!person.clear">
                 <!--<span class="label label-alert border-box" >{{person?.status}}</span>-->
               </div>
               
             </div>
             <div class="nameCountry-container flex-row group-start">
             <span *ngFor=" let attacker of strike?.countries.attackers; let last = last; let i = index " class="flex-row group-start">
-              <span  *ngIf="i > 0 && !last">,</span>
+              <span  *ngIf="i > 0 && !last" style="margin-left:-4px;">,</span>
               <span  *ngIf="i > 0 && last">& </span>
               <span >{{attacker.country}}</span>
             </span> &nbsp;in&nbsp; 
             <span *ngFor=" let target of strike?.countries.targets; let last = last; let i = index " class="flex-row group-start">
-              <span  *ngIf="i > 0 && !last">,</span>
+              <span  *ngIf="i > 0 && !last" style="margin-left:-4px;">,</span>
               <span  *ngIf="i > 0 && last">& </span>
               <span >{{target.country}}</span>
             </span>

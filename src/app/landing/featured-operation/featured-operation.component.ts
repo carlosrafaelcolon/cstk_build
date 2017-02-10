@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute, Params}              from '@angular/router';
-import {StrikeService, Strike} from '../../shared';
+import {StrikeService, Strike, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-featured-operation',
@@ -9,9 +9,12 @@ import { Subscription } from 'rxjs/Subscription';
 export class FeaturedOperationComponent implements OnInit, OnDestroy {
   strike:Strike;
   subscription:Subscription;
+  dateFormatted;
+  dateShortFormatted;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private help:HelperService,
     private strikeService:StrikeService
   ) { }
   	ngOnInit(): void {
@@ -21,7 +24,11 @@ export class FeaturedOperationComponent implements OnInit, OnDestroy {
            this.strikeService
                 .getOperation(id)
                 .subscribe(
-                    strike => this.strike = strike,
+                    strike => {
+                      this.strike = strike;
+                      this.dateFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.options);
+                      this.dateShortFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.shortOptions);
+                    },
                     error => console.log('error getting strike')
                 );
         });

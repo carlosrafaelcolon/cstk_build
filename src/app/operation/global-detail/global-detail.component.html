@@ -1,7 +1,7 @@
-<ol class="breadcrumb">
+<ol class="breadcrumb ">
     <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
     <li class="breadcrumb-item"><a [routerLink]="['/operations']">Operations</a></li>
-    <li class="breadcrumb-item active" *ngIf="strike">
+    <li class="breadcrumb-item active hidden-sm-down" *ngIf="strike">
      <strong> Incident:</strong>
     <span *ngFor=" let attacker of strike?.countries.attackers; let i = index ">
         <span>
@@ -16,7 +16,7 @@
       <span  *ngIf="i > 0 && last">& </span>
       {{target.country}}
     </span>
-    <span>on {{strike?.date | date}}</span>
+    <span>on {{dateShortFormatted}}</span>
     </li>
 </ol>
 <div *ngIf="!strike">
@@ -50,7 +50,7 @@
             <h2>Attack Summary</h2>
 
             <div>
-                <span><strong>Date:</strong> {{strike?.date | date:'fullDate'}}</span>
+                <span><strong>Date:</strong> {{dateFormatted }}</span>
             </div>
             <div ><strong>Launched By:</strong>
             <span *ngFor=" let attacker of strike?.countries.attackers; let i = index; let last = last " >
@@ -64,9 +64,9 @@
             <div ><strong>Took place in:</strong>
                 <span *ngFor=" let target of strike?.countries.targets" >
                     <span>{{target.locale}}</span
-                    ><span  *ngIf="target.subdivision"><span  *ngIf="target.subdivision">,</span> {{target.subdivision}}</span
-                    ><span  *ngIf="target.division"><span  *ngIf="target.division">,</span> {{target.division}}</span
-                    ><span  *ngIf="target.region"><span  *ngIf="target.region">,</span> {{target.region}}</span
+                    ><span  *ngIf="target.subdivision"><span  *ngIf="target.locale">,</span> {{target.subdivision}}</span
+                    ><span  *ngIf="target.division"><span  *ngIf="target.subdivision">,</span> {{target.division}}</span
+                    ><span  *ngIf="target.region"><span  *ngIf="target.division">,</span> {{target.region}}</span
                     ><span> in {{target.country | capitalize}}</span>
                 </span>
             </div>

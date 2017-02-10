@@ -178,7 +178,7 @@
                   <tbody>				
                     <tr *ngFor="let strike of (somaliaStrikes | slice:0:listLimit); trackBy: trackStrike; let odd = odd; let even = even;"  (click)="goToStrike(strike)"  [ngClass]="{ odd: odd, even:even}" >
 
-                      <td>{{strike?.date | date}}</td>
+                      <td>{{strike?.date}}</td>
                       <td>
                         <span *ngFor=" let attacker of strike?.countries.attackers; let first = first; let i = index ">
                              

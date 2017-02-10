@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router }              from '@angular/router';
-import {LibraryService, Publication} from '../../shared';
+import {LibraryService, Publication, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -23,6 +23,7 @@ export class PublicationsComponent implements OnInit,  OnDestroy {
   articles;
   constructor(
     private router: Router,
+    private help:HelperService,
     private libraryService:LibraryService) { 
 
     }
@@ -46,7 +47,11 @@ export class PublicationsComponent implements OnInit,  OnDestroy {
   getPublications(){
    this.sub = this.libraryService.getPublications()
       .subscribe(
-        publications => this.publications = publications,
+        publications => this.publications = publications.map(pub => 
+                  Object.assign({}, pub, {
+                      pubDate: new Date(pub.pubDate).toLocaleDateString('en-US', this.help.noWeekday)
+                  })
+              ),
         error => console.log('error getting publications')
         ) 
   }

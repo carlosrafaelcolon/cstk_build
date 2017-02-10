@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router }              from '@angular/router';
-import {StrikeService, StatisticService, basicStats,  Strike, LibraryService, Publication} from '../../shared';
+import {StrikeService, StatisticService, basicStats,  Strike, LibraryService, Publication, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -23,6 +23,7 @@ export class YemenComponent implements OnInit, OnDestroy {
         private router: Router,
         private strikeService: StrikeService,
         private libraryService:LibraryService,
+        private help:HelperService,
         private stat:StatisticService
     ) { }
 
@@ -93,7 +94,7 @@ export class YemenComponent implements OnInit, OnDestroy {
                             yemen => {
                                 this.yemenStrikes = yemen.map(strike => 
                                     Object.assign({}, strike, {
-                                        date: new Date(strike.date),
+                                       date: new Date(strike.date).toLocaleDateString('en-US', this.help.shortOptions),
                                         year: new Date(strike.date).getFullYear()
                                     })
                                 );

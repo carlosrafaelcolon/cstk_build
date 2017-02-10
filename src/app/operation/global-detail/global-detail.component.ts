@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute, Params}              from '@angular/router';
-import {StrikeService, StatisticService, basicStats, strikeStatistics} from '../../shared';
+import {StrikeService, StatisticService, basicStats, strikeStatistics, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 import { Location }               from '@angular/common';
 @Component({
@@ -12,12 +12,15 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
 	strike;
 	sub:Subscription;
 	sourceList = [];
+  dateFormatted;
+  dateShortFormatted;
 	currentStrike = {};
 	constructor(
 	private router: Router,
 	private route: ActivatedRoute,
 	private strikeService: StrikeService,
 	private stat:StatisticService,
+  private help:HelperService,
 	private location: Location
 	) { }
 	strikeStatistics:strikeStatistics =  {
@@ -58,6 +61,8 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
 		this.strikeService.getStrike(strikeId).subscribe(
 		data => {
 			this.strike = data;
+      this.dateFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.options);
+      this.dateShortFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.shortOptions);
 		},
 		error => console.log('error getting details')
 		)

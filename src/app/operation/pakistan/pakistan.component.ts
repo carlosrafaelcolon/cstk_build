@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router }              from '@angular/router';
-import {StrikeService, StatisticService, basicStats,  Strike, LibraryService, Publication} from '../../shared';
+import {StrikeService, StatisticService, basicStats,  Strike, LibraryService, Publication, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -24,6 +24,7 @@ export class PakistanComponent implements OnInit, OnDestroy {
         private router: Router,
         private strikeService: StrikeService,
         private libraryService:LibraryService,
+        private help:HelperService,
         private stat:StatisticService
     ) { }
 
@@ -93,7 +94,7 @@ export class PakistanComponent implements OnInit, OnDestroy {
                             pakistan => {
                                 this.pakStrikes = pakistan.map(pakStrike => 
                                     Object.assign({}, pakStrike, {
-                                        date: new Date(pakStrike.date),
+                                         date: new Date(pakStrike.date).toLocaleDateString('en-US', this.help.shortOptions),
                                         year: new Date(pakStrike.date).getFullYear()
                                     })
                                 );

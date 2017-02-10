@@ -41,7 +41,11 @@ export class LandingComponent implements OnInit, OnDestroy   {
     this.subStrike =	this.strikeService.getOperations()
       .subscribe(
           strikes => {
-			  this.strikes = strikes
+			  this.strikes = strikes.map(strike => 
+                    Object.assign({}, strike, {
+                      date: new Date(strike.date).toLocaleDateString('en-US', this.help.noWeekday)
+                    })
+                  )
 			},
           error => console.log('error loading strikes'),
           () => this.loadingStrikesComplete = true

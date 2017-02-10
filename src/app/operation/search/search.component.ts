@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router }              from '@angular/router';
-import {StrikeService, StatisticService, basicStats} from '../../shared';
+import {StrikeService, StatisticService, basicStats, HelperService} from '../../shared';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -20,6 +20,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
         private router: Router,
         private strikeService: StrikeService,
+        private help:HelperService,
         private stat:StatisticService
   ){ }
   
@@ -95,7 +96,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                 data => {
                     this.strikes = data.map(strike => 
                         Object.assign({}, strike, {
-                            date: new Date(strike.date),
+                            date: new Date(strike.date).toLocaleDateString('en-US', this.help.shortOptions),
                             year: new Date(strike.date).getFullYear()
                         })
                     );
@@ -113,6 +114,7 @@ export class SearchComponent implements OnInit, OnDestroy {
                         
   };
   ngOnDestroy(){
+      this.resetAll(this.options);
       if(this.searchClicked){
         this.sub.unsubscribe();
       }
@@ -124,7 +126,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   goToStrike(strike) {
       let link = ['/operations/incident/', strike.strikeId];
       this.router.navigate(link);
-      this.resetAll(this.options);
+    //   this.resetAll(this.options);
   };
   affectAll(arr, bool) {
     arr = arr.map(item => item.selected = bool);
