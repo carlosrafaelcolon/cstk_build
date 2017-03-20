@@ -105,10 +105,7 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
           let styles = {
                   
           'color':  '#fabb05',
-          'font-weight':'bold'
-		
-           
-          
+          'font-weight':'bold'      
           };
           return styles;
         }
