@@ -11,6 +11,7 @@ var PeopleSchema = new Schema({
     name: String,
     title: String,
     img: String,
+    avatar:String,
     shortBio: String,
     email: String,
     twitter: String,

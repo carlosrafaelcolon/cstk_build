@@ -139,21 +139,15 @@ export class IsraelComponent implements OnInit, OnDestroy {
             this.value = num;
     
         }
-        let styles = {
-        
-            'color':  value == num ? '#790E39 !important' : '#002147',
-
-            'transition-duration': '.35s',
-            'transition-timing-function': 'linear'
-        
-        };
-        return styles;
     }
     activeText(num) {
       
         let styles = {
         
-            'color':  this.value == num ? '#790E39' : '#002147',
+            'background-color':  this.value == num ? '#790E39' : '#ffffff',
+            'color':  this.value == num ? '#ffffff' : '#790E39',
+            'font-weight': 'bold',
+           
             'transition-duration': '.35s',
             'transition-timing-function': 'linear'
         
@@ -173,7 +167,7 @@ export class IsraelComponent implements OnInit, OnDestroy {
                     data => {
                         this.israelStrikes = data.map(strike => 
                             Object.assign({}, strike, {
-                                date: new Date(strike.date),
+                                date: new Date(strike.date).toLocaleDateString('en-US', this.help.shortOptions),
                                 year: new Date(strike.date).getFullYear()
                             })
                         );

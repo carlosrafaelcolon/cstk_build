@@ -109,7 +109,7 @@ const adminRoutes: Routes = [
                     component:  TutorialComponent
                 },
                 {
-                    path: 'indentification',  
+                    path: 'identification',  
                     component:  IdComponent
                 },
                 {

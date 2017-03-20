@@ -31,6 +31,7 @@ export class AdminPeopleCreateComponent implements OnInit, ComponentCanDeactivat
             'name': ['', Validators.required],
             'title': [''],
             'img': [''],
+            'avatar':[''],
             'email': [''],
             'twitter': [''],
             'github': [''],

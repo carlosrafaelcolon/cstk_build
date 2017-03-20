@@ -33,13 +33,11 @@
             
             <div class="nameBox-container flex-row group-start">
               <span class="dates-heading">{{strike?.date }}:</span>
-              <div class="flex-row group-start"  *ngFor=" let person of strike?.people; let i = index ">
-                <span  *ngIf="i > 0 && !last">,</span>
-                <span  *ngIf="i > 0 && last">& </span>
+              <span  *ngFor=" let person of strike?.people ">
                 <span class="term" ><a  (click)="goToStrike(strike)"  [ngStyle]="activeStatus(person.status)">{{person?.name | capitalize}}</a></span>
                 <img  class="icon-30" src="/assets/images/icons/ic_priority_high_black_36px.svg"  style="margin-left: -15px;" *ngIf="!person.clear">
                 <!--<span class="label label-alert border-box" >{{person?.status}}</span>-->
-              </div>
+              </span>
               
             </div>
             <div class="nameCountry-container flex-row group-start">

@@ -96,11 +96,13 @@
 			}
 		}
 		p.author {
-		font-size: 17px;
+			font-size: 17px;
 		}
 		p.type {
-		font-size: 12px;
-		color:$rose-cherry;
+			font-size: 15px;
+			font-weight:bold;
+			color:$rose-cherry;
+			margin-top:-8px;
 		}	
 	}
 	

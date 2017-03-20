@@ -1,5 +1,3 @@
- 
-
  import { Routes, RouterModule } from '@angular/router';
  import {
      LibraryComponent,
@@ -26,6 +24,7 @@
                 path: 'publications/:pubId', 
                 component: PubComponent
             }
+      
        ]
     },
  ];

@@ -66,7 +66,7 @@
             </div>
             <div ><strong>Took place in:</strong>
                 <span *ngFor=" let target of strike?.countries.targets" >
-                    <span>{{target.locale}}</span
+                    <span *ngIf="target.locale">{{target.locale}}</span
                     ><span  *ngIf="target.subdivision"><span  *ngIf="target.locale">,</span> {{target.subdivision}}</span
                     ><span  *ngIf="target.division"><span  *ngIf="target.subdivision">,</span> {{target.division}}</span
                     ><span  *ngIf="target.region"><span  *ngIf="target.division">,</span> {{target.region}}</span
@@ -138,14 +138,14 @@
                     <span>{{network}}</span>
                 </span>
             </div>-->
-            <div ><strong>Names Indentified:</strong>
+            <div ><strong>Names Identified:</strong>
                 <span *ngFor=" let person of strike?.people; let i = index; let last = last" >
                  
                         <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
                         <span  *ngIf="i > 0 && last">& </span>
-                        <span>{{person.name | capitalize}}</span>
-                        <span class="label " [ngStyle]="activeStatus(person.status)" >{{person.status | capitalize}}</span>
-                        <img  class="icon-18" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!person.clear">
+                        <span [ngStyle]="activeStatus(person.status)">{{person.name | capitalize}}</span>
+                        <!--<span class="label " [ngStyle]="activeStatus(person.status)" >{{person.status | lowercase}}</span>-->
+                        <img  class="icon-18" style="margin-left:-6px"  src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="!person.clear">
                     
                  
                 </span>
@@ -249,7 +249,7 @@
       <article *ngFor=" let source of strike?.sources" class="sourceRecord">
           <div class="row">
               <header class="d-flex flex-row col-md-4">{{source.title }}</header>
-              <span class="col-md-4 "><strong>Published:</strong> {{source.pubDate | date}}</span>
+              <span class="col-md-4 "><strong>Published:</strong> {{source.pubDate}}</span>
               <span class="col-md-4 d-flex flex-row justify-content-start flex-wrap">
                   <span class="label label-primary border-box" *ngFor=" let tag of source?.tags" style="margin-left:5px; margin-top:2px; margin-bottom:2px">{{tag }}</span>
               </span>
@@ -257,7 +257,7 @@
           
               <div class="row">
            <div class="col-md-12 margin-top-bottom-10">
-          <header>Sources of Information:</header>
+          <header class="active-text">Sources of Information:</header>
           <span *ngFor=" let sourceOfInfo of source?.mainReport.sources; let i = index" class="flex-row">
               
             <span  *ngIf="i > 0 && !last" style="margin-left:-4px">,</span>
@@ -269,7 +269,7 @@
           
           <div class="row">
               <div class="d-flex flex-column col-md-6 margin-top-bottom-10">
-                  <header>Number Killed</header>
+                  <header class="active-text">Number Killed</header>
                   <span><strong  class="strong">People:</strong> {{source?.mainReport.casualties.totals}}</span>
                   <span><strong  class="strong">Suspected Militants:</strong> {{source?.mainReport.casualties.susMils}}</span>
                   <span><strong  class="strong">Civilians:</strong> {{source?.mainReport.casualties.civilians}}</span>
@@ -278,8 +278,8 @@
                   <span><strong  class="strong">High Value Targets:</strong> {{source?.mainReport.casualties.hvts}}</span>
               </div>
               <div class="d-flex flex-column col-md-6 margin-top-bottom-10">
-                  <header>Weapons</header>
-                  <span><strong  class="strong">Weapon Type(s):</strong> 
+                  <header class="active-text" >Weapons</header>
+                  <span><strong  class="strong ">Weapon Type(s):</strong> 
                       <span *ngFor="let weapon of source?.mainReport.weapons.terms; let i = index">
                         <span  *ngIf="i > 0 && !last">,</span>
                         <span  *ngIf="i > 0 && last">& </span>
@@ -292,7 +292,7 @@
        <div class="row">
            <div class="col-md-12 margin-top-bottom-10">
           <div  class="d-flex flex-column ">
-              <header>Target Details</header>
+              <header class="active-text">Target Details</header>
               <span><strong class="strong">Location:</strong> {{source?.mainReport.target.location}}</span>
               <span><strong  class="strong">Time:</strong> {{source?.mainReport.target.time}}</span>
               <span><strong  class="strong">Target Type:</strong> {{source?.mainReport.target.targetType}}</span>
@@ -305,7 +305,7 @@
           <div class="row">
            <div class="col-md-12 margin-top-bottom-10">
           <div class="d-flex flex-column ">
-              <header>Details Concerning Those Killed</header>
+              <header class="active-text">Details Concerning Those Killed</header>
               <span><strong  class="strong">Status:</strong> {{source?.mainReport.killed.status | capitalize}}</span>		
               <span><strong  class="strong">Additional Details:</strong> {{source?.mainReport.killed.additionalDetails}}</span>
           </div>

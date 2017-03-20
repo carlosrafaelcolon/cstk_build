@@ -331,14 +331,14 @@ export class AdminOperationsCreateComponent implements OnInit, ComponentCanDeact
                                         'time': new FormControl(null)
                                     }),
                                     'killed': new FormGroup({
-                                        'status':  new FormControl(null, Validators.required),
+                                        'status':  new FormControl(null),
                                         'additionalDetails':  new FormControl(null)
                                     }),
                                     'weapons': new FormGroup({
                                         'terms': new FormArray([
-                                            new FormControl(null, Validators.required)
+                                            new FormControl(null)
                                         ]),
-                                        'ambiguous': new FormControl(false, Validators.required)
+                                        'ambiguous': new FormControl(false)
                                     })
                                     
                                 })

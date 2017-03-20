@@ -26,14 +26,29 @@
                 </md-card>
             </div>
         </div>
-
+        
         <section class="white-bg border-shuttle-top" *ngIf="loadingComplete">
             <div class="container-fluid">
                 <pre>
-                {{strikes | json}}
+                {{strike | json}}
                 </pre>
             </div>
         </section>
+        <div class="row" *ngIf="loadingComplete">
+            <div class="col-md-12">
+                <md-card class="basic-form">
+                    <md-card-content class="basic-form-content">
+                    <form >
+                    <md-input-container   class="full-width">
+                        <textarea  md-input placeholder="insert strike id" class="long-min" type="text" md-autosize  #strikeloaded   ></textarea>
+                    </md-input-container>
+                    <button (click)="onSubmit(strikeloaded.value)" class="btn btn-block alert-hover"  >Send Strike</button>
+
+                    </form>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
     </section>
 </div>
 

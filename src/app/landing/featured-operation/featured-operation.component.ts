@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './featured-operation.component.html'
 })
 export class FeaturedOperationComponent implements OnInit, OnDestroy {
-  strike:Strike;
+  strike;
   subscription:Subscription;
   dateFormatted;
   dateShortFormatted;
@@ -28,6 +28,11 @@ export class FeaturedOperationComponent implements OnInit, OnDestroy {
                       this.strike = strike;
                       this.dateFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.options);
                       this.dateShortFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.shortOptions);
+                      this.strike.sources = this.strike.sources.map(source => 
+                          Object.assign({}, source, {
+                            pubDate:new Date(source.pubDate).toLocaleDateString('en-US', this.help.shortOptions)
+                          })
+                      );
                     },
                     error => console.log('error getting strike')
                 );
@@ -47,10 +52,8 @@ export class FeaturedOperationComponent implements OnInit, OnDestroy {
         if(status.toLowerCase() == 'suspected militant'){
           let styles = {
               
-				'background-color':  '#367D36',
-				'font-size':'55%',
-				'vertical-align': 'super',
-				'border-radius': '0'
+				'color':  '#367D36',
+				'font-weight':'bold'
           
           };
           return styles;
@@ -58,10 +61,8 @@ export class FeaturedOperationComponent implements OnInit, OnDestroy {
         if(status.toLowerCase() == 'hvt'){
           let styles = {
               
-				'background-color':  '#CE121B',
-				'font-size':'55%',
-				'vertical-align': 'super',
-				'border-radius': '0'
+				'color':  '#CE121B',
+				'font-weight':'bold'
       
           
           };
@@ -70,10 +71,8 @@ export class FeaturedOperationComponent implements OnInit, OnDestroy {
         if(status.toLowerCase() == 'civilian'){
           let styles = {
               
-			'background-color':  '#fabb05',
-			'font-size':'55%',
-			'vertical-align': 'super',
-			'border-radius': '0'
+			'color':  '#fabb05',
+			'font-weight':'bold'
            
           
           };
@@ -82,10 +81,8 @@ export class FeaturedOperationComponent implements OnInit, OnDestroy {
         if(status.toLowerCase() == 'unknown'){
           let styles = {
               
-				'background-color':  '#000000',
-				'font-size':'55%',
-				'vertical-align': 'super',
-				'border-radius': '0'
+				'color':  '#000000',
+				'font-weight':'bold'
            
           
           };

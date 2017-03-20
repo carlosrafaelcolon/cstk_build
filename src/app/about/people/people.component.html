@@ -4,30 +4,31 @@
         <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
     </div>
 </section>
-<section class="peopleList" *ngIf="people" >
-  <div class="row "  >
-      <div class="col-xs-12 col-sm-6 col-md-4  col-lg-4" *ngFor="let person of people ">
-        <div class="card  margin-top-bottom-10" >
-            <img class="card-img-top" src="{{person?.img}}" >
-            <div class="card-block">
-                <h4 class="card-title"><a (click)="onSelect(person)" class=" primary-text-hover " >{{person?.name}}</a></h4>
-                <p class="card-text">{{person?.title}}</p>
-                <a  class="btn primary-hover-dark" (click)="onSelect(person)" >Read Bio</a>
+<section class="people-view "  *ngIf="people">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-12 col-md-6 margin-top-bottom-10"  *ngFor="let person of people ">
+                <div class="row">
+                    <div class="expert-image col-12 col-md-4">
+                         <a (click)="onSelect(person)" *ngIf="person.avatar">
+                        <img class="rounded-circle" src="{{person?.avatar}}" >
+                         </a>
+                    </div>
+                    <div class="expert-info col-12 col-md-8">
+                        <h2 class="name"><a (click)="onSelect(person)" class=" primary-text-hover " >{{person?.name}}</a></h2>
+                        <h3 class="title">{{person?.title}}</h3>
+                        <div class="social-link">
+                            <a href="{{person?.twitter}}" aria-label="Twitter" class="social-link primary-text-hover" [hidden]="!person.twitter" target="_blank" style="font-size: 22px;">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="{{person?.github}}" aria-label="Github" class="social-link primary-text-hover" [hidden]="!person.github" target="_blank" style="font-size: 22px;">
+                                <i class="fa fa-github" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
-         <!-- TEAM MEMBER -->
-        <!--<div class="team col-xs-12 col-sm-6 col-md-4  col-lg-4" *ngFor="let person of people ">
-            <div>
-                <img alt="team-member" class="img-responsive img-thumbnail" src="{{person?.img}}">
-            </div>
-            <div class="details">
-                <h3><a (click)="onSelect(person)"  >{{person?.name}}</a></h3>
-                <h4>{{person?.title}}</h4>
-                <button  class="btn btn-block primary-hover-dark" (click)="onSelect(person)" >Read Bio</button>
-             
-            </div>
-        </div>-->
-  </div>
+    </div>
 
-</section>
+    </section>

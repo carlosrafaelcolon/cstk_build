@@ -7,6 +7,7 @@ export interface People {
   name: string;
   title: string;
   img: string;
+  avatar:string;
   email: string;
   twitter: string;
   github: string;

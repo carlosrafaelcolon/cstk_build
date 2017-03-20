@@ -252,7 +252,7 @@ export class AdminOperationsEditComponent implements OnInit, OnDestroy, Componen
                     if (this.strike.sources[i].mainReport.weapons.hasOwnProperty('terms')) {
                         for (let weaponTypeIndex = 0; weaponTypeIndex < this.strike.sources[i].mainReport.weapons.length; weaponTypeIndex++) {
                             weaponTypeTags.push(
-                                    new FormControl(this.strike.sources[i].mainReport.weapons.terms[weaponTypeIndex], Validators.required)
+                                    new FormControl(this.strike.sources[i].mainReport.weapons.terms[weaponTypeIndex])
                             );
                         }
                         ambigWeapon = this.strike.sources[i].mainReport.weapons.ambiguous;

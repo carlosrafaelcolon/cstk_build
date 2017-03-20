@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit, OnDestroy   {
-	headline = 'Project Update: Compiling and Analyzing Data on Cross-border Operations'
+	headline = '<em>Counter Jihad</em> by <strong>Brian Glyn Williams</strong> Available Now!'
 	homeValue = 1;
 	id;
 	scrollUp;
@@ -35,7 +35,7 @@ export class LandingComponent implements OnInit, OnDestroy   {
 		// this.getBlog();
 		this.id = setInterval(() => {
 			this.quoteDisplay(this.homeValue); 
-		}, 5000);
+		}, 17000);
 	}
 	getLatest(){
     this.subStrike =	this.strikeService.getOperations()
@@ -87,7 +87,7 @@ export class LandingComponent implements OnInit, OnDestroy   {
 		this.router.navigate(link);
 	}
 	gotoArticle(){
-		let link = ['/blog/post/the-hammer-and-the-horse'];
+		let link = ['/blog/post/counter-jihad'];
 		this.router.navigate(link);
 	}
 	quoteDisplay(value){

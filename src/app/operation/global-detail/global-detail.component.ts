@@ -13,6 +13,7 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
 	sub:Subscription;
 	sourceList = [];
   dateFormatted;
+  pubDateFormatted;
   dateShortFormatted;
 	currentStrike = {};
 	constructor(
@@ -63,13 +64,19 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
 			this.strike = data;
       this.dateFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.options);
       this.dateShortFormatted =new Date(this.strike.date).toLocaleDateString('en-US', this.help.shortOptions);
+      this.strike.sources = this.strike.sources.map(source => 
+          Object.assign({}, source, {
+            pubDate:new Date(source.pubDate).toLocaleDateString('en-US', this.help.shortOptions)
+          })
+      );
 		},
 		error => console.log('error getting details')
 		)
 
 	});
 
-	}
+}
+
 	goBack(): void {
 		this.location.back();
 	}
@@ -80,33 +87,26 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
         if(status.toLowerCase() == 'suspected militant'){
           let styles = {
               
-				'background-color':  '#367D36',
-				'font-size':'55%',
-				'vertical-align': 'super',
-				'border-radius': '0'
+          'color':  '#367D36',
+          'font-weight':'bold'
           
           };
           return styles;
         }
         if(status.toLowerCase() == 'hvt'){
           let styles = {
-              
-				'background-color':  '#CE121B',
-				'font-size':'55%',
-				'vertical-align': 'super',
-				'border-radius': '0'
-      
-          
+                
+          'color':  '#CE121B',
+          'font-weight':'bold'
           };
           return styles;
         }
         if(status.toLowerCase() == 'civilian'){
           let styles = {
-              
-			'background-color':  '#fabb05',
-			'font-size':'55%',
-			'vertical-align': 'super',
-			'border-radius': '0'
+                  
+          'color':  '#fabb05',
+          'font-weight':'bold'
+		
            
           
           };
@@ -114,11 +114,10 @@ export class GlobalDetailComponent implements OnInit , OnDestroy {
         }
         if(status.toLowerCase() == 'unknown'){
           let styles = {
-              
-				'background-color':  '#000000',
-				'font-size':'55%',
-				'vertical-align': 'super',
-				'border-radius': '0'
+                
+          'color':  '#000000',
+          'font-weight':'bold'
+			
            
           
           };

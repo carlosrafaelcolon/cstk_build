@@ -106,7 +106,7 @@ export class AdminLibraryCreateComponent implements OnInit,  ComponentCanDeactiv
     addReview() { this.reviews.push(
                       new FormGroup({
                           'reviewer': new FormControl(null, Validators.required),
-                          'reviewTitle': new FormControl(null, Validators.required),
+                          'reviewTitle': new FormControl(null),
                           'reviewLink': new FormControl(null, Validators.required)
                       }) ); }
     removeReview(i: number) { this.reviews.removeAt(i); }

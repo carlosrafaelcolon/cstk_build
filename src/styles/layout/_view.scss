@@ -1,3 +1,61 @@
+
+.people-view{
+        display: flex;
+        font-size: 1rem;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        line-height: 1.3;
+        .expert-image img{
+            margin-left:auto;
+            margin-right:auto;
+            width:85%;
+            padding-bottom:5px;
+            @media #{tablets } {
+                width:95%;
+                padding-bottom:inherit;
+            }
+        }
+        .expert-info {
+            padding-left: 1em;
+            padding-top: .3em;
+            width: 100%;
+            .name {
+                font: normal 700 1.5125em/1.14286 franklin-gothic-urw-cond,helvetica,sans-serif;
+                line-height: 1.13;
+                letter-spacing: -.0125em;
+                
+                a{
+                    &:hover{
+                        text-decoration:underline;
+                        color:$astral !important;
+                    }
+                }
+            }
+            .title {
+                display: inline;
+                font: normal 400 1.05em/1.39286 $stack-roboto;
+                letter-spacing: -.0125em;
+               
+            }
+            .social-link{
+                font-size:1.4125em;
+                line-height: 1.14286;
+               
+                a{
+                    &:hover{
+                    
+                        color:$astral !important;
+                    }
+                }
+            }
+        }
+}
+
+
+
+
+
 .searchList {
     background: $white;
     width:100%;

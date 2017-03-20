@@ -74,6 +74,18 @@
                         </md-input-container>
                       </td>
                   </tr>
+                  <tr>
+                      <td>
+                  
+                        <md-input-container  class="full-width">
+							<md-hint align="end">Avatar Path (thumbnail image):</md-hint>
+                        	<input 	md-input 
+									placeholder="Example: /assets/images/staff/superman.jpg"
+									type="text" 
+									formControlName="avatar" >
+                        </md-input-container>
+                      </td>
+                  </tr>
                 </table>
          
 
@@ -134,7 +146,7 @@
 							<textarea 	md-input 
 										placeholder="Short Bio to Post with Blogs"
 										type="text"
-									
+                    md-autosize
 										formControlName="shortBio" ></textarea>
                         </md-input-container>
                       </td>
@@ -147,7 +159,7 @@
 							<textarea 	md-input 
 										placeholder="tell us about yourself"
 										type="text"
-										class="long-min"
+										md-autosize
 										formControlName="bio" ></textarea>
                         </md-input-container>
                       </td>

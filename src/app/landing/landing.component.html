@@ -2,17 +2,17 @@
 <ol class="breadcrumb">
   <li class="breadcrumb-item active">Home</li>
 </ol>
-<!--<div class="row  no-gutters">
-	<a (click)="gotoArticle()" class=" banner-alert hidden-sm-down">
-			{{headline}}
+<div class="row  no-gutters">
+	<a href="https://www.amazon.com/Counter-Jihad-Experience-Afghanistan-Foundation/dp/0812248678/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=&sr=" target="_blank" class=" banner-alert hidden-sm-down">
+			<span [innerHtml]="headline | safeHtml"></span>
 	</a>
-</div>-->
+</div>
 <section class="white-bg" >
   <div class="container-fluid">
-    <div class="featured-block" style="margin-bottom:60px; margin-top:40px;">
+    <div class="featured-block" style="margin-bottom:60px; margin-top:40px;" >
       <h2 class="featured-block__title">New Release</h2>
       <div class="row align-items-start featured-listing">
-      <div class="col-md-4 review-item">
+      <div class="col-md-4 ">
           	<img src="/assets/images/books/droneDebate.jpg" class="main">
 		    <div class="row justify-content-center">
 				<div class="col-6">
@@ -25,9 +25,9 @@
       </div>
       <div class="col-md-8 review-item" >
         <h2>Review</h2>
-        <div [ngSwitch]="homeValue"  myMatchHeight="switch-box">
+        <div [ngSwitch]="homeValue"  >
 			<blockquote  class="blockquote">
-          <div *ngSwitchCase="1" class="switch-box">
+          <div *ngSwitchCase="1">
           
      
             <p>Plaw, Fricker, and Colon masterfully cover the breadth and depth of drone usage across the globe. By examining drones from the perspectives of military strategy, ethics, and international law, the book avoids falling into any single approach to framing the drone debate—which most similar works unfortunately do. ... Summing Up: Highly recommended. Lower-division undergraduates through faculty.</p>
@@ -36,16 +36,16 @@
 
         
           </div>
-          <div *ngSwitchCase="2" class="switch-box">
+          <div *ngSwitchCase="2" >
       
             <p>Some of these books, such as The Drone Debate, by the political scientists Avery Plaw, Matthew Fricker, and Carlos Colon ... provide admirable overviews of the debate. Plaw, Fricker, and Colon provide the most thorough analysis of the available numbers, highlighting the discrepancies between official figures and those reported by independent organizations.</p>
 			<footer class="blockquote-footer float-right" ><cite title=" Foreign Affairs"> Foreign Affairs</cite></footer>
         
           </div>
-          <div *ngSwitchCase="3" class="switch-box">
+          <div *ngSwitchCase="3" >
       
             <p>Offers a wealth of fascinating and important analysis of how drones are used in warfare by several countries, and the ways in which these flying weapons will impact the future of global security.</p>
-			<footer class="blockquote-footer float-right" ><cite title="James Forest">James Forest, professor and director of security studies, University of Massachusetts Lowell</cite></footer>
+			<footer class="blockquote-footer float-right" ><cite title="James Forest">James Forest, professor of security studies, University of Massachusetts Lowell</cite></footer>
       
           </div>
 		   </blockquote>
@@ -75,7 +75,7 @@
 
 										<span  *ngIf="i > 0 && !last">,</span>
 										<span  *ngIf="i > 0 && last">& </span>
-										{{attacker.country | capitalize}} counterterrorism operation occured
+										{{attacker.country | capitalize}} counterterrorism operation occurred
 
 										</span>
 										<span *ngFor=" let target of strike?.countries.targets" >

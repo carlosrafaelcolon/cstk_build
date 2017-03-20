@@ -559,7 +559,6 @@ export class StrikeService {
 		{ value: 'Gatherings', display: 'Gatherings' },
 		{ value: 'Marketplace', display: 'Marketplace' },
 		{ value: 'Weapons Depot', display: 'Weapons Depot' },
-		{ value: 'Intel', display: 'Intel' },
 		{ value: 'Other', display: 'Other' },
 		{ value: 'Unknown', display: 'Unknown' }
 	];
@@ -1413,6 +1412,16 @@ export class StrikeService {
                        .map(this.help.extractData) // ...and calling .json() on the response to return data
                                     .catch(this.help.handleError); //...errors if any
     }  
+	// Update a strike
+    updateID (strike, id): Observable<any[]> {
+        let json = JSON.stringify(strike); // Stringify payload
+        let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let options       = new RequestOptions({ headers: headers }); // Create a request option
+
+        return this.authHttp.put(this.strikeEdit + id, json, options) // ...using put request
+                       .map(this.help.extractData) // ...and calling .json() on the response to return data
+                                    .catch(this.help.handleError); //...errors if any
+    } 
 // Add a new strike
     addStrike (strike): Observable<any[]> {
         const json = JSON.stringify(strike);

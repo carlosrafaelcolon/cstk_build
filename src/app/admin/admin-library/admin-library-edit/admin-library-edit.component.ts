@@ -99,27 +99,27 @@ export class AdminLibraryEditComponent implements OnInit, OnDestroy, ComponentCa
 
        //Get, Push & Delete Themes
     get themes(): FormArray { return this.updateForm.get('themes') as FormArray; }
-    addTheme() { this.themes.push(new FormControl('', Validators.required)); }
+    addTheme() { this.themes.push(new FormControl(null, Validators.required)); }
     removeTheme(i: number) { this.themes.removeAt(i); }
 
     //Get, Push & Delete Topics
     get topics(): FormArray { return this.updateForm.get('topics') as FormArray; }
-    addTopic() { this.topics.push(new FormControl('', Validators.required)); }
+    addTopic() { this.topics.push(new FormControl(null, Validators.required)); }
     removeTopic(i: number) { this.topics.removeAt(i); }
 
 
     //Get, Push & Delete Authors
     get authors(): FormArray { return this.updateForm.get('authors') as FormArray; }
-    addAuthor() { this.authors.push(new FormControl('', Validators.required)); }
+    addAuthor() { this.authors.push(new FormControl(null, Validators.required)); }
     removeAuthor(i: number) { this.authors.removeAt(i); }
 
     //Get, Push & Delete Reviews
     get reviews(): FormArray { return this.updateForm.get('reviews') as FormArray; }
     addReview() { this.reviews.push(
                       new FormGroup({
-                          'reviewer': new FormControl('', Validators.required),
-                          'reviewTitle': new FormControl('', Validators.required),
-                          'reviewLink': new FormControl('', Validators.required)
+                          'reviewer': new FormControl(null, Validators.required),
+                          'reviewTitle': new FormControl(null),
+                          'reviewLink': new FormControl(null, Validators.required)
                       }) ); }
     removeReview(i: number) { this.reviews.removeAt(i); }
 

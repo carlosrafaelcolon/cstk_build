@@ -13,10 +13,10 @@
             </span>
         </button>
         <span class="hidden-md-down fill-remaining-space"></span>
-        <span class="hidden-md-down d-flex flex-row btn-group-round " style="width:25%">
+        <!--<span class="hidden-md-down d-flex flex-row btn-group-round " style="width:25%">
             <button  class="btn primary-hover-dark flex" disabled>Previous</button>
             <button  class="btn primary-hover-dark flex" disabled>Next</button>
-        </span>
+        </span>-->
     </div>
 
   <div class="d-flex flex-column pubHeader margin-top-bottom-40">
@@ -65,8 +65,9 @@
     <div><strong>Reviews:</strong>
         
         <div *ngFor="let review of publication?.reviews; let i = index" class="flex-column group-start reviews" >
-            <h3 *ngIf="review.reviewTitle"><a href="{{review?.reviewLink}}" target="_blank">{{review?.reviewTitle}}</a></h3>
-            <p class="reviewer">By <em>{{review?.reviewer}}</em></p>
+            <h3 *ngIf="review.reviewTitle !== null"><a href="{{review?.reviewLink}}" target="_blank">{{review?.reviewTitle}}</a></h3>
+            <h3 *ngIf="review.reviewTitle === null || review.reviewTitle.length === 0"><a href="{{review?.reviewLink}}" target="_blank">A Review By {{review?.reviewer}}</a></h3>
+            <p class="reviewer" *ngIf="review.reviewTitle !== null">By <em>{{review?.reviewer}}</em></p>
         </div>
     </div>
     </span>

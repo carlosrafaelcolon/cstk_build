@@ -39,5 +39,12 @@ export class NameService {
                             .map(this.help.extractData) // ...and calling .json() on the response to return data
                                 .catch(this.help.handleError); //...errors if any
     }
+    getID(strikeId) {
+        let details = strikeId;
+
+        return this.http.post(this.urlToSend, details)
+							.map(this.help.extractData) // ...and calling .json() on the response to return data
+								.catch(this.help.handleError); //...errors if any
+	}; 
 
 }

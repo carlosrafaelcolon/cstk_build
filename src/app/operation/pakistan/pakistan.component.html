@@ -4,34 +4,8 @@
   <li class="breadcrumb-item active">Pakistan</li>
 </ol>
 
-<section style="margin-top:-1rem;">
-<div class="row no-gutters">
- <div class="col-md-2 side-nav">
-   <ul class="side-list">
-     <li >
-       <a (click)="setActive(value, 1)" [ngStyle]="activeText(1)">Operations</a>
-     </li>
-     <li class="hidden-lg-up">
-       <a (click)="setActive(value, 2)" [ngStyle]="activeText(2)">Related Publications</a>
-     </li>
-     <li class="hidden-md-down">
-       <a (click)="setActive(value, 2)" [ngStyle]="activeText(2)">Publications</a>
-     </li>
-     <!--<li >
-       <a (click)="setActive(value, 3)" [ngStyle]="activeText(3)">Profile</a>
-     </li>-->
-   </ul>
- </div>
- <div class="col-md-9 side-content">
+<section>
   <div class="container-fluid">
-    <div [ngSwitch]="value">
-        
-     
-      <div *ngSwitchCase="1">
-        
-        
-        <div class="searchList">
-          
           <div class="page-headline">
               <h1>Pakistan</h1>
               <span class="text_underline"></span>
@@ -43,303 +17,304 @@
           <h2 class="text-center"><strong   class="active-text"  *ngIf="loadingPakComplete">{{pakStrikes?.length}}</strong> Cases Recorded</h2>
           <h2 class="text-center" style="margin-bottom:30px;"><small>(with a total of <strong   class="active-text"  *ngIf="loadingPakComplete">{{basicPakStats?.numStrikes}}</strong> strikes documented)</small></h2>
           </span>
-          <div class="stat-section">
-            <div class="row" style="margin-bottom:20px;">
-              <div class="col-md-12">
-                <!--<md-card class="filter-form round-top ">
-                    <md-toolbar class="primary">Filter Strikes</md-toolbar>
-                    <md-card-content >
+          <div class="btn-group btn-group-lg d-flex justify-content-center margin-top-bottom-10" role="group" aria-label="Basic example" style="margin-left:auto; margin-right:auto">
+            <button id="outline-red" type="button" class="btn btn-secondary" (click)="setActive(value, 1)" [ngStyle]="activeText(1)">Operations</button>
+            <button id="outline-red" type="button" class="btn btn-secondary" (click)="setActive(value, 2)" [ngStyle]="activeText(2)">Publications</button>
+            <!--<button id="outline-red" type="button" class="btn btn-secondary" (click)="setActive(value, 3)" [ngStyle]="activeText(3)">Profile</button>-->
+          </div>
+          <div [ngSwitch]="value">
+            <div *ngSwitchCase="1">
+              <div class="searchList">
                 
-                        <md-tab-group class="full-width cb-group">
-                            <md-tab>
-                                <template md-tab-label >
-                                <strong><em>Attacking Countries</em></strong>
-                                </template>
-                                <md-toolbar >
-                                <span>Select Attacking Countries</span>
-                                <span class="fill-remaining-space"></span>
-                                <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.attackers, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
-                                <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.attackers, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
-                                </md-toolbar>
-                                <ul class="flex-row adminCheckboxes" >
-                                    <li *ngFor="let attacker of strikeOptions.attackers">
-                                        <md-checkbox [(ngModel)]="attacker.selected">
-                                        {{attacker.country}}
-                                        </md-checkbox>
-                                    </li> 
-                                </ul>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                <strong><em>Countries Targeted</em></strong>
-                                </template>
-                                <md-toolbar >
-                                <span>Select Countries Targeted</span>
-                                <span class="fill-remaining-space"></span>
-                                <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.targets, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
-                                <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.targets, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
-                                </md-toolbar>
-                                <ul class="flex-row adminCheckboxes" >
-                                    <li *ngFor="let target of strikeOptions.targets">
-                                        <md-checkbox [(ngModel)]="target.selected">
-                                        {{target.country}}
-                                        </md-checkbox>
-                                    </li>
-                                </ul>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                <strong><em>Weapon Types</em></strong>
-                                </template>
-                                <md-toolbar >
-                                <span>Select Weapon Types</span>
-                                <span class="fill-remaining-space"></span>
-                                <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.weaponTypes, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
-                                <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.weaponTypes, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
-                                </md-toolbar>
-                                <ul class="flex-row adminCheckboxes" >
-                                    <li *ngFor="let weapon of strikeOptions.weaponTypes">
-                                        <md-checkbox [(ngModel)]="weapon.selected">
-                                        {{weapon.term}}
-                                        </md-checkbox>
-                                    </li>
-                                </ul>
-                            </md-tab>
-                            <md-tab>
-                                <template md-tab-label>
-                                <strong><em>Action Types</em></strong> 
-                                </template>
-                                <md-toolbar >
-                                <span>Select Action Types</span>
-                                <span class="fill-remaining-space"></span>
-                                <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.actionTypes, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
-                                <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.actionTypes, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
-                                </md-toolbar>
-                                <ul class="flex-row adminCheckboxes" >
-                                    <li *ngFor="let action of strikeOptions.actionTypes">
-                                        <md-checkbox [(ngModel)]="action.selected" >
-                                        {{action.term}}
-                                        </md-checkbox>
-                                    </li>
-                                </ul>
-                            </md-tab>
-                            <hr>
-                        </md-tab-group>
-                        <div class="filter-form-content">
-                            <md-slide-toggle [(ngModel)]="strikeOptions.excludeWeapons" name="excludeWeapons">
-                            Exclude Cases where its unclear which weapons were used (i.e. possible drone strikes)?:
-                                <strong *ngIf="!strikeOptions.excludeWeapons">
+                
+                <div class="stat-section">
+                  <div class="row" style="margin-bottom:20px;">
+                    <div class="col-md-12">
+                      <!--<md-card class="filter-form round-top ">
+                          <md-toolbar class="primary">Filter Strikes</md-toolbar>
+                          <md-card-content >
+                      
+                              <md-tab-group class="full-width cb-group">
+                                  <md-tab>
+                                      <template md-tab-label >
+                                      <strong><em>Attacking Countries</em></strong>
+                                      </template>
+                                      <md-toolbar >
+                                      <span>Select Attacking Countries</span>
+                                      <span class="fill-remaining-space"></span>
+                                      <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.attackers, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
+                                      <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.attackers, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
+                                      </md-toolbar>
+                                      <ul class="flex-row adminCheckboxes" >
+                                          <li *ngFor="let attacker of strikeOptions.attackers">
+                                              <md-checkbox [(ngModel)]="attacker.selected">
+                                              {{attacker.country}}
+                                              </md-checkbox>
+                                          </li> 
+                                      </ul>
+                                  </md-tab>
+                                  <md-tab>
+                                      <template md-tab-label>
+                                      <strong><em>Countries Targeted</em></strong>
+                                      </template>
+                                      <md-toolbar >
+                                      <span>Select Countries Targeted</span>
+                                      <span class="fill-remaining-space"></span>
+                                      <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.targets, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
+                                      <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.targets, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
+                                      </md-toolbar>
+                                      <ul class="flex-row adminCheckboxes" >
+                                          <li *ngFor="let target of strikeOptions.targets">
+                                              <md-checkbox [(ngModel)]="target.selected">
+                                              {{target.country}}
+                                              </md-checkbox>
+                                          </li>
+                                      </ul>
+                                  </md-tab>
+                                  <md-tab>
+                                      <template md-tab-label>
+                                      <strong><em>Weapon Types</em></strong>
+                                      </template>
+                                      <md-toolbar >
+                                      <span>Select Weapon Types</span>
+                                      <span class="fill-remaining-space"></span>
+                                      <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.weaponTypes, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
+                                      <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.weaponTypes, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
+                                      </md-toolbar>
+                                      <ul class="flex-row adminCheckboxes" >
+                                          <li *ngFor="let weapon of strikeOptions.weaponTypes">
+                                              <md-checkbox [(ngModel)]="weapon.selected">
+                                              {{weapon.term}}
+                                              </md-checkbox>
+                                          </li>
+                                      </ul>
+                                  </md-tab>
+                                  <md-tab>
+                                      <template md-tab-label>
+                                      <strong><em>Action Types</em></strong> 
+                                      </template>
+                                      <md-toolbar >
+                                      <span>Select Action Types</span>
+                                      <span class="fill-remaining-space"></span>
+                                      <span ><button title="Check All" class="btn alert-hover " (click)="affectAll(strikeOptions.actionTypes, true)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_done_all_white_36px.svg"></button>&nbsp;</span>
+                                      <span >&nbsp;<button title="Clear All" class="btn alert-hover "  (click)="affectAll(strikeOptions.actionTypes, false)" md-mini-fab ><img class="icon-40" src="/assets/images/icons/ic_clear_all_white_36px.svg"></button></span>
+                                      </md-toolbar>
+                                      <ul class="flex-row adminCheckboxes" >
+                                          <li *ngFor="let action of strikeOptions.actionTypes">
+                                              <md-checkbox [(ngModel)]="action.selected" >
+                                              {{action.term}}
+                                              </md-checkbox>
+                                          </li>
+                                      </ul>
+                                  </md-tab>
+                                  <hr>
+                              </md-tab-group>
+                              <div class="filter-form-content">
+                                  <md-slide-toggle [(ngModel)]="strikeOptions.excludeWeapons" name="excludeWeapons">
+                                  Exclude Cases where its unclear which weapons were used (i.e. possible drone strikes)?:
+                                      <strong *ngIf="!strikeOptions.excludeWeapons">
+                                      No
+                                      </strong>
+                                      <strong *ngIf="strikeOptions.excludeWeapons">
+                                      Yes
+                                      </strong>
+                                  </md-slide-toggle>
+                    
+                              </div>
+                          </md-card-content>
+                          
+                          <md-card-actions class="filter-form-content">
+                              <button class="btn  alert-hover" (click)="resetAll(strikeOptions)">Clear All</button>
+                              <button class="btn  primary-hover" (click)="onSubmit(strikeOptions)">Search Now</button>
+                          </md-card-actions>
+                  
+                      </md-card>-->
+                      <md-card class="filter-form round-top">
+                          <md-toolbar >Exclude Variables</md-toolbar>
+                        
+                          <md-card-content class="filter-form-content">
+                            <p>Exclude cases where its unclear which <strong class="active-text">weapons</strong> were used (e.g., possible drone strikes)?:</p>
+                            <md-slide-toggle [(ngModel)]="pakOptions.excludeWeapons" name="excludeWeapons">
+                                <strong *ngIf="!pakOptions.excludeWeapons">
                                 No
                                 </strong>
-                                <strong *ngIf="strikeOptions.excludeWeapons">
+                                <strong *ngIf="pakOptions.excludeWeapons">
                                 Yes
                                 </strong>
                             </md-slide-toggle>
-              
-                        </div>
-                    </md-card-content>
-                    
-                    <md-card-actions class="filter-form-content">
-                        <button class="btn  alert-hover" (click)="resetAll(strikeOptions)">Clear All</button>
-                        <button class="btn  primary-hover" (click)="onSubmit(strikeOptions)">Search Now</button>
-                    </md-card-actions>
-            
-                </md-card>-->
-                <md-card class="filter-form round-top">
-                    <md-toolbar >Exclude Variables</md-toolbar>
-                  
-                    <md-card-content class="filter-form-content">
-                      <p>Exclude cases where its unclear which <strong class="active-text">weapons</strong> were used (e.g., possible drone strikes)?:</p>
-                      <md-slide-toggle [(ngModel)]="pakOptions.excludeWeapons" name="excludeWeapons">
-                          <strong *ngIf="!pakOptions.excludeWeapons">
-                          No
-                          </strong>
-                          <strong *ngIf="pakOptions.excludeWeapons">
-                          Yes
-                          </strong>
-                      </md-slide-toggle>
-                    </md-card-content>
-                    <md-card-actions class="filter-form-content">
+                          </md-card-content>
+                          <md-card-actions class="filter-form-content">
 
-                        <button class="btn  alert-hover" (click)="onSubmit(pakOptions)">Filter</button>
-                    </md-card-actions>
-                </md-card>
-                
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <md-card class="stat-box">
-                  <md-card-title>
-                    <h2>Total Killed:</h2>
-                  </md-card-title>
-                  <md-card-content>
-                    <ul class="stat-list">
-                      <li><strong>People:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.totals.sum}}</span></li>
-                      <li><strong>Suspected Militants:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.susMils.sum}}</span></li>
-                      <li><strong>Civilians:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.civilians.sum}}</span></li>
-                      <li><strong>Unknowns:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.unknowns.sum}}</span></li>
-                    </ul>
-                  </md-card-content>
-                </md-card>
-                
-              </div>
-              <div class="col-lg-6">
-                <md-card class="stat-box">
-                  <md-card-title>
-                    <h2>Average Killed per Strike:</h2>
-                  </md-card-title>
-                  <md-card-content>
-                    <ul class="stat-list">
-                      <li><strong>People:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.totals.avg}}</span></li>
-                      <li><strong>Suspected Militants:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.susMils.avg}}</span></li>
-                      <li><strong>Civilians:</strong>  <span  *ngIf="loadingPakComplete">{{basicPakStats?.civilians.avg}}</span></li>
-                      <li><strong>Unknowns:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.unknowns.avg}}</span></li>
-                    </ul>
-                  </md-card-content>
-                </md-card>
-                
-              </div>
-            </div>
-            
-          </div>
-          <div *ngIf="!loadingPakComplete">
-            <div class="d-flex justify-content-center ">
-              <md-progress-circle mode="indeterminate" ></md-progress-circle>
-            </div>
-          </div>
-     
-          <span  *ngIf="loadingPakComplete">
-            <div class="table-section">
-              
-              <h2 >Click a Record Below to See More Details</h2>
-              <span class="d-flex justify-content-center "><img  src="/assets/images/icons/ic_filter_list_black_48px.svg"  class="icon-40"></span>
-              <div class="table-responsive ">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th style="text-align:left;">Date</th>
-                      <th style="text-align:left;">Attacking Country</th>
-                      <!--<th style="text-align:left;">Country Attacked</th>-->
-                      <th style="text-align:left;">Weapons</th>
-                      <!--<th style="text-align:left;">Actions</th>-->
-                      <th style="text-align:left;">Mil.</th>
-                      <th style="text-align:left;">Civ.</th>
-                      <th style="text-align:left;">Unk.</th>	
-                      <th style="text-align:left;">HVTs</th>																	
-                    </tr>
-                  </thead>
-                  <tbody>				
-                    <tr *ngFor="let strike of (pakStrikes | slice:0:listLimit); trackBy: trackStrike; let odd = odd; let even = even;"  (click)="goToStrike(strike)"  [ngClass]="{ odd: odd, even:even}" >
-
-                      <td>{{strike?.date}}</td>
-                      <td>
-                        <span *ngFor=" let attacker of strike?.countries.attackers; let first = first; let i = index ">
-                         
-                              <span *ngIf="first">{{attacker.country}}</span>
-                           
-                            
-                            
-                        </span>
-                      </td>
-                      <!--<td>
-                        <span *ngFor="let target of strike?.countries.targets; let first = first; let i = index">
-                          
-                            <span *ngIf="first">{{target.country}}</span>
-                            <span *ngIf="i > 0">...</span>
-                          
-                        </span>
-                      </td>-->
-                      <td>
-                        <span *ngFor=" let weapon of strike?.type.weaponTypes; let first = first; let i = index ">
-                            <span class="d-flex justify-content-start">
-                              <span *ngIf="first">{{weapon.term}}</span> 
-                              <img  class="icon-15" src="/assets/images/icons/ic_priority_high_black_36px.svg" *ngIf="first && !weapon.clear" >
-                              <!--<span *ngIf="first && !weapon.clear" ><img>error</span>-->
-         
-                            </span>
-                        </span>
-                        <!--<span *ngFor="let term of strike?.type.weapons.terms; let first = first; let i = index">
-                          
-                          <span *ngIf="first">{{term}}</span>
-                          <span *ngIf="i > 0">...</span>
-                        </span>-->
-                      </td>
-                      <!--<td>
-                        <span *ngFor=" let action of strike?.type.actionTypes; let first = first; let i = index ">
-                              <span class="flex-row group-center">
-                                <span *ngIf="first">{{action.term}}</span>
-                                <img   class="icon-15" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="first && !action.clear" >
-                   
-                           
-                              </span>
-                        </span>
-                   
-                      </td>-->
-                      <td>
-                      {{strike?.casualties.susMils}}
-                      </td>
-                      <td>
-                      {{strike?.casualties.civilians}}
-                      </td>
-                      <td>
-                      {{strike?.casualties.unknowns}}
-                      </td>
-                      <td>
-                      {{strike?.casualties.hvts}}
-                      </td>
-                                              
-                    </tr>
+                              <button class="btn  alert-hover" (click)="onSubmit(pakOptions)">Filter</button>
+                          </md-card-actions>
+                      </md-card>
                       
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="7">
-                        <button *ngIf="listLimit < pakStrikes.length"    class="btn  btn-block primary-hover" (click)="listLimit = listLimit + 15">Show More Strikes (displaying {{listLimit}} out of {{pakStrikes?.length }})</button>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <md-card class="stat-box">
+                        <md-card-title>
+                          <h2>Total Killed:</h2>
+                        </md-card-title>
+                        <md-card-content>
+                          <ul class="stat-list">
+                            <li><strong>People:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.totals.sum}}</span></li>
+                            <li><strong>Suspected Militants:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.susMils.sum}}</span></li>
+                            <li><strong>Civilians:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.civilians.sum}}</span></li>
+                            <li><strong>Unknowns:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.unknowns.sum}}</span></li>
+                          </ul>
+                        </md-card-content>
+                      </md-card>
+                      
+                    </div>
+                    <div class="col-lg-6">
+                      <md-card class="stat-box">
+                        <md-card-title>
+                          <h2>Average Killed per Strike:</h2>
+                        </md-card-title>
+                        <md-card-content>
+                          <ul class="stat-list">
+                            <li><strong>People:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.totals.avg}}</span></li>
+                            <li><strong>Suspected Militants:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.susMils.avg}}</span></li>
+                            <li><strong>Civilians:</strong>  <span  *ngIf="loadingPakComplete">{{basicPakStats?.civilians.avg}}</span></li>
+                            <li><strong>Unknowns:</strong> <span  *ngIf="loadingPakComplete">{{basicPakStats?.unknowns.avg}}</span></li>
+                          </ul>
+                        </md-card-content>
+                      </md-card>
+                      
+                    </div>
+                  </div>
+                  
+                </div>
+                <div *ngIf="!loadingPakComplete">
+                  <div class="d-flex justify-content-center ">
+                    <md-progress-circle mode="indeterminate" ></md-progress-circle>
+                  </div>
+                </div>
+          
+                <span  *ngIf="loadingPakComplete">
+                  <div class="table-section">
+                    
+                    <h2 >Click a Record Below to See More Details</h2>
+                    <span class="d-flex justify-content-center "><img  src="/assets/images/icons/ic_filter_list_black_48px.svg"  class="icon-40"></span>
+                    <div class="table-responsive ">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th style="text-align:left;">Date</th>
+                            <th style="text-align:left;">Attacking Country</th>
+                            <!--<th style="text-align:left;">Country Attacked</th>-->
+                            <th style="text-align:left;">Weapons</th>
+                            <!--<th style="text-align:left;">Actions</th>-->
+                            <th style="text-align:left;">Mil.</th>
+                            <th style="text-align:left;">Civ.</th>
+                            <th style="text-align:left;">Unk.</th>	
+                            <th style="text-align:left;">HVTs</th>																	
+                          </tr>
+                        </thead>
+                        <tbody>				
+                          <tr *ngFor="let strike of (pakStrikes | slice:0:listLimit); trackBy: trackStrike; let odd = odd; let even = even;"  (click)="goToStrike(strike)"  [ngClass]="{ odd: odd, even:even}" >
+
+                            <td>{{strike?.date}}</td>
+                            <td>
+                              <span *ngFor=" let attacker of strike?.countries.attackers; let first = first; let i = index ">
+                              
+                                    <span *ngIf="first">{{attacker.country}}</span>
+                                
+                                  
+                                  
+                              </span>
+                            </td>
+                            <!--<td>
+                              <span *ngFor="let target of strike?.countries.targets; let first = first; let i = index">
+                                
+                                  <span *ngIf="first">{{target.country}}</span>
+                                  <span *ngIf="i > 0">...</span>
+                                
+                              </span>
+                            </td>-->
+                            <td>
+                              <span *ngFor=" let weapon of strike?.type.weaponTypes; let first = first; let i = index ">
+                                  <span class="d-flex justify-content-start">
+                                    <span *ngIf="first">{{weapon.term}}</span> 
+                                    <img  class="icon-15" src="/assets/images/icons/ic_priority_high_black_36px.svg" *ngIf="first && !weapon.clear" >
+                                    <!--<span *ngIf="first && !weapon.clear" ><img>error</span>-->
+              
+                                  </span>
+                              </span>
+                              <!--<span *ngFor="let term of strike?.type.weapons.terms; let first = first; let i = index">
+                                
+                                <span *ngIf="first">{{term}}</span>
+                                <span *ngIf="i > 0">...</span>
+                              </span>-->
+                            </td>
+                            <!--<td>
+                              <span *ngFor=" let action of strike?.type.actionTypes; let first = first; let i = index ">
+                                    <span class="flex-row group-center">
+                                      <span *ngIf="first">{{action.term}}</span>
+                                      <img   class="icon-15" src="/assets/images/icons/ic_priority_high_black_36px.svg"  *ngIf="first && !action.clear" >
+                        
+                                
+                                    </span>
+                              </span>
+                        
+                            </td>-->
+                            <td>
+                            {{strike?.casualties.susMils}}
+                            </td>
+                            <td>
+                            {{strike?.casualties.civilians}}
+                            </td>
+                            <td>
+                            {{strike?.casualties.unknowns}}
+                            </td>
+                            <td>
+                            {{strike?.casualties.hvts}}
+                            </td>
+                                                    
+                          </tr>
+                            
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colspan="7">
+                              <button *ngIf="listLimit < pakStrikes.length"    class="btn  btn-block primary-hover" (click)="listLimit = listLimit + 15">Show More Strikes (displaying {{listLimit}} out of {{pakStrikes?.length }})</button>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </span>
               </div>
             </div>
-          </span>
-        </div>
-      </div>
-      <div *ngSwitchCase="2">
-        <div *ngIf="!publications">
-          <div class="d-flex justify-content-center  load-full">
-            <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
-          </div>
-        </div>
-        <div class="titleList" *ngIf="publications">
-          <div class="page-headline">
-              <h1>List of Publications on Pakistan</h1>
-              <span class="text_underline"></span>
-          </div>
-          <div class="d-flex flex-column title-block padding-2percent"  *ngFor="let publication of (publications | pubCountry: 'pakistan') ">
-            <a href="{{publication?.link}}" target="_blank"><h2 class="text-left">{{publication?.title }}</h2></a>
-            <p class="text-left author">
-              by 
-              <span *ngFor=" let author of publication?.authors; let i = index; let last = last ">
-                  <span  *ngIf="i > 0 && !last" style="margin-left:-4px;">,</span>
-                  <span  *ngIf="i > 0 && last">& </span>
-                  <span>{{author | capitalize}}</span>
+            <div *ngSwitchCase="2">
+              <div *ngIf="!publications">
+                <div class="d-flex justify-content-center  load-full">
+                  <md-progress-circle mode="indeterminate" class="circle-300"></md-progress-circle>
+                </div>
+              </div>
+              <div class="titleList  padding-2percent" *ngIf="publications">
+               
+                <div class="d-flex flex-column title-block"  *ngFor="let publication of (publications | pubCountry: 'pakistan') ">
+                  <a href="{{publication?.link}}" target="_blank"><h2 class="text-left">{{publication?.title }}</h2></a>
+                  <p class="text-left author">
+                    by 
+                    <span *ngFor=" let author of publication?.authors; let i = index; let last = last ">
+                        <span  *ngIf="i > 0 && !last" style="margin-left:-4px;">,</span>
+                        <span  *ngIf="i > 0 && last">& </span>
+                        <span>{{author | capitalize}}</span>
 
-              </span>
-            </p>
-            <p class="text-left type">
-              <small>{{publication?.pubType | uppercase}}</small>
-            </p>
+                    </span>
+                  </p>
+                  <p class="text-left type">
+                    {{publication?.pubType | uppercase}}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-          
-      </div>
-      <!--<div *ngSwitchCase="3">
-          output 3
-      </div>-->
-    </div>
- 
   </div>
- </div>
-</div>
+
 </section>

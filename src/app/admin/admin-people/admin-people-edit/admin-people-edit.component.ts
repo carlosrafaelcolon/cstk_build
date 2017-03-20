@@ -54,6 +54,7 @@ export class AdminPeopleEditComponent implements OnInit, OnDestroy, ComponentCan
         'name': [this.person.name, Validators.required],
         'title': [this.person.title],
         'img': [this.person.img],
+        'avatar':[this.person.avatar],
         'email': [this.person.email],
         'twitter': [this.person.twitter],
         'github': [this.person.github],
