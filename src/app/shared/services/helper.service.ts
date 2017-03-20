@@ -8,7 +8,6 @@ export class HelperService {
   	options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
 	noWeekday = {  year: 'numeric', month: 'long', day: 'numeric', timeZone:'UTC' };
 	shortOptions = {  year: 'numeric', month: 'short', day: 'numeric', timeZone:'UTC' };
-	trial = {  year: 'numeric', month: 'short', day: 'numeric'};
   	//Helpers
 	leave = "Do you want to leave? If YES click 'OK'"
 	public extractData(res: Response) {
