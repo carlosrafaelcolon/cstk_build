@@ -23,7 +23,7 @@ export class IdComponent implements OnInit, OnDestroy {
   }
    search(searchOptions) {
      this.loadingComplete = false;
-     console.log(searchOptions)
+
      this.searchClicked = true;
      this.searchQuery = searchOptions;
      this.sub = this.nameService.getID(this.searchQuery).subscribe(
@@ -34,12 +34,11 @@ export class IdComponent implements OnInit, OnDestroy {
    }
    // submit values to create data
     onSubmit(value: any){
-      
-      console.log(this.strike)
+
  
         // console.log(value)
         let jsonObject = JSON.parse(value);
-        console.log(jsonObject)
+  
         this.strikeService.updateID(jsonObject, this.strike._id)
         .subscribe(
             data =>  alert('Data successfully updated!'),
